@@ -1,0 +1,16 @@
+.group_course{
+	font-size:18px;
+	float: left;
+}
+.group_name{
+	font-size:18px;
+	font-weight: bold;
+	float:left;
+}
+.group_author{
+	fonr-size:12px;
+	float:left;
+}
+.group_title{
+	font-size:18px;
+}
