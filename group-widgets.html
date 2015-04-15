@@ -1,15 +1,26 @@
-<div class="col-md-6 group_widget" ng-repeat="group in gWidget.groups">
+<div class="col-md-6" ng-repeat="group in gWidget.groups" on-finish-render="ngRepeatFinished">
+	<div class="col-md-12 group_widget">
 	<div class="row group_header" style="border-bottom: 2px solid #ccc">
 		<div>
 			<span class="group_course">{{group.course}}</span>
 			<span class="group_name">{{group.name}}</span>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row group_body">
 		<p class="group_author">Created by: {{group.author}}</p>
-	</div>
-	<div class="row">
 		<p class="group_title">{{group.title}}</p>
+	</div>
+	<div class="row group_stats">
+	<figure class="col-md-12 col-sm-12">
+		<div class="group_progressbar" id="graph1" data-percent="40" data-color="#30bae7" data-size="90">
+	   </div>
+	   <!---<img src="images/UserGroup.png" style="width: 100%;position:absolute;"></img>--->
+	   <figcaption>
+		<p>Invited</p>
+		<p>Pending</p>
+         </figcaption>
+	</figure>
+	</div>
 	</div>
 </div>
 

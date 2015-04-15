@@ -10,7 +10,9 @@
 
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style.css">
+  <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script> 
   <script type="text/javascript" src="js/angular.js"></script> 
+  <!---<script type="text/javascript" src="js/circularProgressBar.js"></script>--->
   <script type="text/javascript" src="js/app.js"></script>
 
   <!--[if lt IE 9]>
@@ -19,18 +21,20 @@
 </head>
 
 <body>
-	<div class="container main">
+	<div class="container main" ng-controller="PanelController as panel">
 		<ul class="nav nav-tabs nav-justified">
-		<li class="active"><a href="#">Projects</a></li>
-		<li><a href="#">Groups</a></li>
+			<li ng-click="panel.selectPanel(1)" ng-class="{ active:panel.isSelected(1) }">
+				<a class="panel_text" href="#">Projects</a>
+			</li>
+			<li ng-click="panel.selectPanel(2)" ng-class="{ active:panel.isSelected(2) }">
+				<a class="panel_text" href="#">Groups</a>
+			</li>
 		</ul>
-
-		<group-widgets class="col-md-12"></group-widgets>
-		<div class="col-md-6 well">
-		blah de blah
+		<div class="projects_panel" ng-show="panel.isSelected(1)">
+			<p>Here goes the Projects Panel!</p>
 		</div>
-		<div class="col-md-6 well">
-		blah de blah 2
+		<div class="groups_panel" ng-show="panel.isSelected(2)">
+			<group-widgets class="col-md-12"></group-widgets>
 		</div>
 			
 	</div>
