@@ -32,6 +32,22 @@
 			title: 'Web application development.',
 			members: 1,
 			maxmembers: 2
+		},
+		{
+			course: "HY454",
+			name: 'Omada12',
+			author: 'Eleni',
+			title: 'Web application development.',
+			members: 1,
+			maxmembers: 2
+		},
+		{
+			course: "HY454",
+			name: 'Omada12',
+			author: 'Eleni',
+			title: 'Web application development.',
+			members: 1,
+			maxmembers: 2
 		}
 	];
 

@@ -1,11 +1,28 @@
+/* group widget styles */
+.group_widget{
+	margin-left:0px;
+	margin-right:0px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	background-color: #ffffff;
+	border-radius: 10px 10px 0px 0px;
+}
+.group_header{
+	margin-left: 2%;
+	margin-right: 2%;
+	}
 .group_course{
-	font-size:18px;
+	font-size:32px;
 	float: left;
+	vertical-align: bottom;
+	display: table-cell;
 }
 .group_name{
 	font-size:18px;
-	font-weight: bold;
-	float:left;
+	/*font-weight: bold;*/
+	float:none;
+	vertical-align: bottom;
+	display: table-cell;
 }
 .group_author{
 	fonr-size:12px;
@@ -14,3 +31,9 @@
 .group_title{
 	font-size:18px;
 }
+
+/* main container styles */
+.container.main{
+	background-color: #f5f5f5;
+	max-width:1024px;
+	}
