@@ -15,14 +15,33 @@
 	float: left;
 }
 .group_stats{
+	
 	float: right;
 	width: 120px;
 	height: 180px;
 }
 .group_progressbar{
 	width:100%;
-	background-image: url('../images/UserGroup.png');
-	background-repeat: no-repeat;
+	height:100%;
+	position:absolute;
+	/*background-image: url('../images/UserGroup.png');
+	background-repeat: no-repeat;*/
+}
+.group_progressbar > span{
+	color:#555;
+    display:block;
+    line-height:90px;
+    text-align:center;
+    width:90px;
+    font-size:30px;
+    font-weight:300;
+	padding-top:50px;
+}
+.group_progressbar > canvas{
+    display: block;
+    position:absolute;
+    top:0;
+    left:0;
 }
 .group_course{
 	font-size:24px;

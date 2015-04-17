@@ -25,7 +25,7 @@
 
         ctx = canvas.getContext('2d');
         canvas.width = canvas.height = options.size;
-        //el.appendChild(span);
+        el.appendChild(span);
         el.appendChild(canvas);
 
         ctx.translate(options.size / 2, options.size / 2); // change center

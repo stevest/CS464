@@ -10,16 +10,17 @@
 		<p class="group_author">Created by: {{group.author}}</p>
 		<p class="group_title">{{group.title}}</p>
 	</div>
-	<div class="row group_stats">
-	<figure class="col-md-12 col-sm-12">
-		<div class="group_progressbar" id="graph1" data-percent="40" data-color="#30bae7" data-size="90">
-	   </div>
-	   <!---<img src="images/UserGroup.png" style="width: 100%;position:absolute;"></img>--->
-	   <figcaption>
-		<p>Invited</p>
-		<p>Pending</p>
-         </figcaption>
-	</figure>
+	<div class="row group_stats ">
+	<div class="col-md-12 col-sm-12 position: relative;">
+		<img src="images/UserGroup.png" style="width:90px;position:absolute;"></img>
+		<div class="group_progressbar" id="graph1" data-percent="40" data-color="#30bae7" data-size="90"></div>
+	</div>
+	<div>
+	   <div style="margin-top:90;">
+		<p>Invited:1</p>
+		<p>Pending:3</p>
+       </div>
+	</div>
 	</div>
 	</div>
 </div>
