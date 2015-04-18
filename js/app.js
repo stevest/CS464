@@ -49,7 +49,7 @@
         el = document.getElementById(id);
         createAllVariables();
         drawCircle('#333333', options.lineWidth, 1.0*0.75);
-        drawCircle(options.color, options.lineWidth, (options.percent / 100)*0.75 );
+        drawCircle(options.color, options.lineWidth - options.lineWidth*25/100, (options.percent / 100)*0.75 );
 
 
     };
