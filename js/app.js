@@ -48,7 +48,7 @@
     var drawNewGraph = function(id){
         el = document.getElementById(id);
         createAllVariables();
-        //drawCircle('#efefef', options.lineWidth, 1.0*0.75);
+        drawCircle('#333333', options.lineWidth, 1.0*0.75);
         drawCircle(options.color, options.lineWidth, (options.percent / 100)*0.75 );
 
 
@@ -109,7 +109,7 @@
 	var allGroups = [
 		{
 			course: "HY464",
-			name: 'Omada1',
+			name: 'Ομάδα-1',
 			author: 'Alexandros',
 			title: 'Mobile application development.',
 			members: 3,

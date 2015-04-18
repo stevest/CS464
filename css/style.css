@@ -4,8 +4,9 @@
 	margin-right:0px;
 	margin-top: 5px;
 	margin-bottom: 5px;
-	background-color: #f5f5f5;
+	background-color: #f9f9f9;
 	border-radius: 10px 10px 0px 0px;
+    box-shadow: inset 1px 1px 4px rgba(255, 255, 255, .4), inset -1px -1px 4px rgba(243, 243, 243, .4);
 }
 .group_header{
 	margin-left: 2%;
@@ -44,12 +45,14 @@
     left:0;
 }
 .group_course{
+	font-family: 'Ubuntu Condensed', sans-serif;
 	font-size:24px;
 	float: left;
 	vertical-align: bottom;
 	display: table-cell;
 }
 .group_name{
+font-family: 'Fira Sans', sans-serif;
 	font-size:18px;
 	font-weight: bold;
 	float:left;
@@ -66,7 +69,7 @@
 
 /* main container styles */
 .container.main{
-	background-color: #e9e9e9;
+	background-color: #ffffff;
 	max-width:1024px;
 	}
 	
