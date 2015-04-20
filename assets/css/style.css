@@ -50,17 +50,20 @@
 .group_course{
 	font-family: 'Ubuntu Condensed', sans-serif;
 	font-size:24px;
-	float: left;
+	/*float: left;
 	vertical-align: bottom;
-	display: table-cell;
+	display: table-cell;*/
 }
 .group_name{
-font-family: 'Fira Sans', sans-serif;
+	font-family: 'Ubuntu Condensed', sans-serif;
 	font-size:18px;
 	font-weight: bold;
-	float:left;
+	position:static;
+	bottom: 0;
+	/*float:left;
+	margin-left: 10px;
 	vertical-align: bottom;
-	display: table-cell;
+	display: table-cell;*/
 }
 .group_author{
 	fonr-size:12px;
