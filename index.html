@@ -2,41 +2,102 @@
 
 <html lang="en" ng-app="pm">
 <head>
-  <meta charset="utf-8">
+	<meta charset="utf-8">
 
+<<<<<<< HEAD
+  	<title>Project Student Manager</title>
+  	<meta name="description" content="student project manager">
+  	<meta name="author" content="team12">
+  	<link href='http://fonts.googleapis.com/css?family=Fira+Sans:400,500|Ubuntu+Condensed|Open+Sans|Roboto|Roboto+Condensed|Open+Sans+Condensed:300&subset=latin,greek' rel='stylesheet' type='text/css'>
+  	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  	<link rel="stylesheet" href="assets/css/style.css">
+  	<script type="text/javascript" src="assets/js/jquery-1.11.2.min.js"></script> 
+  	<script type="text/javascript" src="assets/js/angular.js"></script> 
+  	<!--<script type="text/javascript" src="js/circularProgressBar.js"></script>-->
+  	<script type="text/javascript" src="assets/js/app.js"></script>
+  	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="assets/js/comments.js"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+  
+=======
   <title>Project Manager</title>
   <meta name="description" content="student project manager">
   <meta name="author" content="team12">
 <link href='http://fonts.googleapis.com/css?family=Fira+Sans:400,500|Ubuntu+Condensed|Open+Sans|Roboto|Roboto+Condensed|Open+Sans+Condensed:300&subset=latin,greek' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script> 
-  <script type="text/javascript" src="js/angular.js"></script> 
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script type="text/javascript" src="assets/js/jquery-1.11.2.min.js"></script> 
+  <script type="text/javascript" src="assets/js/angular.js"></script> 
   <!---<script type="text/javascript" src="js/circularProgressBar.js"></script>--->
-  <script type="text/javascript" src="js/app.js"></script>
+  <script type="text/javascript" src="assets/js/app.js"></script>
 
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
+>>>>>>> be5b62b311fb9b788560b601ee631089e675662c
 </head>
 
 <body>
-	<div class="container main" ng-controller="PanelController as panel">
-		<ul class="nav nav-tabs nav-justified">
-			<li ng-click="panel.selectPanel(1)" ng-class="{ active:panel.isSelected(1) }">
-				<a class="panel_text" href="#">Projects</a>
-			</li>
-			<li ng-click="panel.selectPanel(2)" ng-class="{ active:panel.isSelected(2) }">
-				<a class="panel_text" href="#">Groups</a>
-			</li>
-		</ul>
-		<div class="projects_panel" ng-show="panel.isSelected(1)">
-			<p>Here goes the Projects Panel!</p>
+	<div id="wrapper">
+		<div class="container main ">
+			<div class="row">
+				<div class="col-md-12">
+						<img src="assets/images/bar.jpg"></img>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div  ng-controller="PanelController as panel">
+						<ul class="nav nav-tabs nav-justified">
+							<li ng-click="panel.selectPanel(1)" ng-class="{ active:panel.isSelected(1) }">
+								<a class="panel_text" href="#">Projects</a>
+							</li>
+							<li ng-click="panel.selectPanel(2)" ng-class="{ active:panel.isSelected(2) }">
+								<a class="panel_text" href="#">Groups</a>
+							</li>
+						</ul>
+						<div class="projects_panel" ng-show="panel.isSelected(1)">
+							<p>Here goes the Projects Panel!</p>
+						</div>
+						<div class="groups_panel" ng-show="panel.isSelected(2)">
+							<!--											 -->
+							<div class="col-md-12 p-30 comment m-t-0">
+                                    <div class="row">
+                                        <div class="comment-checkbox">
+                                            <input type="checkbox">
+                                        </div>
+                                        <div class="comment-content">
+                                            <div class="comment-header f-16 clearfix">
+                                                <div class="pull-left">
+                                                    <a href="#">John Miller</a> <span class="c-gray">commented on</span> <a href="#">Billy Paul</a>
+                                                </div>
+                                                <div class="pull-right f-12">
+                                                   <span class="c-gray">Monday, 04 March - 10:49</span>
+                                                </div>
+                                            </div>
+                                            <p class="comment-text">
+                                                To continue to thrive as a business over the next ten years and beyond, we must look ahead, understand the trends and forces that will shape our business in the future and move swiftly to prepare for what's to come. We must get ready for tomorrow today. That's what our 2020 Vision is all about. It creates a long-term destination for our business and provides us with a "Roadmap" for winning together with our bottling partners.
+                                            </p>
+                                            <div class="comment-footer">
+                                                <div>
+                                                    <a href="#" class="aprrove btn btn-success m-r-10" data-rel="tooltip" data-original-title="Approve"><i class="fa fa-check"></i></a>
+                                                    <a href="#" class="delete btn btn-danger m-r-10" data-rel="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                                                    <a href="#" class="edit btn btn-default" data-rel="tooltip" data-original-title="Edit">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--											 -->
+							<group-widgets class="col-md-12"></group-widgets>
+						</div>
+							
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="groups_panel" ng-show="panel.isSelected(2)">
-			<group-widgets class="col-md-12"></group-widgets>
-		</div>
-			
 	</div>
 </body>
 </html>

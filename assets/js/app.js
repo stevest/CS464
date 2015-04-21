@@ -1,58 +1,43 @@
 (function(){
- 	    var el;
-    var options;
-    var canvas;
-    var span;
-    var ctx;
-    var radius;
 
-    var createAllVariables = function(){
-        options = {
-            percent:  el.getAttribute('data-percent') || 25,
-            size: el.getAttribute('data-size') || 165,
-            lineWidth: el.getAttribute('data-line') || 15,
-            rotate: el.getAttribute('data-rotate') || 225,
-            color: el.getAttribute('data-color')
-        };
+	function cicrbar(){
+		this.init = function(id,mem,maxmem){
+			this.id = id;
+			this.mem = mem;
+			this.maxmem = maxmem;
+			el = document.getElementById(this.id);
+			this.size = el.getAttribute('data-size') || 165;
+			this.lineWidth = el.getAttribute('data-line') || 15;
+            this.color = el.getAttribute('data-color') || "#30bae7";
+			this.canvas = document.createElement('canvas');
+			this.span = document.createElement('span');
+			this.span.textContent = this.mem + '/' + this.maxmem;
+			if (typeof(G_vmlCanvasManager) !== 'undefined') {
+				G_vmlCanvasManager.initElement(canvas);
+			}
+			this.ctx = this.canvas.getContext('2d');
+			this.canvas.width = this.canvas.height = this.size;
+			el.appendChild(this.span);
+			el.appendChild(this.canvas);
+			this.ctx.translate(this.size / 2, this.size / 2); // change center
+			this.ctx.rotate((-1 / 2 + 225 / 180) * Math.PI); // rotate -90 deg
+			this.radius = (this.size - this.lineWidth) / 2;
+		};
+		this.drawBar = function(color, lineWidth, percent) {
+			percent = Math.min(Math.max(0, percent), 1);
+			this.ctx.beginPath();
+			this.ctx.arc(0, 0, this.radius, 0, Math.PI * 2 * percent, false);
+			this.ctx.strokeStyle = color;
+			this.ctx.lineCap = 'round'; // butt, round or square
+			this.ctx.lineWidth = lineWidth;
+			this.ctx.stroke();
+		};
+		this.draw = function(){
+			this.drawBar('#333333', this.lineWidth, 1.0*0.75);
+			this.drawBar(this.color, this.lineWidth - this.lineWidth*25/100, (this.mem/this.maxmem)*0.75 );
+		};
+	};
 
-        canvas = document.createElement('canvas');
-        span = document.createElement('span');
-        span.textContent = options.percent + '%';
-
-        if (typeof(G_vmlCanvasManager) !== 'undefined') {
-            G_vmlCanvasManager.initElement(canvas);
-        }
-
-        ctx = canvas.getContext('2d');
-        canvas.width = canvas.height = options.size;
-        el.appendChild(span);
-        el.appendChild(canvas);
-
-        ctx.translate(options.size / 2, options.size / 2); // change center
-        ctx.rotate((-1 / 2 + options.rotate / 180) * Math.PI); // rotate -90 deg
-
-        radius = (options.size - options.lineWidth) / 2;
-    };
-
-
-    var drawCircle = function(color, lineWidth, percent) {
-        percent = Math.min(Math.max(0, percent || 1), 1);
-        ctx.beginPath();
-        ctx.arc(0, 0, radius, 0, Math.PI * 2 * percent, false);
-        ctx.strokeStyle = color;
-        ctx.lineCap = 'round'; // butt, round or square
-        ctx.lineWidth = lineWidth;
-        ctx.stroke();
-    };
-
-    var drawNewGraph = function(id){
-        el = document.getElementById(id);
-        createAllVariables();
-        drawCircle('#333333', options.lineWidth, 1.0*0.75);
-        drawCircle(options.color, options.lineWidth - options.lineWidth*25/100, (options.percent / 100)*0.75 );
-
-
-    };
 
 	
 	//------------------------------------------------//
@@ -68,16 +53,29 @@
 			controller:function($scope){
 			//controller is this:
 				this.groups = allGroups;
-				console.log("Groups loaded");
+				console.log($scope);
 				console.log("Wait till renders...");
 				$scope.$on('ngRepeatFinished',function(ngRepeatFinishedEvent){
 					console.log("ng-repeat FINISHED!");
-					drawNewGraph('graph1');
+					var bars = new Array($scope.gWidget.groups.length);
+					
+					for (i=0 ; i < $scope.gWidget.groups.length ; i++) {
+						console.log($scope.gWidget.groups[i].id);
+						//drawNewGraph("graph"+$scope.gWidget.groups[i].id,40);
+						bars[i] = new cicrbar();
+						//console.log("percent is"+$scope.gWidget.groups[i].members/$scope.gWidget.groups[i].maxmembers*100);
+						bars[i].init("graph"+$scope.gWidget.groups[i].id,$scope.gWidget.groups[i].members,$scope.gWidget.groups[i].maxmembers);
+						bars[i].draw();
+					}
 					console.log("graph created");
 				});
 				
 			},
-			controllerAs: 'gWidget'
+			controllerAs: 'gWidget',
+			link:function(){
+				console.log("LINKED!");
+				//drawNewGraph("graph1");
+			}
 		};
 	});
 	app.directive('onFinishRender',function($timeout){
@@ -108,6 +106,7 @@
 	
 	var allGroups = [
 		{
+			id:1,
 			course: "HY464",
 			name: 'Ομάδα-1',
 			author: 'Alexandros',
@@ -116,6 +115,7 @@
 			maxmembers: 4
 		},
 		{
+			id:2,
 			course: "HY454",
 			name: 'Omada12',
 			author: 'Eleni',
@@ -124,19 +124,21 @@
 			maxmembers: 2
 		},
 		{
+			id:3,
 			course: "HY454",
 			name: 'Omada12',
 			author: 'Eleni',
 			title: 'Web application development.',
-			members: 1,
-			maxmembers: 2
+			members: 3,
+			maxmembers: 3
 		},
 		{
+			id:4,
 			course: "HY454",
 			name: 'Omada12',
 			author: 'Eleni',
 			title: 'Web application development.',
-			members: 1,
+			members: 0,
 			maxmembers: 2
 		}
 	];

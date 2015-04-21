@@ -1,5 +1,6 @@
-<div class="col-md-6" ng-repeat="group in gWidget.groups" on-finish-render="ngRepeatFinished">
-	<div class="col-md-12 group_widget">
+
+<div class="col-md-6 comment" ng-repeat="group in gWidget.groups" on-finish-render="ngRepeatFinished">
+	<div class="col-md-12  group_widget">
 		<div class="row group_header" style="border-bottom: 2px solid #ccc">
 			<div>
 				<span class="group_course">{{group.course}}</span>
@@ -13,7 +14,7 @@
 		<div class="row group_stats ">
 			<div class="col-md-12 col-sm-12" style="float:left;">
 				<img src="assets/images/UserGroup.png" style="width:90px;position:absolute;"></img>
-				<div class="group_progressbar" id="graph1" data-percent="40" data-color="#30bae7" data-size="90"></div>
+				<div class="group_progressbar" id="graph{{group.id}}"data-color="#30bae7" data-size="90"></div>
 				
 			</div>
 			<div style="padding-top:120px; text-align: center;">
@@ -21,7 +22,7 @@
 				Pending:3
 			</div>
 		</div>
-		<div class="row">
+		<div class="row comment-footer">
 			<div class="btn-group btn-group-justified" role="group">
 				<div class="btn-group" role="group">
 					<button type="button" class="btn btn-success">Accept</button>
