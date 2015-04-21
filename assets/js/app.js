@@ -6,6 +6,7 @@
 			this.mem = mem;
 			this.maxmem = maxmem;
 			el = document.getElementById(this.id);
+			console.log("Element got is: "+el);
 			this.size = el.getAttribute('data-size') || 165;
 			this.lineWidth = el.getAttribute('data-line') || 15;
             this.color = el.getAttribute('data-color') || "#30bae7";
@@ -112,9 +113,26 @@
 				
 			},
 			controllerAs: 'gWidget',
-			link:function(){
+			link: function(scope, element){
 				console.log("LINKED!");
-				//drawNewGraph("graph1");
+				console.log(document.getElementsByClassName("comment"));
+				console.log(jQuery("div.comment"));
+				//console.log(element.find(".comment").css("padding-bottom"));
+				//console.log($(".comment").css("padding-bottom"));
+				/* Show / Hide action buttons on hover */
+				//console.log.apply(console, angular.element('.comment'));
+					    //angular.element('.comment').mouseenter(function(){console.log("CLICK")});
+						/*var myTimeout;
+					    $('.comment').mouseenter(function() {
+					        console.log("footer-mousehover");
+					        var comment_footer = $(this).find('.comment-footer');
+					        myTimeout = setTimeout(function() {
+								comment_footer.slideDown(100);
+					        }, 1);
+					    }).mouseleave(function() {
+					        clearTimeout(myTimeout);
+					        $(this).find('.comment-footer').slideUp(100);
+					    });*/
 			}
 		};
 	});
