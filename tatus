@@ -1,0 +1,174 @@
+[1mdiff --git a/assets/js/app.js b/assets/js/app.js[m
+[1mindex 81c5926..05f76a4 100644[m
+[1m--- a/assets/js/app.js[m
+[1m+++ b/assets/js/app.js[m
+[36m@@ -1,58 +1,43 @@[m
+ (function(){[m
+[31m- 	    var el;[m
+[31m-    var options;[m
+[31m-    var canvas;[m
+[31m-    var span;[m
+[31m-    var ctx;[m
+[31m-    var radius;[m
+ [m
+[31m-    var createAllVariables = function(){[m
+[31m-        options = {[m
+[31m-            percent:  el.getAttribute('data-percent') || 25,[m
+[31m-            size: el.getAttribute('data-size') || 165,[m
+[31m-            lineWidth: el.getAttribute('data-line') || 15,[m
+[31m-            rotate: el.getAttribute('data-rotate') || 225,[m
+[31m-            color: el.getAttribute('data-color')[m
+[31m-        };[m
+[32m+[m	[32mfunction cicrbar(){[m
+[32m+[m		[32mthis.init = function(id,mem,maxmem){[m
+[32m+[m			[32mthis.id = id;[m
+[32m+[m			[32mthis.mem = mem;[m
+[32m+[m			[32mthis.maxmem = maxmem;[m
+[32m+[m			[32mel = document.getElementById(this.id);[m
+[32m+[m			[32mthis.size = el.getAttribute('data-size') || 165;[m
+[32m+[m			[32mthis.lineWidth = el.getAttribute('data-line') || 15;[m
+[32m+[m[32m            this.color = el.getAttribute('data-color') || "#30bae7";[m
+[32m+[m			[32mthis.canvas = document.createElement('canvas');[m
+[32m+[m			[32mthis.span = document.createElement('span');[m
+[32m+[m			[32mthis.span.textContent = this.mem + '/' + this.maxmem;[m
+[32m+[m			[32mif (typeof(G_vmlCanvasManager) !== 'undefined') {[m
+[32m+[m				[32mG_vmlCanvasManager.initElement(canvas);[m
+[32m+[m			[32m}[m
+[32m+[m			[32mthis.ctx = this.canvas.getContext('2d');[m
+[32m+[m			[32mthis.canvas.width = this.canvas.height = this.size;[m
+[32m+[m			[32mel.appendChild(this.span);[m
+[32m+[m			[32mel.appendChild(this.canvas);[m
+[32m+[m			[32mthis.ctx.translate(this.size / 2, this.size / 2); // change center[m
+[32m+[m			[32mthis.ctx.rotate((-1 / 2 + 225 / 180) * Math.PI); // rotate -90 deg[m
+[32m+[m			[32mthis.radius = (this.size - this.lineWidth) / 2;[m
+[32m+[m		[32m};[m
+[32m+[m		[32mthis.drawBar = function(color, lineWidth, percent) {[m
+[32m+[m			[32mpercent = Math.min(Math.max(0, percent), 1);[m
+[32m+[m			[32mthis.ctx.beginPath();[m
+[32m+[m			[32mthis.ctx.arc(0, 0, this.radius, 0, Math.PI * 2 * percent, false);[m
+[32m+[m			[32mthis.ctx.strokeStyle = color;[m
+[32m+[m			[32mthis.ctx.lineCap = 'round'; // butt, round or square[m
+[32m+[m			[32mthis.ctx.lineWidth = lineWidth;[m
+[32m+[m			[32mthis.ctx.stroke();[m
+[32m+[m		[32m};[m
+[32m+[m		[32mthis.draw = function(){[m
+[32m+[m			[32mthis.drawBar('#333333', this.lineWidth, 1.0*0.75);[m
+[32m+[m			[32mthis.drawBar(this.color, this.lineWidth - this.lineWidth*25/100, (this.mem/this.maxmem)*0.75 );[m
+[32m+[m		[32m};[m
+[32m+[m	[32m};[m
+ [m
+[31m-        canvas = document.createElement('canvas');[m
+[31m-        span = document.createElement('span');[m
+[31m-        span.textContent = options.percent + '%';[m
+[31m-[m
+[31m-        if (typeof(G_vmlCanvasManager) !== 'undefined') {[m
+[31m-            G_vmlCanvasManager.initElement(canvas);[m
+[31m-        }[m
+[31m-[m
+[31m-        ctx = canvas.getContext('2d');[m
+[31m-        canvas.width = canvas.height = options.size;[m
+[31m-        el.appendChild(span);[m
+[31m-        el.appendChild(canvas);[m
+[31m-[m
+[31m-        ctx.translate(options.size / 2, options.size / 2); // change center[m
+[31m-        ctx.rotate((-1 / 2 + options.rotate / 180) * Math.PI); // rotate -90 deg[m
+[31m-[m
+[31m-        radius = (options.size - options.lineWidth) / 2;[m
+[31m-    };[m
+[31m-[m
+[31m-[m
+[31m-    var drawCircle = function(color, lineWidth, percent) {[m
+[31m-        percent = Math.min(Math.max(0, percent || 1), 1);[m
+[31m-        ctx.beginPath();[m
+[31m-        ctx.arc(0, 0, radius, 0, Math.PI * 2 * percent, false);[m
+[31m-        ctx.strokeStyle = color;[m
+[31m-        ctx.lineCap = 'round'; // butt, round or square[m
+[31m-        ctx.lineWidth = lineWidth;[m
+[31m-        ctx.stroke();[m
+[31m-    };[m
+[31m-[m
+[31m-    var drawNewGraph = function(id){[m
+[31m-        el = document.getElementById(id);[m
+[31m-        createAllVariables();[m
+[31m-        drawCircle('#333333', options.lineWidth, 1.0*0.75);[m
+[31m-        drawCircle(options.color, options.lineWidth - options.lineWidth*25/100, (options.percent / 100)*0.75 );[m
+[31m-[m
+[31m-[m
+[31m-    };[m
+ [m
+ 	[m
+ 	//------------------------------------------------//[m
+[36m@@ -68,16 +53,29 @@[m
+ 			controller:function($scope){[m
+ 			//controller is this:[m
+ 				this.groups = allGroups;[m
+[31m-				console.log("Groups loaded");[m
+[32m+[m				[32mconsole.log($scope);[m
+ 				console.log("Wait till renders...");[m
+ 				$scope.$on('ngRepeatFinished',function(ngRepeatFinishedEvent){[m
+ 					console.log("ng-repeat FINISHED!");[m
+[31m-					drawNewGraph('graph1');[m
+[32m+[m					[32mvar bars = new Array($scope.gWidget.groups.length);[m
+[32m+[m[41m					[m
+[32m+[m					[32mfor (i=0 ; i < $scope.gWidget.groups.length ; i++) {[m
+[32m+[m						[32mconsole.log($scope.gWidget.groups[i].id);[m
+[32m+[m						[32m//drawNewGraph("graph"+$scope.gWidget.groups[i].id,40);[m
+[32m+[m						[32mbars[i] = new cicrbar();[m
+[32m+[m						[32m//console.log("percent is"+$scope.gWidget.groups[i].members/$scope.gWidget.groups[i].maxmembers*100);[m
+[32m+[m						[32mbars[i].init("graph"+$scope.gWidget.groups[i].id,$scope.gWidget.groups[i].members,$scope.gWidget.groups[i].maxmembers);[m
+[32m+[m						[32mbars[i].draw();[m
+[32m+[m					[32m}[m
+ 					console.log("graph created");[m
+ 				});[m
+ 				[m
+ 			},[m
+[31m-			controllerAs: 'gWidget'[m
+[32m+[m			[32mcontrollerAs: 'gWidget',[m
+[32m+[m			[32mlink:function(){[m
+[32m+[m				[32mconsole.log("LINKED!");[m
+[32m+[m				[32m//drawNewGraph("graph1");[m
+[32m+[m			[32m}[m
+ 		};[m
+ 	});[m
+ 	app.directive('onFinishRender',function($timeout){[m
+[36m@@ -108,6 +106,7 @@[m
+ 	[m
+ 	var allGroups = [[m
+ 		{[m
+[32m+[m			[32mid:1,[m
+ 			course: "HY464",[m
+ 			name: 'Ομάδα-1',[m
+ 			author: 'Alexandros',[m
+[36m@@ -116,6 +115,7 @@[m
+ 			maxmembers: 4[m
+ 		},[m
+ 		{[m
+[32m+[m			[32mid:2,[m
+ 			course: "HY454",[m
+ 			name: 'Omada12',[m
+ 			author: 'Eleni',[m
+[36m@@ -124,19 +124,21 @@[m
+ 			maxmembers: 2[m
+ 		},[m
+ 		{[m
+[32m+[m			[32mid:3,[m
+ 			course: "HY454",[m
+ 			name: 'Omada12',[m
+ 			author: 'Eleni',[m
+ 			title: 'Web application development.',[m
+[31m-			members: 1,[m
+[31m-			maxmembers: 2[m
+[32m+[m			[32mmembers: 3,[m
+[32m+[m			[32mmaxmembers: 3[m
+ 		},[m
+ 		{[m
+[32m+[m			[32mid:4,[m
+ 			course: "HY454",[m
+ 			name: 'Omada12',[m
+ 			author: 'Eleni',[m
+ 			title: 'Web application development.',[m
+[31m-			members: 1,[m
+[32m+[m			[32mmembers: 0,[m
+ 			maxmembers: 2[m
+ 		}[m
+ 	];[m

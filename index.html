@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 
-<<<<<<< HEAD
+
   	<title>Project Student Manager</title>
   	<meta name="description" content="student project manager">
   	<meta name="author" content="team12">
@@ -15,40 +15,196 @@
   	<script type="text/javascript" src="assets/js/angular.js"></script> 
   	<!--<script type="text/javascript" src="js/circularProgressBar.js"></script>-->
   	<script type="text/javascript" src="assets/js/app.js"></script>
-  	<!-- BEGIN PAGE LEVEL SCRIPTS -->
-    <script src="assets/js/comments.js"></script>
-    <!-- END PAGE LEVEL SCRIPTS -->
-  
-=======
-  <title>Project Manager</title>
-  <meta name="description" content="student project manager">
-  <meta name="author" content="team12">
-<link href='http://fonts.googleapis.com/css?family=Fira+Sans:400,500|Ubuntu+Condensed|Open+Sans|Roboto|Roboto+Condensed|Open+Sans+Condensed:300&subset=latin,greek' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <script type="text/javascript" src="assets/js/jquery-1.11.2.min.js"></script> 
-  <script type="text/javascript" src="assets/js/angular.js"></script> 
-  <!---<script type="text/javascript" src="js/circularProgressBar.js"></script>--->
-  <script type="text/javascript" src="assets/js/app.js"></script>
+    <link href="assets/css/plugins.css" rel="stylesheet">
 
-  <!--[if lt IE 9]>
-  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
->>>>>>> be5b62b311fb9b788560b601ee631089e675662c
+    <link href="assets/plugins/metrojs/metrojs.css" rel="stylesheet">
+    <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/application.js"></script>
+
+    <script src="assets/plugins/jquery-1.11.js"></script>
+    <script src="assets/plugins/jquery-migrate-1.2.1.js"></script>
+    <script src="assets/plugins/jquery-ui/jquery-ui-1.10.4.min.js"></script>
+    <script src="assets/plugins/jquery-mobile/jquery.mobile-1.4.2.js"></script>
+    <script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="assets/plugins/bootstrap-dropdown/bootstrap-hover-dropdown.min.js"></script>
+    <script src="assets/plugins/bootstrap-select/bootstrap-select.js"></script>
+    <script src="assets/plugins/mcustom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="assets/plugins/mmenu/js/jquery.mmenu.min.all.js"></script>
+    <script src="assets/plugins/nprogress/nprogress.js"></script>
+    <script src="assets/plugins/charts-sparkline/sparkline.min.js"></script>
+    <script src="assets/plugins/breakpoints/breakpoints.js"></script>
+    <script src="assets/plugins/numerator/jquery-numerator.js"></script>
+    <script src="assets/plugins/jquery.cookie.min.js" type="text/javascript"></script>
+
+     <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+    <script src="assets/plugins/modal/js/classie.js"></script>
+    <script src="assets/plugins/modal/js/modalEffects.js"></script>
+    <!-- END  PAGE LEVEL SCRIPTS -->
+
+
+
+    <link href="assets/css/icons/icons.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/plugins.min.css" rel="stylesheet">
+    <link href="assets/css/style.min.css" rel="stylesheet">
+    <link href="#" rel="stylesheet" id="theme-color">
+    <!-- END  MANDATORY STYLE -->
+    <link href="assets/plugins/modal/css/component.css" rel="stylesheet">
+    <script src="assets/plugins/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <!--<script src="assets/js/comments.js"></script>-->
+    <!-- TABLES -->
+    <link rel="stylesheet" href="assets/plugins/datatables/dataTables.css">
+    <link rel="stylesheet" href="assets/plugins/datatables/dataTables.tableTools.css">
+
+    <script src="assets/plugins/bootstrap-switch/bootstrap-switch.js"></script>
+    <script src="assets/plugins/bootstrap-progressbar/bootstrap-progressbar.js"></script>
+    <script src="assets/plugins/datatables/dynamic/jquery.dataTables.min.js"></script>
+    <script src="assets/plugins/datatables/dataTables.bootstrap.js"></script>
+    <script src="assets/plugins/datatables/dataTables.tableTools.js"></script>
+    <script src="assets/plugins/datatables/table.editable.js"></script>
+    <script src="assets/js/table_dynamic.js"></script>
+    <!-- END OF TABLES -->
+    
+  
+
 </head>
 
-<body>
-	<div id="wrapper">
-		<div class="container main ">
-			<div class="row">
+<body data-page="tables_dynamic">
+	
+				
+						<!--<img src="assets/images/bar.jpg"></img>-->
+          <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" >
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="index.html"> ProjectManager</a>
+              </div>
+              <div class="navbar-center" style="top:2px;">
+                  <div class="m-b-20" style="width:300px;color: #262626;background:#2b303b;">
+                    <input type="text" class="form-control" placeholder="Browse Bitches..." style="color: #262626;background:#2b303b;">
+                  </div>
+              </div>
+              <div class="navbar-collapse collapse">
+            <!-- BEGIN TOP NAVIGATION MENU -->
+                <ul class="nav navbar-nav pull-right header-menu" >
+                    <!-- BEGIN NOTIFICATION DROPDOWN -->
+                    <li class="dropdown" id="notifications-header">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                            <i class="glyph-icon flaticon-notifications"></i>
+                            <span class="badge badge-danger badge-header">6</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header clearfix">
+                                <p class="pull-left">Notifications</p>
+                            </li>
+                            <li>
+                                <ul class="dropdown-menu-list withScroll" data-height="220">
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-star p-r-10 f-18 c-orange"></i>
+                                            Steve have rated your photo
+                                            <span class="dropdown-time">Just now</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-heart p-r-10 f-18 c-red"></i>
+                                            John added you to his favs
+                                            <span class="dropdown-time">15 mins</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-file-text p-r-10 f-18"></i>
+                                            New document available
+                                            <span class="dropdown-time">22 mins</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-picture-o p-r-10 f-18 c-blue"></i>
+                                            New picture added
+                                            <span class="dropdown-time">40 mins</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-bell p-r-10 f-18 c-orange"></i>
+                                            Meeting in 1 hour
+                                            <span class="dropdown-time">1 hour</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-bell p-r-10 f-18"></i>
+                                            Server 5 overloaded
+                                            <span class="dropdown-time">2 hours</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-comment p-r-10 f-18 c-gray"></i>
+                                            Bill comment your post
+                                            <span class="dropdown-time">3 hours</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-picture-o p-r-10 f-18 c-blue"></i>
+                                            New picture added
+                                            <span class="dropdown-time">2 days</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-footer clearfix">
+                                <a href="#" class="pull-left">See all notifications</a>
+                                <a href="#" class="pull-right">
+                                    <i class="fa fa-cog"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- END NOTIFICATION DROPDOWN -->
+                    
+                    <!-- BEGIN USER DROPDOWN -->
+                    <li class="dropdown" id="user-header">
+                        <a href="#" class="dropdown-toggle c-white" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                            <img src="assets/img/avatars/avatar2.png" alt="user avatar" width="30" class="p-r-5">
+                            <span class="username">Bob Nilson</span>
+                            <i class="fa fa-angle-down p-r-10"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="profil.html">
+                                    <i class="glyph-icon flaticon-account"></i> My Profile
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a href="profil_edit.html">
+                                    <i class="glyph-icon flaticon-settings21"></i> Account Settings
+                                </a>
+                            </li>
+                            <li >
+                              <a href="logout.html" title="Lock Screen"> <i class="fa fa-power-off"></i>LOGOUT</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- END USER DROPDOWN -->
+                    
+                </ul>
+                <!-- END TOP NAVIGATION MENU -->
+                </div>
+          </div>
+        </nav>
+    <!-- END TOP MENU -->
+				
+			
+			<div class="row" style="margin-top:-10px;">
 				<div class="col-md-12">
-						<img src="assets/images/bar.jpg"></img>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div  ng-controller="PanelController as panel">
-						<ul class="nav nav-tabs nav-justified">
+					<div  ng-controller="PanelController as panel" >
+						<ul class="nav nav-tabs nav-justified" style="position: fixed;z-index:9;" >
 							<li ng-click="panel.selectPanel(1)" ng-class="{ active:panel.isSelected(1) }">
 								<a class="panel_text" href="#">Projects</a>
 							</li>
@@ -57,11 +213,176 @@
 							</li>
 						</ul>
 						<div class="projects_panel" ng-show="panel.isSelected(1)">
-							<p>Here goes the Projects Panel!</p>
+              <div class="row" >
+                <div class="col-md-12" style="margin-top:60px;">
+                    <div class="panel panel-default">
+                        
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 table-responsive table-red">
+                                  <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <div id="DataTables_Table_1_filter" class="dataTables_filter">
+                                          <label>filter:<input type="search" class="form-control" aria-controls="DataTables_Table_1"></label>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <table class="table table-hover table-dynamic table-tools">
+                                        <thead>
+                                            <tr>
+                                                <th>Rendering engine</th>
+                                                <th>Browser</th>
+                                                <th class='hidden-350'>Platform(s)</th>
+                                                <th class='hidden-1024'>Engine version</th>
+                                                <th class='hidden-480'>CSS grade</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Trident</td>
+                                                <td>
+                                                    Internet Explorer 4.0
+                                                </td>
+                                                <td class='hidden-350'>Win 95+</td>
+                                                <td class='hidden-1024'>4</td>
+                                                <td class='hidden-480'>X</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Presto</td>
+                                                <td>Nokia N800</td>
+                                                <td class='hidden-350'>N800</td>
+                                                <td class='hidden-1024'>-</td>
+                                                <td class='hidden-480'>A</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Misc</td>
+                                                <td>NetFront 3.4</td>
+                                                <td class='hidden-350'>Embedded devices</td>
+                                                <td class='hidden-1024'>-</td>
+                                                <td class='hidden-480'>A</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Misc</td>
+                                                <td>Dillo 0.8</td>
+                                                <td class='hidden-350'>Embedded devices</td>
+                                                <td class='hidden-1024'>-</td>
+                                                <td class='hidden-480'>X</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Misc</td>
+                                                <td>Links</td>
+                                                <td class='hidden-350'>Text only</td>
+                                                <td class='hidden-1024'>-</td>
+                                                <td class='hidden-480'>X</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Misc</td>
+                                                <td>Lynx</td>
+                                                <td class='hidden-350'>Text only</td>
+                                                <td class='hidden-1024'>-</td>
+                                                <td class='hidden-480'>X</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Misc</td>
+                                                <td>IE Mobile</td>
+                                                <td class='hidden-350'>Windows Mobile 6</td>
+                                                <td class='hidden-1024'>-</td>
+                                                <td class='hidden-480'>C</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Misc</td>
+                                                <td>PSP browser</td>
+                                                <td class='hidden-350'>PSP</td>
+                                                <td class='hidden-1024'>-</td>
+                                                <td class='hidden-480'>C</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Other browsers</td>
+                                                <td>All others</td>
+                                                <td class='hidden-350'>-</td>
+                                                <td class='hidden-1024'>-</td>
+                                                <td class='hidden-480'>U</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Trident</td>
+                                                <td>
+                                                    Internet Explorer 4.0
+                                                </td>
+                                                <td class='hidden-350'>Win 95+</td>
+                                                <td class='hidden-1024'>4</td>
+                                                <td class='hidden-480'>X</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Presto</td>
+                                                <td>Nokia N800</td>
+                                                <td class='hidden-350'>N800</td>
+                                                <td class='hidden-1024'>-</td>
+                                                <td class='hidden-480'>A</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Misc</td>
+                                                <td>NetFront 3.4</td>
+                                                <td class='hidden-350'>Embedded devices</td>
+                                                <td class='hidden-1024'>-</td>
+                                                <td class='hidden-480'>A</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Misc</td>
+                                                <td>Dillo 0.8</td>
+                                                <td class='hidden-350'>Embedded devices</td>
+                                                <td class='hidden-1024'>-</td>
+                                                <td class='hidden-480'>X</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Misc</td>
+                                                <td>Links</td>
+                                                <td class='hidden-350'>Text only</td>
+                                                <td class='hidden-1024'>-</td>
+                                                <td class='hidden-480'>X</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Misc</td>
+                                                <td>Lynx</td>
+                                                <td class='hidden-350'>Text only</td>
+                                                <td class='hidden-1024'>-</td>
+                                                <td class='hidden-480'>X</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Misc</td>
+                                                <td>IE Mobile</td>
+                                                <td class='hidden-350'>Windows Mobile 6</td>
+                                                <td class='hidden-1024'>-</td>
+                                                <td class='hidden-480'>C</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Misc</td>
+                                                <td>PSP browser</td>
+                                                <td class='hidden-350'>PSP</td>
+                                                <td class='hidden-1024'>-</td>
+                                                <td class='hidden-480'>C</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Other browsers</td>
+                                                <td>All others</td>
+                                                <td class='hidden-350'>-</td>
+                                                <td class='hidden-1024'>-</td>
+                                                <td class='hidden-480'>U</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+							
 						</div>
+          </div>
 						<div class="groups_panel" ng-show="panel.isSelected(2)">
-							<!--											 -->
-							<div class="col-md-12 p-30 comment m-t-0">
+							<!--				EXAMPLE							 -->
+							<!--<div class="col-md-12 p-30 comment m-t-0" style="">
                                     <div class="row">
                                         <div class="comment-checkbox">
                                             <input type="checkbox">
@@ -89,15 +410,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!--											 -->
-							<group-widgets class="col-md-12"></group-widgets>
-						</div>
-							
-					</div>
+                </div>-->
+                <!--			end of EXAMPLE								 -->
+                
+							<group-widgets class="col-md-12" style="margin-top:60px;"></group-widgets>
+					 </div>
 				</div>
-			</div>
-		</div>
-	</div>
+	     </div>
+      </div>
+  
 </body>
 </html>
