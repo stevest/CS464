@@ -68,7 +68,7 @@
 						bars[i].draw();
 					}
 					console.log("graph created");
-					$(function () {
+					//$(function () {
 						console.log("RUNNING JQUERY");
 					    /* Show / Hide action buttons on hover */
 					    var myTimeout;
@@ -76,11 +76,11 @@
 					        console.log("footer-mousehover");
 					        var comment_footer = $(this).find('.comment-footer');
 					        myTimeout = setTimeout(function() {
-					        comment_footer.slideDown();
-					        }, 200);
+								comment_footer.slideDown(100);
+					        }, 1);
 					    }).mouseleave(function() {
 					        clearTimeout(myTimeout);
-					        $(this).find('.comment-footer').slideUp();
+					        $(this).find('.comment-footer').slideUp(100);
 					    });
 
 					    /* Edit a comment */
@@ -107,7 +107,7 @@
 					    });
 
 
-					});
+					//});
 				});
 				
 			},

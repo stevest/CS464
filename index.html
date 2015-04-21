@@ -3,8 +3,6 @@
 <html lang="en" ng-app="pm">
 <head>
 	<meta charset="utf-8">
-
-
   	<title>Project Student Manager</title>
   	<meta name="description" content="student project manager">
   	<meta name="author" content="team12">
@@ -65,359 +63,321 @@
     <script src="assets/plugins/datatables/table.editable.js"></script>
     <script src="assets/js/table_dynamic.js"></script>
     <!-- END OF TABLES -->
-    
-  
-
 </head>
 
 <body data-page="tables_dynamic">
 	
 				
-						<!--<img src="assets/images/bar.jpg"></img>-->
-          <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" >
-            <div class="container-fluid">
-              <div class="navbar-header">
-                <a class="navbar-brand" href="index.html"> ProjectManager</a>
-              </div>
-              <div class="navbar-center" style="top:2px;">
-                  <div class="m-b-20" style="width:300px;color: #262626;background:#2b303b;">
-                    <input type="text" class="form-control" placeholder="Browse Bitches..." style="color: #262626;background:#2b303b;">
-                  </div>
-              </div>
-              <div class="navbar-collapse collapse">
-            <!-- BEGIN TOP NAVIGATION MENU -->
-                <ul class="nav navbar-nav pull-right header-menu" >
-                    <!-- BEGIN NOTIFICATION DROPDOWN -->
-                    <li class="dropdown" id="notifications-header">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                            <i class="glyph-icon flaticon-notifications"></i>
-                            <span class="badge badge-danger badge-header">6</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-header clearfix">
-                                <p class="pull-left">Notifications</p>
-                            </li>
-                            <li>
-                                <ul class="dropdown-menu-list withScroll" data-height="220">
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-star p-r-10 f-18 c-orange"></i>
-                                            Steve have rated your photo
-                                            <span class="dropdown-time">Just now</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-heart p-r-10 f-18 c-red"></i>
-                                            John added you to his favs
-                                            <span class="dropdown-time">15 mins</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-file-text p-r-10 f-18"></i>
-                                            New document available
-                                            <span class="dropdown-time">22 mins</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-picture-o p-r-10 f-18 c-blue"></i>
-                                            New picture added
-                                            <span class="dropdown-time">40 mins</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-bell p-r-10 f-18 c-orange"></i>
-                                            Meeting in 1 hour
-                                            <span class="dropdown-time">1 hour</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-bell p-r-10 f-18"></i>
-                                            Server 5 overloaded
-                                            <span class="dropdown-time">2 hours</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-comment p-r-10 f-18 c-gray"></i>
-                                            Bill comment your post
-                                            <span class="dropdown-time">3 hours</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-picture-o p-r-10 f-18 c-blue"></i>
-                                            New picture added
-                                            <span class="dropdown-time">2 days</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-footer clearfix">
-                                <a href="#" class="pull-left">See all notifications</a>
-                                <a href="#" class="pull-right">
-                                    <i class="fa fa-cog"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- END NOTIFICATION DROPDOWN -->
-                    
-                    <!-- BEGIN USER DROPDOWN -->
-                    <li class="dropdown" id="user-header">
-                        <a href="#" class="dropdown-toggle c-white" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                            <img src="assets/img/avatars/avatar2.png" alt="user avatar" width="30" class="p-r-5">
-                            <span class="username">Bob Nilson</span>
-                            <i class="fa fa-angle-down p-r-10"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="profil.html">
-                                    <i class="glyph-icon flaticon-account"></i> My Profile
-                                </a>
-                            </li>
-                            
-                            <li>
-                                <a href="profil_edit.html">
-                                    <i class="glyph-icon flaticon-settings21"></i> Account Settings
-                                </a>
-                            </li>
-                            <li >
-                              <a href="logout.html" title="Lock Screen"> <i class="fa fa-power-off"></i>LOGOUT</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- END USER DROPDOWN -->
-                    
-                </ul>
-                <!-- END TOP NAVIGATION MENU -->
-                </div>
-          </div>
-        </nav>
-    <!-- END TOP MENU -->
+				<!--<img src="assets/images/bar.jpg"></img>-->
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" >
+		<div class="container-fluid">
+		  <div class="navbar-header">
+			<a class="navbar-brand" href="index.html"> ProjectManager</a>
+		  </div>
+		  <div class="navbar-center" style="top:2px;">
+			  <div class="m-b-20" style="width:300px;color: #262626;background:#2b303b;">
+				<input type="text" class="form-control" placeholder="Browse Bitches..." style="color: #262626;background:#2b303b;">
+			  </div>
+		  </div>
+		  <div class="navbar-collapse collapse">
+		<!-- BEGIN TOP NAVIGATION MENU -->
+			<ul class="nav navbar-nav pull-right header-menu" >
+				<!-- BEGIN NOTIFICATION DROPDOWN -->
+				<li class="dropdown" id="notifications-header">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+						<i class="glyph-icon flaticon-notifications"></i>
+						<span class="badge badge-danger badge-header">6</span>
+					</a>
+					<ul class="dropdown-menu">
+						<li class="dropdown-header clearfix">
+							<p class="pull-left">Notifications</p>
+						</li>
+						<li>
+							<ul class="dropdown-menu-list withScroll" data-height="220">
+								<li>
+									<a href="#">
+										<i class="fa fa-star p-r-10 f-18 c-orange"></i>
+										Steve have rated your photo
+										<span class="dropdown-time">Just now</span>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<i class="fa fa-heart p-r-10 f-18 c-red"></i>
+										John added you to his favs
+										<span class="dropdown-time">15 mins</span>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<i class="fa fa-file-text p-r-10 f-18"></i>
+										New document available
+										<span class="dropdown-time">22 mins</span>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<i class="fa fa-picture-o p-r-10 f-18 c-blue"></i>
+										New picture added
+										<span class="dropdown-time">40 mins</span>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<i class="fa fa-bell p-r-10 f-18 c-orange"></i>
+										Meeting in 1 hour
+										<span class="dropdown-time">1 hour</span>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<i class="fa fa-bell p-r-10 f-18"></i>
+										Server 5 overloaded
+										<span class="dropdown-time">2 hours</span>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<i class="fa fa-comment p-r-10 f-18 c-gray"></i>
+										Bill comment your post
+										<span class="dropdown-time">3 hours</span>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<i class="fa fa-picture-o p-r-10 f-18 c-blue"></i>
+										New picture added
+										<span class="dropdown-time">2 days</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+						<li class="dropdown-footer clearfix">
+							<a href="#" class="pull-left">See all notifications</a>
+							<a href="#" class="pull-right">
+								<i class="fa fa-cog"></i>
+							</a>
+						</li>
+					</ul>
+				</li>
+				<!-- END NOTIFICATION DROPDOWN -->
+				
+				<!-- BEGIN USER DROPDOWN -->
+				<li class="dropdown" id="user-header">
+					<a href="#" class="dropdown-toggle c-white" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+						<img src="assets/img/avatars/avatar2.png" alt="user avatar" width="30" class="p-r-5">
+						<span class="username">Bob Nilson</span>
+						<i class="fa fa-angle-down p-r-10"></i>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="profil.html">
+								<i class="glyph-icon flaticon-account"></i> My Profile
+							</a>
+						</li>
+						
+						<li>
+							<a href="profil_edit.html">
+								<i class="glyph-icon flaticon-settings21"></i> Account Settings
+							</a>
+						</li>
+						<li >
+						  <a href="logout.html" title="Lock Screen"> <i class="fa fa-power-off"></i>LOGOUT</a>
+						</li>
+					</ul>
+				</li>
+				<!-- END USER DROPDOWN -->
+			</ul>
+			<!-- END TOP NAVIGATION MENU -->
+			</div>
+		</div>
+	</nav>
+	<!-- END TOP MENU -->
 				
 			
-			<div class="row" style="margin-top:-10px;">
-				<div class="col-md-12">
-					<div  ng-controller="PanelController as panel" >
-						<ul class="nav nav-tabs nav-justified" style="position: fixed;z-index:9;" >
-							<li ng-click="panel.selectPanel(1)" ng-class="{ active:panel.isSelected(1) }">
-								<a class="panel_text" href="#">Projects</a>
-							</li>
-							<li ng-click="panel.selectPanel(2)" ng-class="{ active:panel.isSelected(2) }">
-								<a class="panel_text" href="#">Groups</a>
-							</li>
-						</ul>
-						<div class="projects_panel" ng-show="panel.isSelected(1)">
-              <div class="row" >
-                <div class="col-md-12" style="margin-top:60px;">
-                    <div class="panel panel-default">
-                        
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12 table-responsive table-red">
-                                  <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
-                                    <div class="row">
-                                      <div class="col-md-12">
-                                        <div id="DataTables_Table_1_filter" class="dataTables_filter">
-                                          <label>filter:<input type="search" class="form-control" aria-controls="DataTables_Table_1"></label>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <table class="table table-hover table-dynamic table-tools">
-                                        <thead>
-                                            <tr>
-                                                <th>Rendering engine</th>
-                                                <th>Browser</th>
-                                                <th class='hidden-350'>Platform(s)</th>
-                                                <th class='hidden-1024'>Engine version</th>
-                                                <th class='hidden-480'>CSS grade</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Trident</td>
-                                                <td>
-                                                    Internet Explorer 4.0
-                                                </td>
-                                                <td class='hidden-350'>Win 95+</td>
-                                                <td class='hidden-1024'>4</td>
-                                                <td class='hidden-480'>X</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Presto</td>
-                                                <td>Nokia N800</td>
-                                                <td class='hidden-350'>N800</td>
-                                                <td class='hidden-1024'>-</td>
-                                                <td class='hidden-480'>A</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Misc</td>
-                                                <td>NetFront 3.4</td>
-                                                <td class='hidden-350'>Embedded devices</td>
-                                                <td class='hidden-1024'>-</td>
-                                                <td class='hidden-480'>A</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Misc</td>
-                                                <td>Dillo 0.8</td>
-                                                <td class='hidden-350'>Embedded devices</td>
-                                                <td class='hidden-1024'>-</td>
-                                                <td class='hidden-480'>X</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Misc</td>
-                                                <td>Links</td>
-                                                <td class='hidden-350'>Text only</td>
-                                                <td class='hidden-1024'>-</td>
-                                                <td class='hidden-480'>X</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Misc</td>
-                                                <td>Lynx</td>
-                                                <td class='hidden-350'>Text only</td>
-                                                <td class='hidden-1024'>-</td>
-                                                <td class='hidden-480'>X</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Misc</td>
-                                                <td>IE Mobile</td>
-                                                <td class='hidden-350'>Windows Mobile 6</td>
-                                                <td class='hidden-1024'>-</td>
-                                                <td class='hidden-480'>C</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Misc</td>
-                                                <td>PSP browser</td>
-                                                <td class='hidden-350'>PSP</td>
-                                                <td class='hidden-1024'>-</td>
-                                                <td class='hidden-480'>C</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Other browsers</td>
-                                                <td>All others</td>
-                                                <td class='hidden-350'>-</td>
-                                                <td class='hidden-1024'>-</td>
-                                                <td class='hidden-480'>U</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Trident</td>
-                                                <td>
-                                                    Internet Explorer 4.0
-                                                </td>
-                                                <td class='hidden-350'>Win 95+</td>
-                                                <td class='hidden-1024'>4</td>
-                                                <td class='hidden-480'>X</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Presto</td>
-                                                <td>Nokia N800</td>
-                                                <td class='hidden-350'>N800</td>
-                                                <td class='hidden-1024'>-</td>
-                                                <td class='hidden-480'>A</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Misc</td>
-                                                <td>NetFront 3.4</td>
-                                                <td class='hidden-350'>Embedded devices</td>
-                                                <td class='hidden-1024'>-</td>
-                                                <td class='hidden-480'>A</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Misc</td>
-                                                <td>Dillo 0.8</td>
-                                                <td class='hidden-350'>Embedded devices</td>
-                                                <td class='hidden-1024'>-</td>
-                                                <td class='hidden-480'>X</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Misc</td>
-                                                <td>Links</td>
-                                                <td class='hidden-350'>Text only</td>
-                                                <td class='hidden-1024'>-</td>
-                                                <td class='hidden-480'>X</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Misc</td>
-                                                <td>Lynx</td>
-                                                <td class='hidden-350'>Text only</td>
-                                                <td class='hidden-1024'>-</td>
-                                                <td class='hidden-480'>X</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Misc</td>
-                                                <td>IE Mobile</td>
-                                                <td class='hidden-350'>Windows Mobile 6</td>
-                                                <td class='hidden-1024'>-</td>
-                                                <td class='hidden-480'>C</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Misc</td>
-                                                <td>PSP browser</td>
-                                                <td class='hidden-350'>PSP</td>
-                                                <td class='hidden-1024'>-</td>
-                                                <td class='hidden-480'>C</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Other browsers</td>
-                                                <td>All others</td>
-                                                <td class='hidden-350'>-</td>
-                                                <td class='hidden-1024'>-</td>
-                                                <td class='hidden-480'>U</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+	<div class="row" style="margin-top:-10px;">
+		<div class="col-md-12">
+			<div  ng-controller="PanelController as panel" >
+				<ul class="nav nav-tabs nav-justified" style="position: fixed;z-index:9;" >
+					<li ng-click="panel.selectPanel(1)" ng-class="{ active:panel.isSelected(1) }">
+						<a class="panel_text" href="#">Projects</a>
+					</li>
+					<li ng-click="panel.selectPanel(2)" ng-class="{ active:panel.isSelected(2) }">
+						<a class="panel_text" href="#">Groups</a>
+					</li>
+				</ul>
+				<div class="projects_panel" ng-show="panel.isSelected(1)">
+				  <div class="row" >
+					<div class="col-md-12" style="margin-top:60px;">
+						<div class="panel panel-default">
 							
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-12 col-sm-12 col-xs-12 table-responsive table-red">
+									  <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+										<div class="row">
+										  <div class="col-md-12">
+											<div id="DataTables_Table_1_filter" class="dataTables_filter">
+											  <label>filter:<input type="search" class="form-control" aria-controls="DataTables_Table_1"></label>
+											</div>
+										  </div>
+										</div>
+										<table class="table table-hover table-dynamic table-tools">
+											<thead>
+												<tr>
+													<th>Rendering engine</th>
+													<th>Browser</th>
+													<th class='hidden-350'>Platform(s)</th>
+													<th class='hidden-1024'>Engine version</th>
+													<th class='hidden-480'>CSS grade</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Trident</td>
+													<td>
+														Internet Explorer 4.0
+													</td>
+													<td class='hidden-350'>Win 95+</td>
+													<td class='hidden-1024'>4</td>
+													<td class='hidden-480'>X</td>
+												</tr>
+												<tr>
+													<td>Presto</td>
+													<td>Nokia N800</td>
+													<td class='hidden-350'>N800</td>
+													<td class='hidden-1024'>-</td>
+													<td class='hidden-480'>A</td>
+												</tr>
+												<tr>
+													<td>Misc</td>
+													<td>NetFront 3.4</td>
+													<td class='hidden-350'>Embedded devices</td>
+													<td class='hidden-1024'>-</td>
+													<td class='hidden-480'>A</td>
+												</tr>
+												<tr>
+													<td>Misc</td>
+													<td>Dillo 0.8</td>
+													<td class='hidden-350'>Embedded devices</td>
+													<td class='hidden-1024'>-</td>
+													<td class='hidden-480'>X</td>
+												</tr>
+												<tr>
+													<td>Misc</td>
+													<td>Links</td>
+													<td class='hidden-350'>Text only</td>
+													<td class='hidden-1024'>-</td>
+													<td class='hidden-480'>X</td>
+												</tr>
+												<tr>
+													<td>Misc</td>
+													<td>Lynx</td>
+													<td class='hidden-350'>Text only</td>
+													<td class='hidden-1024'>-</td>
+													<td class='hidden-480'>X</td>
+												</tr>
+												<tr>
+													<td>Misc</td>
+													<td>IE Mobile</td>
+													<td class='hidden-350'>Windows Mobile 6</td>
+													<td class='hidden-1024'>-</td>
+													<td class='hidden-480'>C</td>
+												</tr>
+												<tr>
+													<td>Misc</td>
+													<td>PSP browser</td>
+													<td class='hidden-350'>PSP</td>
+													<td class='hidden-1024'>-</td>
+													<td class='hidden-480'>C</td>
+												</tr>
+												<tr>
+													<td>Other browsers</td>
+													<td>All others</td>
+													<td class='hidden-350'>-</td>
+													<td class='hidden-1024'>-</td>
+													<td class='hidden-480'>U</td>
+												</tr>
+												<tr>
+													<td>Trident</td>
+													<td>
+														Internet Explorer 4.0
+													</td>
+													<td class='hidden-350'>Win 95+</td>
+													<td class='hidden-1024'>4</td>
+													<td class='hidden-480'>X</td>
+												</tr>
+												<tr>
+													<td>Presto</td>
+													<td>Nokia N800</td>
+													<td class='hidden-350'>N800</td>
+													<td class='hidden-1024'>-</td>
+													<td class='hidden-480'>A</td>
+												</tr>
+												<tr>
+													<td>Misc</td>
+													<td>NetFront 3.4</td>
+													<td class='hidden-350'>Embedded devices</td>
+													<td class='hidden-1024'>-</td>
+													<td class='hidden-480'>A</td>
+												</tr>
+												<tr>
+													<td>Misc</td>
+													<td>Dillo 0.8</td>
+													<td class='hidden-350'>Embedded devices</td>
+													<td class='hidden-1024'>-</td>
+													<td class='hidden-480'>X</td>
+												</tr>
+												<tr>
+													<td>Misc</td>
+													<td>Links</td>
+													<td class='hidden-350'>Text only</td>
+													<td class='hidden-1024'>-</td>
+													<td class='hidden-480'>X</td>
+												</tr>
+												<tr>
+													<td>Misc</td>
+													<td>Lynx</td>
+													<td class='hidden-350'>Text only</td>
+													<td class='hidden-1024'>-</td>
+													<td class='hidden-480'>X</td>
+												</tr>
+												<tr>
+													<td>Misc</td>
+													<td>IE Mobile</td>
+													<td class='hidden-350'>Windows Mobile 6</td>
+													<td class='hidden-1024'>-</td>
+													<td class='hidden-480'>C</td>
+												</tr>
+												<tr>
+													<td>Misc</td>
+													<td>PSP browser</td>
+													<td class='hidden-350'>PSP</td>
+													<td class='hidden-1024'>-</td>
+													<td class='hidden-480'>C</td>
+												</tr>
+												<tr>
+													<td>Other browsers</td>
+													<td>All others</td>
+													<td class='hidden-350'>-</td>
+													<td class='hidden-1024'>-</td>
+													<td class='hidden-480'>U</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
 						</div>
-          </div>
-						<div class="groups_panel" ng-show="panel.isSelected(2)">
-							<!--				EXAMPLE							 -->
-							<!--<div class="col-md-12 p-30 comment m-t-0" style="">
-                                    <div class="row">
-                                        <div class="comment-checkbox">
-                                            <input type="checkbox">
-                                        </div>
-                                        <div class="comment-content">
-                                            <div class="comment-header f-16 clearfix">
-                                                <div class="pull-left">
-                                                    <a href="#">John Miller</a> <span class="c-gray">commented on</span> <a href="#">Billy Paul</a>
-                                                </div>
-                                                <div class="pull-right f-12">
-                                                   <span class="c-gray">Monday, 04 March - 10:49</span>
-                                                </div>
-                                            </div>
-                                            <p class="comment-text">
-                                                To continue to thrive as a business over the next ten years and beyond, we must look ahead, understand the trends and forces that will shape our business in the future and move swiftly to prepare for what's to come. We must get ready for tomorrow today. That's what our 2020 Vision is all about. It creates a long-term destination for our business and provides us with a "Roadmap" for winning together with our bottling partners.
-                                            </p>
-                                            <div class="comment-footer">
-                                                <div>
-                                                    <a href="#" class="aprrove btn btn-success m-r-10" data-rel="tooltip" data-original-title="Approve"><i class="fa fa-check"></i></a>
-                                                    <a href="#" class="delete btn btn-danger m-r-10" data-rel="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-                                                    <a href="#" class="edit btn btn-default" data-rel="tooltip" data-original-title="Edit">
-                                                        <i class="fa fa-edit"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                </div>-->
-                <!--			end of EXAMPLE								 -->
-                
-							<group-widgets class="col-md-12" style="margin-top:60px;"></group-widgets>
-					 </div>
+					</div>
 				</div>
-	     </div>
-      </div>
-  
+				</div>
+			</div>
+			<div class="groups_panel" ng-show="panel.isSelected(2)">
+				<group-widgets class="col-md-12" style="margin-top:60px;"></group-widgets>
+			</div>
+		</div>
+	</div>
+	</div>
 </body>
 </html>

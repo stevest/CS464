@@ -1,5 +1,5 @@
 
-<div class="col-md-6 comment" style="z-index:1;" ng-repeat="group in gWidget.groups" on-finish-render="ngRepeatFinished">
+<div class="col-md-6 comment" style="padding-bottom:40px;" ng-repeat="group in gWidget.groups" on-finish-render="ngRepeatFinished">
 	<div class="col-md-12  group_widget">
 		<div class="row group_header" style="border-bottom: 2px solid #ccc">
 			<div>
@@ -7,11 +7,11 @@
 				<span class="group_name">{{group.name}}</span>
 			</div>
 		</div>
-		<div class="row group_body">
+		<div class=" group_body">
 			<p class="group_author">Created by: {{group.author}}</p>
 			<p class="group_title">{{group.title}}</p>
 		</div>
-		<div class="row group_stats ">
+		<div class=" group_stats ">
 			<div class="col-md-12 col-sm-12" style="float:left;">
 				<img src="assets/images/UserGroup.png" style="width:90px;position:absolute;"></img>
 				<div class="group_progressbar" id="graph{{group.id}}"data-color="#30bae7" data-size="90"></div>
@@ -22,11 +22,13 @@
 				Pending:3
 			</div>
 		</div>
-		<div class="row comment-footer" style="z-index:-1;">
+	</div>
+	<div class="row" style="position:absolute;top:180px;z-index:1;">
+		<div class="col-md-12 comment-footer" style="display:none;">
 			<div class="btn-group btn-group-justified" role="group">
 				<div class="btn-group" role="group">
 					<button type="button" class="btn btn-success">Accept</button>
-				</div>
+				</div>	
 				<div class="btn-group" role="group">
 					<button type="button" class="btn btn-danger">Decline</button>
 				</div>

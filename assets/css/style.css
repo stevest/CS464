@@ -84,6 +84,10 @@
 	font-size: 28px;
 	font-weight: bold;
 }
+.groups_panel {
+	height: 500px;
+	background-color: #ffffff;
+}
 /*.nav-tabs > li > a:hover {
   border-color: #eee #eee #ddd;
 }
