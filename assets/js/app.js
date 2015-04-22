@@ -6,7 +6,7 @@
 			this.mem = mem;
 			this.maxmem = maxmem;
 			el = document.getElementById(this.id);
-			console.log("Element got is: "+el);
+			//console.log("Element got is: "+el);
 			this.size = el.getAttribute('data-size') || 165;
 			this.lineWidth = el.getAttribute('data-line') || 15;
             this.color = el.getAttribute('data-color') || "#30bae7";
@@ -61,10 +61,8 @@
 					var bars = new Array($scope.gWidget.groups.length);
 					
 					for (i=0 ; i < $scope.gWidget.groups.length ; i++) {
-						console.log($scope.gWidget.groups[i].id);
-						//drawNewGraph("graph"+$scope.gWidget.groups[i].id,40);
+						//console.log($scope.gWidget.groups[i].id);
 						bars[i] = new cicrbar();
-						//console.log("percent is"+$scope.gWidget.groups[i].members/$scope.gWidget.groups[i].maxmembers*100);
 						bars[i].init("graph"+$scope.gWidget.groups[i].id,$scope.gWidget.groups[i].members,$scope.gWidget.groups[i].maxmembers);
 						bars[i].draw();
 					}
@@ -72,7 +70,7 @@
 					//$(function () {
 						console.log("RUNNING JQUERY");
 					    /* Show / Hide action buttons on hover */
-					    var myTimeout;
+						var myTimeout;
 					    $('.comment').mouseenter(function() {
 					        console.log("footer-mousehover");
 					        var comment_footer = $(this).find('.comment-footer');
@@ -83,6 +81,17 @@
 					        clearTimeout(myTimeout);
 					        $(this).find('.comment-footer').slideUp(100);
 					    });
+					    /*var myTimeout;
+					    $('.comment').mouseenter(function() {
+					        console.log("footer-mousehover");
+					        var comment_footer = $(this).find('.comment-footer');
+					        myTimeout = setTimeout(function() {
+								comment_footer.slideDown(100);
+					        }, 1);
+					    }).mouseleave(function() {
+					        clearTimeout(myTimeout);
+					        $(this).find('.comment-footer').slideUp(100);
+					    });*/
 
 					    /* Edit a comment */
 					    $('.edit').on('click', function(e){
@@ -113,15 +122,37 @@
 				
 			},
 			controllerAs: 'gWidget',
-			link: function(scope, element){
+			link: function(scope, element, attributes, parentCtrl){
+				var mylength, myHTMLcollection, myjQueryObj, myElementObj;
+				mylength = document.getElementsByClassName("comment").length;
+				myHTMLcollection = document.getElementsByClassName("comment");
+				myjQueryObj = $(".comment");
+				myElementObj = element.parent().html();
 				console.log("LINKED!");
-				console.log(document.getElementsByClassName("comment"));
-				console.log(jQuery("div.comment"));
+				console.log(mylength);
+				console.log(myHTMLcollection); //its updated live, so its full.
+				console.log(myElementObj);
+				console.log(myjQueryObj);
+				$(function () {
+					var myvar = element.find(".comment");
+					//console.log(element);
+					//console.log(myvar);
+				});
+				console.log("END");
+				/*element.mouseenter(function(){
+					console.log(element.find(".comment"));
+				});*/
+				/*$(function () {
+					console.log($(".comment"));
+					angular.element('.comment').click(function(){
+						console.log("CLICK")
+					});
+				})*/
 				//console.log(element.find(".comment").css("padding-bottom"));
 				//console.log($(".comment").css("padding-bottom"));
 				/* Show / Hide action buttons on hover */
 				//console.log.apply(console, angular.element('.comment'));
-					    //angular.element('.comment').mouseenter(function(){console.log("CLICK")});
+					    
 						/*var myTimeout;
 					    $('.comment').mouseenter(function() {
 					        console.log("footer-mousehover");
@@ -133,6 +164,11 @@
 					        clearTimeout(myTimeout);
 					        $(this).find('.comment-footer').slideUp(100);
 					    });*/
+					var blah = function(elObj){
+					console.log("function is executed...");
+					console.log(elObj.parent().html());
+					}
+				return blah(element)
 			}
 		};
 	});
