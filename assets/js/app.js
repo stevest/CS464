@@ -232,7 +232,16 @@
 			name: 'Omada12',
 			author: 'Eleni',
 			title: 'Web application development.',
-			members: 0,
+			members: 1,
+			maxmembers: 2
+		},
+		{
+			id:5,
+			course: "HY359",
+			name: 'Omada15',
+			author: 'Giorgos',
+			title: 'Design',
+			members: 1,
 			maxmembers: 2
 		}
 	];
