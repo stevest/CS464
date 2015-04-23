@@ -47,10 +47,10 @@
 	
 	var app = angular.module('pm',[]);
 	
-	app.directive('groupWidgets',function($timeout){
+	app.directive('groupsWidgets',function($timeout){
 		return{
 			restrict: 'E',
-			templateUrl: 'group-widgets.html',
+			templateUrl: 'groups-widgets.html',
 			controller:function($scope){
 				//Not the best practice:
 				$scope.group.maximized = false;
@@ -120,6 +120,45 @@
 				    }*/
 				});
 				
+
+			}
+		};
+	});
+app.directive('groupMembers',function($timeout){
+		return{
+			restrict: 'E',
+			templateUrl: 'group-members.html',
+			controller:function($scope){
+			
+			},
+			/*controllerAs: 'gWidget'*/
+			link: function(scope, element, attrs){
+
+			}
+		};
+	});
+app.directive('groupInvited',function($timeout){
+		return{
+			restrict: 'E',
+			templateUrl: 'group-invited.html',
+			controller:function($scope){
+			
+			},
+			/*controllerAs: 'gWidget'*/
+			link: function(scope, element, attrs){
+
+			}
+		};
+	});
+app.directive('groupPending',function($timeout){
+		return{
+			restrict: 'E',
+			templateUrl: 'group-pending.html',
+			controller:function($scope){
+			
+			},
+			/*controllerAs: 'gWidget'*/
+			link: function(scope, element, attrs){
 
 			}
 		};

@@ -51,13 +51,23 @@
 								</div>
 	                        </div>
 	                    </div>
-	                    <div class="row">
-	                        <div class="col-xs-7">
-	                        	<div class="row" ng-show="group.maximized">
-	                        		Members ng-repeat
-	                            </div>
+	                    	<div class="row" ng-show="group.maximized">
+	                    		<div class="col-md-12">
+		                    		<h3>Members</h3>
+		                    		<p>Owners of this group.</p>
+		                    		<group-members ng-repeat="members in group.members"></group-members>
+	                    		</div>
+	                    		<div class="col-md-12">
+		                    		<h3>Invited</h3>
+		                    		<p>Members invited to join this group.</p>
+		                    		<group-invited ng-repeat="invited in group.invited"></group-invited>
+	                    		</div>
+	                    		<div class="col-md-12">
+		                    		<h3>Pending</h3>
+		                    		<p>Members requested to join this group.</p>
+		                    		<group-pending ng-repeat="pending in group.pending"></group-pending>
+	                    		</div>
 	                        </div>
-	                    </div>
 	                    <div class="row ">
 					    	<div class="col-md-12 comment-footer" style="display:none;">
 								<div class="btn-group btn-group-justified" role="group">

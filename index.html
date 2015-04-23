@@ -373,11 +373,8 @@
 					</div>
 				</div>
 				<div class="groups_panel" ng-show="panel.isSelected(2)">
-					<!--<h1 ng-controller="groupsController"> blah {{groups.length}}</h1>-->
-					<div class="gwidget_holder" style="width:100%; height:100%; position:initial;" ng-controller="groupsController">
-						<!-- <div class="col-md-3 col-sm-6 " ng-repeat="group in groups" > -->
-							<group-widgets class="gwidget gw-id{{group.id}}" ng-class="!group.maximized ? 'col-md-3' : 'col-md-12'" ng-repeat="group in groups" style="margin-top:65px;"></group-widgets>
-						<!-- </div> -->
+					<div class="gwidget_holder" style="width:100%; height:100%; position:relative;" ng-controller="groupsController">
+							<groups-widgets class="gwidget gw-id{{group.id}}" ng-class="!group.maximized ? 'col-md-3' : 'col-md-12'" ng-repeat="group in groups" style="margin-top:65px;"></groups-widgets>
 					</div>
 				</div>
 			</div>
