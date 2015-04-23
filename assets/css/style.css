@@ -1,4 +1,12 @@
 /* group widget styles */
+.gwidget{
+	transition: height 0.2s;
+	transition: width 0.2s;
+}
+.gwidget_max{
+	height:100%;
+	width:100%;
+}
 .group_widget{
 	margin-left:0px;
 	margin-right:0px;

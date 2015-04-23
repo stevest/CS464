@@ -47,143 +47,98 @@
 	
 	var app = angular.module('pm',[]);
 	
-	app.directive('groupWidgets',function(){
+	app.directive('groupWidgets',function($timeout){
 		return{
 			restrict: 'E',
 			templateUrl: 'group-widgets.html',
 			controller:function($scope){
-			//controller is this:
-				this.groups = allGroups;
-				console.log($scope);
-				console.log("Wait till renders...");
-				$scope.$on('ngRepeatFinished',function(ngRepeatFinishedEvent){
+				//Not the best practice:
+				$scope.group.maximized = false;
+				//console.log("Length of group members is " + $scope.group.members.length);
+				//console.log($scope);
+				/*$scope.$on('ngRepeatFinished',function(ngRepeatFinishedEvent){
 					console.log("ng-repeat FINISHED!");
-					var bars = new Array($scope.gWidget.groups.length);
+					var bars = new Array($scope.groups.length);
 					
-					for (i=0 ; i < $scope.gWidget.groups.length ; i++) {
-						//console.log($scope.gWidget.groups[i].id);
+					for (i=0 ; i < $scope.groups.length ; i++) {
+						//console.log($scope.groups[i].id);
 						bars[i] = new cicrbar();
-						bars[i].init("graph"+$scope.gWidget.groups[i].id,$scope.gWidget.groups[i].members,$scope.gWidget.groups[i].maxmembers);
+						bars[i].init("graph"+$scope.groups[i].id,$scope.groups[i].members.length,$scope.groups[i].maxmembers);
 						bars[i].draw();
 					}
 					console.log("graph created");
-					//$(function () {
-						console.log("RUNNING JQUERY");
-					    /* Show / Hide action buttons on hover */
-						var myTimeout;
-					    $('.comment').mouseenter(function() {
-					        console.log("footer-mousehover");
-					        var comment_footer = $(this).find('.comment-footer');
-					        myTimeout = setTimeout(function() {
-								comment_footer.slideDown(100);
-					        }, 1);
-					    }).mouseleave(function() {
-					        clearTimeout(myTimeout);
-					        $(this).find('.comment-footer').slideUp(100);
-					    });
-					    /*var myTimeout;
-					    $('.comment').mouseenter(function() {
-					        console.log("footer-mousehover");
-					        var comment_footer = $(this).find('.comment-footer');
-					        myTimeout = setTimeout(function() {
-								comment_footer.slideDown(100);
-					        }, 1);
-					    }).mouseleave(function() {
-					        clearTimeout(myTimeout);
-					        $(this).find('.comment-footer').slideUp(100);
-					    });*/
-
-					    /* Edit a comment */
-					    $('.edit').on('click', function(e){
-					      e.preventDefault();
-					      $('#modal-edit-comment').modal('show');
-					    });
-
-					    /* Delete a comment */
-					    $('.delete').on('click', function(){
-					      $(this).closest('.comment').hide();
-					    });
-
-					    /* Checkbox select */
-					    $('input:checkbox').on('ifClicked', function () {
-					        if ($(this).parent().hasClass('checked')) {
-					            $(this).closest('.comment').removeClass('selected');
-					            $(this).closest('.comment').find(':checkbox').attr('checked', false);
-					        } else {
-					            $(this).parent().addClass('checked');
-					            $(this).closest('.comment').addClass('selected');
-					            $(this).closest('.comment').find(':checkbox').attr('checked', true);
-					        }
-					    });
-
-
-					//});
-				});
+				});*/
 				
 			},
-			controllerAs: 'gWidget',
-			link: function(scope, element, attributes, parentCtrl){
-				var mylength, myHTMLcollection, myjQueryObj, myElementObj;
-				mylength = document.getElementsByClassName("comment").length;
-				myHTMLcollection = document.getElementsByClassName("comment");
-				myjQueryObj = $(".comment");
-				myElementObj = element.parent().html();
-				console.log("LINKED!");
-				console.log(mylength);
-				console.log(myHTMLcollection); //its updated live, so its full.
-				console.log(myElementObj);
-				console.log(myjQueryObj);
-				$(function () {
-					var myvar = element.find(".comment");
-					//console.log(element);
-					//console.log(myvar);
-				});
-				console.log("END");
-				/*element.mouseenter(function(){
-					console.log(element.find(".comment"));
-				});*/
-				/*$(function () {
-					console.log($(".comment"));
-					angular.element('.comment').click(function(){
-						console.log("CLICK")
+			/*controllerAs: 'gWidget'*/
+			link: function(scope, element, attrs){
+				//Render each element as soon as its ready:
+				$timeout(function(){
+					//scope.$emit('ngRepeatFinished');
+					//console.log("Timeout function executed");
+					//console.log(scope);
+					//console.log(element.html());
+					var bar = new cicrbar();
+					bar.init("graph"+scope.group.id,scope.group.members.length,scope.group.maxmembers);
+					bar.draw();
+
+					element.mouseenter(function(){
+						element.find('.comment-footer').slideDown(100);
+					}).mouseleave(function(){
+						element.find('.comment-footer').slideUp(100);
 					});
-				})*/
-				//console.log(element.find(".comment").css("padding-bottom"));
-				//console.log($(".comment").css("padding-bottom"));
-				/* Show / Hide action buttons on hover */
-				//console.log.apply(console, angular.element('.comment'));
-					    
-						/*var myTimeout;
-					    $('.comment').mouseenter(function() {
-					        console.log("footer-mousehover");
-					        var comment_footer = $(this).find('.comment-footer');
-					        myTimeout = setTimeout(function() {
-								comment_footer.slideDown(100);
-					        }, 1);
-					    }).mouseleave(function() {
-					        clearTimeout(myTimeout);
-					        $(this).find('.comment-footer').slideUp(100);
-					    });*/
-					var blah = function(elObj){
-					console.log("function is executed...");
-					console.log(elObj.parent().html());
-					}
-				return blah(element)
+
+					element.find('.maximizeWidget').on('click',function(){
+						console.log(scope.group.name);
+						console.log(element.parent().find(".gw-id"+scope.group.id).height());
+						console.log(element.parent().parent().find('.gwidget_holder').height());
+						if (!scope.group.maximized) {
+							element.parent().find(".gw-id"+scope.group.id).css({"position":"absolute","z-index":4});
+					    	//element.parent().find(".gw-id"+scope.group.id).width("100%");
+					    	//element.parent().find(".gw-id"+scope.group.id).height("100%");
+					    	scope.$apply(function(){
+					    		scope.group.maximized = true;					    	
+					    	});
+					    } else {
+					    	element.parent().find(".gw-id"+scope.group.id).css({"position":"relative","z-index":"auto"});
+					    	scope.$apply(function(){
+					    		scope.group.maximized = false;					    	
+					    	});
+					    }
+					});
+
+
+					/*var gwidget = document.getElementsByClassName('gwidget');
+					var gwidgetHolder = document.getElementsByClassName('gwidget_holder');
+				    if (gwidget.clientHeight < gwidgetHolder.clientHeight) {
+				    	gwidget.style.height = gwidgetHolder.style.height;
+				    	gwidget.style.width = gwidgetHolder.style.width;
+				    } else {
+				    	//gwidget.style.height = gwidgetHolder.clientHeight;
+				    	//var wrapper = document.querySelector('.measuringWrapper');
+				    	//growDiv.style.height = wrapper.clientHeight + "px";
+				    }*/
+				});
+				
+
 			}
 		};
 	});
-	app.directive('onFinishRender',function($timeout){
+	/*app.directive('onFinishRender',function($timeout){
 		return{
 			restrict:'A',
 			link: function(scope,element,attr){
 				if(scope.$last === true) {
 					$timeout(function(){
 						scope.$emit('ngRepeatFinished');
+						console.log("EMITTING");
+						console.log(scope);
+						console.log(element.html());
 					});
 				}
 			}
 		}
-	});
+	});*/
 	//app.controller('postRender',function(){
 	//	
 	//});
@@ -197,6 +152,9 @@
 			return this.panel == checkPanel;
 		};
 	});
+	app.controller("groupsController",function($scope){
+		$scope.groups = allGroups;
+	});
 	
 	var allGroups = [
 		{
@@ -205,8 +163,38 @@
 			name: 'Ομάδα-1',
 			author: 'Alexandros',
 			title: 'Mobile application development.',
-			members: 3,
-			maxmembers: 4
+			maxmembers: 4,
+			members: [
+				{
+					name: "Αλέξανδρος",
+					surname: "Ιωαννίδης-Παπαγεωργίου",
+					email: "alexandros@csd.uoc.gr",
+				},
+				{
+					name: "Γιώργος",
+					surname: "Παπακωνσταντίνου",
+					email: "george@csd.uoc.gr",
+				},
+				{
+					name: "Ελένη",
+					surname: "Ιωάννου",
+					email: "elena@csd.uoc.gr",
+				}
+			],
+			invited: [
+				{
+					name: "Κώστας",
+					surname: "Γλεζέλης",
+					email: "kostis@csd.uoc.gr",
+				}
+			],
+			pending: [
+				{
+					name: "Αθανάσιος",
+					surname: "Μπίτσιος",
+					email: "nassos@csd.uoc.gr",
+				}
+			]
 		},
 		{
 			id:2,
@@ -214,8 +202,38 @@
 			name: 'Omada12',
 			author: 'Eleni',
 			title: 'Web application development.',
-			members: 1,
-			maxmembers: 2
+			maxmembers: 4,
+			members: [
+				{
+					name: "Αλέξανδρος",
+					surname: "Ιωαννίδης-Παπαγεωργίου",
+					email: "alexandros@csd.uoc.gr",
+				},
+				{
+					name: "Γιώργος",
+					surname: "Παπακωνσταντίνου",
+					email: "george@csd.uoc.gr",
+				}
+			],
+			invited: [
+				{
+					name: "Κώστας",
+					surname: "Γλεζέλης",
+					email: "kostis@csd.uoc.gr",
+				},
+				{
+					name: "Ελένη",
+					surname: "Ιωάννου",
+					email: "elena@csd.uoc.gr",
+				}
+			],
+			pending: [
+				{
+					name: "Αθανάσιος",
+					surname: "Μπίτσιος",
+					email: "nassos@csd.uoc.gr",
+				}
+			]
 		},
 		{
 			id:3,
@@ -223,8 +241,38 @@
 			name: 'Omada12',
 			author: 'Eleni',
 			title: 'Web application development.',
-			members: 3,
-			maxmembers: 3
+			maxmembers: 4,
+			members: [
+				{
+					name: "Αλέξανδρος",
+					surname: "Ιωαννίδης-Παπαγεωργίου",
+					email: "alexandros@csd.uoc.gr",
+				}
+			],
+			invited: [
+				{
+					name: "Κώστας",
+					surname: "Γλεζέλης",
+					email: "kostis@csd.uoc.gr",
+				}
+			],
+			pending: [
+				{
+					name: "Αθανάσιος",
+					surname: "Μπίτσιος",
+					email: "nassos@csd.uoc.gr",
+				},
+				{
+					name: "Γιώργος",
+					surname: "Παπακωνσταντίνου",
+					email: "george@csd.uoc.gr",
+				},
+				{
+					name: "Ελένη",
+					surname: "Ιωάννου",
+					email: "elena@csd.uoc.gr",
+				}
+			]
 		},
 		{
 			id:4,
@@ -232,8 +280,38 @@
 			name: 'Omada12',
 			author: 'Eleni',
 			title: 'Web application development.',
-			members: 1,
-			maxmembers: 2
+			maxmembers: 4,
+			members: [
+				{
+					name: "Αλέξανδρος",
+					surname: "Ιωαννίδης-Παπαγεωργίου",
+					email: "alexandros@csd.uoc.gr",
+				},
+				{
+					name: "Γιώργος",
+					surname: "Παπακωνσταντίνου",
+					email: "george@csd.uoc.gr",
+				}
+			],
+			invited: [
+				{
+					name: "Κώστας",
+					surname: "Γλεζέλης",
+					email: "kostis@csd.uoc.gr",
+				}
+			],
+			pending: [
+				{
+					name: "Αθανάσιος",
+					surname: "Μπίτσιος",
+					email: "nassos@csd.uoc.gr",
+				},
+				{
+					name: "Ελένη",
+					surname: "Ιωάννου",
+					email: "elena@csd.uoc.gr",
+				}
+			]
 		},
 		{
 			id:5,
@@ -241,8 +319,38 @@
 			name: 'Omada15',
 			author: 'Giorgos',
 			title: 'Design',
-			members: 1,
-			maxmembers: 2
+			maxmembers: 4,
+			members: [
+				{
+					name: "Αλέξανδρος",
+					surname: "Ιωαννίδης-Παπαγεωργίου",
+					email: "alexandros@csd.uoc.gr",
+				},
+				{
+					name: "Γιώργος",
+					surname: "Παπακωνσταντίνου",
+					email: "george@csd.uoc.gr",
+				},
+				{
+					name: "Ελένη",
+					surname: "Ιωάννου",
+					email: "elena@csd.uoc.gr",
+				}
+			],
+			invited: [
+				{
+					name: "Κώστας",
+					surname: "Γλεζέλης",
+					email: "kostis@csd.uoc.gr",
+				}
+			],
+			pending: [
+				{
+					name: "Αθανάσιος",
+					surname: "Μπίτσιος",
+					email: "nassos@csd.uoc.gr",
+				}
+			]
 		}
 	];
 
