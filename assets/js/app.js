@@ -45,7 +45,7 @@
 	//------------------------------------------------//
 	//------------------------------------------------//
 	
-	var app = angular.module('pm',[]);
+	var app = angular.module('pm',['ngTable']);
 	
 	app.directive('groupsWidgets',function($timeout){
 		return{
@@ -194,6 +194,28 @@ app.directive('groupPending',function($timeout){
 	app.controller("groupsController",function($scope){
 		$scope.groups = allGroups;
 	});
+	app.controller('DemoCtrl', function($scope, $filter, NgTableParams) {
+            var data = [{pass: "Pass", code: "HY464", author: "Κωνσταντίνος Στεφανίδης", title: "Ανάπτυξη γραφικής διεπαφής για Web.", members:"2"},
+                        {pass: "Fail", code: "HY454", author: "Αναστασακης Αλέξανδρος", title: "Ανάπτυξη γραφικής διεπαφής για Mobile.", members:"2"}];
+
+            $scope.tableParams = new NgTableParams({
+                page: 1,            // show first page
+                count: 10,          // count per page
+                sorting: {
+                    author: 'asc'     // initial sorting
+                }
+            }, {
+                total: data.length, // length of data
+                getData: function($defer, params) {
+                    // use build-in angular filter
+                    var orderedData = params.sorting() ?
+                                        $filter('orderBy')(data, params.orderBy()) :
+                                        data;
+
+                    $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                }
+            });
+        })
 	
 	var allGroups = [
 		{

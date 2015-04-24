@@ -13,6 +13,8 @@
 	  	<script type="text/javascript" src="assets/js/jquery-1.11.2.min.js"></script> 
 	  	<script type="text/javascript" src="assets/js/angular.js"></script> 
 	  	<script type="text/javascript" src="assets/js/app.js"></script>
+	  	<script type="text/javascript" src="assets/js/ng-table.min.js"></script>
+	  	<link rel="stylesheet" href="assets/css/ng-table.min.css">
 		
 		
 	    <link href="assets/css/plugins.css" rel="stylesheet">
@@ -212,7 +214,30 @@
 								
 								<div class="panel-body">
 									<div class="row">
-										<div class="col-md-12 col-sm-12 col-xs-12 table-responsive table-red">
+									<div ng-controller="DemoCtrl">
+									    <button ng-click="tableParams.sorting({})" class="btn btn-default pull-right">Clear sorting</button>
+									    <p><strong>Sorting:</strong> {{tableParams.sorting()|json}}</p>
+									        <table ng-table="tableParams" class="table">
+									            <tr ng-repeat="user in $data">
+									                <td data-title="'Pass'" sortable="'pass'">
+									                    {{user.pass}}
+									                </td>
+									                <td data-title="'Code'" sortable="'code'">
+									                    {{user.code}}
+									                </td>
+									                <td data-title="'Author'" sortable="'author'">
+									                    {{user.author}}
+									                </td>
+									                <td data-title="'Title'" sortable="'title'">
+									                    {{user.title}}
+									                </td>
+									                <td data-title="'Members'" sortable="'members'">
+									                    {{user.members}}
+									                </td>
+									            </tr>
+									        </table>
+									</div>
+										<!-- <div class="col-md-12 col-sm-12 col-xs-12 table-responsive table-red">
 										  <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
 											<div class="row">
 											  <div class="col-md-12">
@@ -365,7 +390,7 @@
 												</tbody>
 											</table>
 										</div>
-									</div>
+									</div> -->
 								</div>
 							</div>
 						</div>
