@@ -40,13 +40,13 @@
 	};
 
 
-	
+
 	//------------------------------------------------//
 	//------------------------------------------------//
 	//------------------------------------------------//
-	
+
 	var app = angular.module('pm',['ngTable']);
-	
+
 	app.directive('groupsWidgets',function($timeout){
 		return{
 			restrict: 'E',
@@ -59,7 +59,7 @@
 				/*$scope.$on('ngRepeatFinished',function(ngRepeatFinishedEvent){
 					console.log("ng-repeat FINISHED!");
 					var bars = new Array($scope.groups.length);
-					
+
 					for (i=0 ; i < $scope.groups.length ; i++) {
 						//console.log($scope.groups[i].id);
 						bars[i] = new cicrbar();
@@ -68,7 +68,7 @@
 					}
 					console.log("graph created");
 				});*/
-				
+
 			},
 			/*controllerAs: 'gWidget'*/
 			link: function(scope, element, attrs){
@@ -97,12 +97,12 @@
 					    	//element.parent().find(".gw-id"+scope.group.id).width("100%");
 					    	//element.parent().find(".gw-id"+scope.group.id).height("100%");
 					    	scope.$apply(function(){
-					    		scope.group.maximized = true;					    	
+					    		scope.group.maximized = true;
 					    	});
 					    } else {
 					    	element.parent().find(".gw-id"+scope.group.id).css({"position":"relative","z-index":"auto"});
 					    	scope.$apply(function(){
-					    		scope.group.maximized = false;					    	
+					    		scope.group.maximized = false;
 					    	});
 					    }
 					});
@@ -119,7 +119,7 @@
 				    	//growDiv.style.height = wrapper.clientHeight + "px";
 				    }*/
 				});
-				
+
 
 			}
 		};
@@ -129,7 +129,7 @@ app.directive('groupMembers',function($timeout){
 			restrict: 'E',
 			templateUrl: 'group-members.html',
 			controller:function($scope){
-			
+
 			},
 			/*controllerAs: 'gWidget'*/
 			link: function(scope, element, attrs){
@@ -142,7 +142,7 @@ app.directive('groupInvited',function($timeout){
 			restrict: 'E',
 			templateUrl: 'group-invited.html',
 			controller:function($scope){
-			
+
 			},
 			/*controllerAs: 'gWidget'*/
 			link: function(scope, element, attrs){
@@ -155,7 +155,7 @@ app.directive('groupPending',function($timeout){
 			restrict: 'E',
 			templateUrl: 'group-pending.html',
 			controller:function($scope){
-			
+
 			},
 			/*controllerAs: 'gWidget'*/
 			link: function(scope, element, attrs){
@@ -179,7 +179,7 @@ app.directive('groupPending',function($timeout){
 		}
 	});*/
 	//app.controller('postRender',function(){
-	//	
+	//
 	//});
 	app.controller('PanelController',function(){
 		//Initialize selected panel to be Groups:
@@ -216,7 +216,7 @@ app.directive('groupPending',function($timeout){
                 }
             });
         })
-	
+
 	var allGroups = [
 		{
 			id:1,
@@ -230,16 +230,19 @@ app.directive('groupPending',function($timeout){
 					name: "Αλέξανδρος",
 					surname: "Ιωαννίδης-Παπαγεωργίου",
 					email: "alexandros@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				},
 				{
 					name: "Γιώργος",
 					surname: "Παπακωνσταντίνου",
 					email: "george@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				},
 				{
 					name: "Ελένη",
 					surname: "Ιωάννου",
 					email: "elena@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				}
 			],
 			invited: [
@@ -247,6 +250,7 @@ app.directive('groupPending',function($timeout){
 					name: "Κώστας",
 					surname: "Γλεζέλης",
 					email: "kostis@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				}
 			],
 			pending: [
@@ -254,6 +258,7 @@ app.directive('groupPending',function($timeout){
 					name: "Αθανάσιος",
 					surname: "Μπίτσιος",
 					email: "nassos@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				}
 			]
 		},
@@ -269,11 +274,13 @@ app.directive('groupPending',function($timeout){
 					name: "Αλέξανδρος",
 					surname: "Ιωαννίδης-Παπαγεωργίου",
 					email: "alexandros@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				},
 				{
 					name: "Γιώργος",
 					surname: "Παπακωνσταντίνου",
 					email: "george@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				}
 			],
 			invited: [
@@ -281,11 +288,13 @@ app.directive('groupPending',function($timeout){
 					name: "Κώστας",
 					surname: "Γλεζέλης",
 					email: "kostis@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				},
 				{
 					name: "Ελένη",
 					surname: "Ιωάννου",
 					email: "elena@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				}
 			],
 			pending: [
@@ -293,6 +302,7 @@ app.directive('groupPending',function($timeout){
 					name: "Αθανάσιος",
 					surname: "Μπίτσιος",
 					email: "nassos@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				}
 			]
 		},
@@ -308,6 +318,7 @@ app.directive('groupPending',function($timeout){
 					name: "Αλέξανδρος",
 					surname: "Ιωαννίδης-Παπαγεωργίου",
 					email: "alexandros@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				}
 			],
 			invited: [
@@ -315,6 +326,7 @@ app.directive('groupPending',function($timeout){
 					name: "Κώστας",
 					surname: "Γλεζέλης",
 					email: "kostis@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				}
 			],
 			pending: [
@@ -322,16 +334,19 @@ app.directive('groupPending',function($timeout){
 					name: "Αθανάσιος",
 					surname: "Μπίτσιος",
 					email: "nassos@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				},
 				{
 					name: "Γιώργος",
 					surname: "Παπακωνσταντίνου",
 					email: "george@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				},
 				{
 					name: "Ελένη",
 					surname: "Ιωάννου",
 					email: "elena@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				}
 			]
 		},
@@ -347,11 +362,13 @@ app.directive('groupPending',function($timeout){
 					name: "Αλέξανδρος",
 					surname: "Ιωαννίδης-Παπαγεωργίου",
 					email: "alexandros@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				},
 				{
 					name: "Γιώργος",
 					surname: "Παπακωνσταντίνου",
 					email: "george@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				}
 			],
 			invited: [
@@ -359,6 +376,7 @@ app.directive('groupPending',function($timeout){
 					name: "Κώστας",
 					surname: "Γλεζέλης",
 					email: "kostis@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				}
 			],
 			pending: [
@@ -366,11 +384,13 @@ app.directive('groupPending',function($timeout){
 					name: "Αθανάσιος",
 					surname: "Μπίτσιος",
 					email: "nassos@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				},
 				{
 					name: "Ελένη",
 					surname: "Ιωάννου",
 					email: "elena@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				}
 			]
 		},
@@ -386,16 +406,19 @@ app.directive('groupPending',function($timeout){
 					name: "Αλέξανδρος",
 					surname: "Ιωαννίδης-Παπαγεωργίου",
 					email: "alexandros@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				},
 				{
 					name: "Γιώργος",
 					surname: "Παπακωνσταντίνου",
 					email: "george@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				},
 				{
 					name: "Ελένη",
 					surname: "Ιωάννου",
 					email: "elena@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				}
 			],
 			invited: [
@@ -403,6 +426,7 @@ app.directive('groupPending',function($timeout){
 					name: "Κώστας",
 					surname: "Γλεζέλης",
 					email: "kostis@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				}
 			],
 			pending: [
@@ -410,6 +434,7 @@ app.directive('groupPending',function($timeout){
 					name: "Αθανάσιος",
 					surname: "Μπίτσιος",
 					email: "nassos@csd.uoc.gr",
+					avatar: "assets/img/avatars/avatar1_big.png"
 				}
 			]
 		}

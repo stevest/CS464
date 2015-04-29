@@ -1,3 +1,9 @@
+/*Member tabs styles */
+.img-avatar{
+	border-radius: 50%;
+	width: 90px;
+}
+
 /* group widget styles */
 .gwidget{
 	transition: height 0.2s;
@@ -27,7 +33,7 @@
 	margin-right: 2%;
 }
 .group_stats{
-	
+
 	float: right;
 	width: 120px;
 	height: 180px;
@@ -86,7 +92,7 @@
 	background-color: #ffffff;
 	max-width:1024px;
 	}
-	
+
 /* Panel styles */
 .panel_text{
 	font-size: 28px;
@@ -115,7 +121,7 @@
   white-space: nowrap;
   top:0%;
 }
- 
+
 .container-3 input#search{
   width: 300px;
   height: 40px;
@@ -132,23 +138,23 @@
 .container-3 input#search::-webkit-input-placeholder {
    color: #65737e;
 }
- 
+
 .container-3 input#search:-moz-placeholder { /* Firefox 18- */
-   color: #65737e;  
+   color: #65737e;
 }
- 
+
 .container-3 input#search::-moz-placeholder {  /* Firefox 19+ */
-   color: #65737e;  
+   color: #65737e;
 }
- 
-.container-3 input#search:-ms-input-placeholder {  
-   color: #65737e;  
+
+.container-3 input#search:-ms-input-placeholder {
+   color: #65737e;
 }
 
 .container-3 .icon{
   z-index: 1;
   color: #4f5b66;
- 
+
    -webkit-transition: all .55s ease;
   -moz-transition: all .55s ease;
   -ms-transition: all .55s ease;
