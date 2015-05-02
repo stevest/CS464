@@ -206,6 +206,19 @@ app.directive('groupPending',function($timeout){
 	app.controller("groupsController",function($scope){
 		$scope.groups = allGroups;
 	});
+	app.controller('GroupTypesController',function(){
+		//Initialize selected panel to be Owner:
+		this.gTab = 1;
+		this.selectGTab = function(setTab){
+			this.gTab = setTab;
+		};
+		this.isSelected = function(checkTab){
+			return this.gTab == checkTab;
+		};
+	});
+	app.controller("groupsController",function($scope){
+		$scope.groups = allGroups;
+	});
 	app.controller('DemoCtrl', function($scope, $filter, NgTableParams) {
             var data = [{pass: "Pass", code: "HY464", author: "Κωνσταντίνος Στεφανίδης", title: "Ανάπτυξη γραφικής διεπαφής για Web.", members:"2"},
                         {pass: "Fail", code: "HY454", author: "Αναστασακης Αλέξανδρος", title: "Ανάπτυξη γραφικής διεπαφής για Mobile.", members:"2"}];
