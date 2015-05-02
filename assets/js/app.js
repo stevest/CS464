@@ -93,14 +93,26 @@
 						console.log(element.parent().find(".gw-id"+scope.group.id).height());
 						console.log(element.parent().parent().find('.gwidget_holder').height());
 						if (!scope.group.maximized) {
-							element.parent().find(".gw-id"+scope.group.id).css({"position":"absolute","z-index":4});
+							//element.parent().find(".gw-id"+scope.group.id).css({"position":"absolute","z-index":4});
 					    	//element.parent().find(".gw-id"+scope.group.id).width("100%");
 					    	//element.parent().find(".gw-id"+scope.group.id).height("100%");
+								$("html, body").animate({ scrollTop: 0 }, "slow");
+								for ( var k = 1 ; k <= scope.$parent.groups.length ; k++ ){
+									if (scope.group.id != k){
+										console.log(element.parent().find(".gw-id"+k));
+										element.parent().find(".gw-id"+k).css({"display":"none"});
+									}
+								}
 					    	scope.$apply(function(){
 					    		scope.group.maximized = true;
 					    	});
 					    } else {
-					    	element.parent().find(".gw-id"+scope.group.id).css({"position":"relative","z-index":"auto"});
+					    	//element.parent().find(".gw-id"+scope.group.id).css({"position":"relative","z-index":"auto"});
+								for ( var k = 1 ; k <= scope.$parent.groups.length ; k++ ){
+									if (scope.group.id != k){
+										element.parent().find(".gw-id"+k).css({"display":"inline"});
+									}
+								}
 					    	scope.$apply(function(){
 					    		scope.group.maximized = false;
 					    	});

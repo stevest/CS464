@@ -1,7 +1,6 @@
 
 
-		<div class="comment">
-			<div class="col-md-12">
+					<div class="col-md-12">
 				<div class="panel no-bd bd-3 panel-stat">
 	                <div class="panel-body bg-grey p-15" style="background-color:#DFE5E9;">
 	                    <div class="row m-b-0">
@@ -42,7 +41,7 @@
 										<div class="btn-group-vertical" role="group" style="float:right;" ng-show="group.maximized">
 											<div class="btn-group" role="group">
 												<button type="button" class="btn btn-success">SUBMIT GROUP</button>
-											</div>	
+											</div>
 											<div class="btn-group" role="group">
 												<button type="button" class="btn btn-danger">LEAVE GROUP</button>
 											</div>
@@ -54,7 +53,7 @@
 									<div class="col-md-12 col-sm-12" style="float:left;">
 										<img src="assets/images/UserGroup.png" style="width:90px;position:absolute;"></img>
 										<div class="group_progressbar" id="graph{{group.id}}"data-color="#30bae7" data-size="90"></div>
-										
+
 									</div>
 									<div style="padding-top:120px; text-align: center;">
 										Invited:{{group.invited.length}}
@@ -72,12 +71,12 @@
 	                    		<div class="col-md-12">
 		                    		<h3>Invited</h3>
 		                    		<p>Members invited to join this group.</p>
-		                    		<group-invited ng-repeat="invited in group.invited"></group-invited>
+		                    		<group-members ng-repeat="members in group.invited"></group-members>
 	                    		</div>
 	                    		<div class="col-md-12">
 		                    		<h3>Pending</h3>
 		                    		<p>Members requested to join this group.</p>
-		                    		<group-pending ng-repeat="pending in group.pending"></group-pending>
+		                    		<group-members ng-repeat="members in group.pending"></group-members>
 	                    		</div>
 	                        </div>
 	                    <div class="row" ng-show="!group.maximized">
@@ -85,19 +84,18 @@
 								<div class="btn-group btn-group-justified" role="group">
 									<div class="btn-group" role="group">
 										<button type="button" class="btn btn-success">SUBMIT GROUP</button>
-									</div>	
+									</div>
 									<div class="btn-group" role="group">
 										<button type="button" class="btn btn-danger">LEAVE GROUP</button>
 									</div>
 								</div>
 							</div>
 					    </div>
-					    
+
 	                </div>
 	            </div>
 	        </div>
-	    </div>
-	    
+
 
 				<!--<div class="row group_header" style="border-bottom: 2px solid #ccc">
 					<div>
@@ -119,7 +117,7 @@
 					<div class="col-md-12 col-sm-12" style="float:left;">
 						<img src="assets/images/UserGroup.png" style="width:90px;position:absolute;"></img>
 						<div class="group_progressbar" id="graph{{group.id}}"data-color="#30bae7" data-size="90"></div>
-						
+
 					</div>
 					<div style="padding-top:120px; text-align: center;">
 						Invited:1
@@ -134,7 +132,7 @@
 				<div class="btn-group btn-group-justified" role="group">
 					<div class="btn-group" role="group">
 						<button type="button" class="btn btn-success">SUBMIT GROUP</button>
-					</div>	
+					</div>
 					<div class="btn-group" role="group">
 						<button type="button" class="btn btn-danger">LEAVE GROUP</button>
 					</div>
@@ -142,4 +140,3 @@
 			</div>
 		</div>
 	</div>-->
-

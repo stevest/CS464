@@ -10,13 +10,13 @@
 	  	<link href='http://fonts.googleapis.com/css?family=Fira+Sans:400,500|Ubuntu+Condensed|Open+Sans|Roboto|Roboto+Condensed|Open+Sans+Condensed:300&subset=latin,greek' rel='stylesheet' type='text/css'>
 	  	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	  	<link rel="stylesheet" href="assets/css/style.css">
-	  	<script type="text/javascript" src="assets/js/jquery-1.11.2.min.js"></script> 
-	  	<script type="text/javascript" src="assets/js/angular.js"></script> 
+	  	<script type="text/javascript" src="assets/js/jquery-1.11.2.min.js"></script>
+	  	<script type="text/javascript" src="assets/js/angular.js"></script>
 	  	<script type="text/javascript" src="assets/js/app.js"></script>
 	  	<script type="text/javascript" src="assets/js/ng-table.min.js"></script>
 	  	<link rel="stylesheet" href="assets/css/ng-table.min.css">
-		
-		
+
+
 	    <link href="assets/css/plugins.css" rel="stylesheet">
 
 	    <link href="assets/plugins/metrojs/metrojs.css" rel="stylesheet">
@@ -63,12 +63,12 @@
 	    <script src="assets/plugins/datatables/dataTables.tableTools.js"></script>
 	    <script src="assets/plugins/datatables/table.editable.js"></script>
 	    <script src="assets/js/table_dynamic.js"></script>
-	    
+
 	</head>
 
 	<body style="background-color:#ffffff;">
-		
-					
+
+
 					<!--<img src="assets/images/bar.jpg"></img>-->
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" >
 			<div class="container-fluid">
@@ -162,7 +162,7 @@
 						</ul>
 					</li>
 					<!-- END NOTIFICATION DROPDOWN -->
-					
+
 					<!-- BEGIN USER DROPDOWN -->
 					<li class="dropdown" id="user-header">
 						<a href="#" class="dropdown-toggle c-white" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
@@ -176,7 +176,7 @@
 									<i class="glyph-icon flaticon-account"></i> My Profile
 								</a>
 							</li>
-							
+
 							<li>
 								<a href="profil_edit.html">
 									<i class="glyph-icon flaticon-settings21"></i> Account Settings
@@ -194,12 +194,11 @@
 			</div>
 		</nav>
 		<!-- END TOP MENU -->
-					
-				
-		<div class="row" style="margin-top:-10px;">
-			<div class="col-md-12">
-				<div  ng-controller="PanelController as panel" >
-					<ul class="nav nav-tabs nav-justified" style="position: fixed;z-index:9;" >
+
+
+		<div class="container" style="margin-top:-10px;max-width:1024px;">
+				<div  ng-controller="PanelController as panel" class="row">
+					<ul class="nav nav-tabs nav-justified" >
 						<li ng-click="panel.selectPanel(1)" ng-class="{ active:panel.isSelected(1) }">
 							<a class="panel_text" href="#">Projects</a>
 						</li>
@@ -211,7 +210,7 @@
 					  <div class="row" >
 						<div class="col-md-12" style="margin-top:60px;">
 							<div class="panel panel-default">
-								
+
 								<div class="panel-body">
 									<div class="row">
 									<div ng-controller="DemoCtrl">
@@ -237,160 +236,6 @@
 									            </tr>
 									        </table>
 									</div>
-										<!-- <div class="col-md-12 col-sm-12 col-xs-12 table-responsive table-red">
-										  <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
-											<div class="row">
-											  <div class="col-md-12">
-												<div id="DataTables_Table_1_filter" class="dataTables_filter">
-												  <label>filter:<input type="search" class="form-control" aria-controls="DataTables_Table_1"></label>
-												</div>
-											  </div>
-											</div>
-											<table class="table table-hover table-dynamic table-tools">
-												<thead>
-													<tr>
-														<th>Rendering engine</th>
-														<th>Browser</th>
-														<th class='hidden-350'>Platform(s)</th>
-														<th class='hidden-1024'>Engine version</th>
-														<th class='hidden-480'>CSS grade</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>Trident</td>
-														<td>
-															Internet Explorer 4.0
-														</td>
-														<td class='hidden-350'>Win 95+</td>
-														<td class='hidden-1024'>4</td>
-														<td class='hidden-480'>X</td>
-													</tr>
-													<tr>
-														<td>Presto</td>
-														<td>Nokia N800</td>
-														<td class='hidden-350'>N800</td>
-														<td class='hidden-1024'>-</td>
-														<td class='hidden-480'>A</td>
-													</tr>
-													<tr>
-														<td>Misc</td>
-														<td>NetFront 3.4</td>
-														<td class='hidden-350'>Embedded devices</td>
-														<td class='hidden-1024'>-</td>
-														<td class='hidden-480'>A</td>
-													</tr>
-													<tr>
-														<td>Misc</td>
-														<td>Dillo 0.8</td>
-														<td class='hidden-350'>Embedded devices</td>
-														<td class='hidden-1024'>-</td>
-														<td class='hidden-480'>X</td>
-													</tr>
-													<tr>
-														<td>Misc</td>
-														<td>Links</td>
-														<td class='hidden-350'>Text only</td>
-														<td class='hidden-1024'>-</td>
-														<td class='hidden-480'>X</td>
-													</tr>
-													<tr>
-														<td>Misc</td>
-														<td>Lynx</td>
-														<td class='hidden-350'>Text only</td>
-														<td class='hidden-1024'>-</td>
-														<td class='hidden-480'>X</td>
-													</tr>
-													<tr>
-														<td>Misc</td>
-														<td>IE Mobile</td>
-														<td class='hidden-350'>Windows Mobile 6</td>
-														<td class='hidden-1024'>-</td>
-														<td class='hidden-480'>C</td>
-													</tr>
-													<tr>
-														<td>Misc</td>
-														<td>PSP browser</td>
-														<td class='hidden-350'>PSP</td>
-														<td class='hidden-1024'>-</td>
-														<td class='hidden-480'>C</td>
-													</tr>
-													<tr>
-														<td>Other browsers</td>
-														<td>All others</td>
-														<td class='hidden-350'>-</td>
-														<td class='hidden-1024'>-</td>
-														<td class='hidden-480'>U</td>
-													</tr>
-													<tr>
-														<td>Trident</td>
-														<td>
-															Internet Explorer 4.0
-														</td>
-														<td class='hidden-350'>Win 95+</td>
-														<td class='hidden-1024'>4</td>
-														<td class='hidden-480'>X</td>
-													</tr>
-													<tr>
-														<td>Presto</td>
-														<td>Nokia N800</td>
-														<td class='hidden-350'>N800</td>
-														<td class='hidden-1024'>-</td>
-														<td class='hidden-480'>A</td>
-													</tr>
-													<tr>
-														<td>Misc</td>
-														<td>NetFront 3.4</td>
-														<td class='hidden-350'>Embedded devices</td>
-														<td class='hidden-1024'>-</td>
-														<td class='hidden-480'>A</td>
-													</tr>
-													<tr>
-														<td>Misc</td>
-														<td>Dillo 0.8</td>
-														<td class='hidden-350'>Embedded devices</td>
-														<td class='hidden-1024'>-</td>
-														<td class='hidden-480'>X</td>
-													</tr>
-													<tr>
-														<td>Misc</td>
-														<td>Links</td>
-														<td class='hidden-350'>Text only</td>
-														<td class='hidden-1024'>-</td>
-														<td class='hidden-480'>X</td>
-													</tr>
-													<tr>
-														<td>Misc</td>
-														<td>Lynx</td>
-														<td class='hidden-350'>Text only</td>
-														<td class='hidden-1024'>-</td>
-														<td class='hidden-480'>X</td>
-													</tr>
-													<tr>
-														<td>Misc</td>
-														<td>IE Mobile</td>
-														<td class='hidden-350'>Windows Mobile 6</td>
-														<td class='hidden-1024'>-</td>
-														<td class='hidden-480'>C</td>
-													</tr>
-													<tr>
-														<td>Misc</td>
-														<td>PSP browser</td>
-														<td class='hidden-350'>PSP</td>
-														<td class='hidden-1024'>-</td>
-														<td class='hidden-480'>C</td>
-													</tr>
-													<tr>
-														<td>Other browsers</td>
-														<td>All others</td>
-														<td class='hidden-350'>-</td>
-														<td class='hidden-1024'>-</td>
-														<td class='hidden-480'>U</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div> -->
 								</div>
 							</div>
 						</div>
@@ -398,12 +243,11 @@
 					</div>
 				</div>
 				<div class="groups_panel" ng-show="panel.isSelected(2)">
-					<div class="gwidget_holder" style="width:100%; height:100%; position:relative;" ng-controller="groupsController">
-							<groups-widgets class="gwidget gw-id{{group.id}}" ng-class="!group.maximized ? 'col-md-3' : 'col-md-12'" ng-repeat="group in groups" style="margin-top:65px;"></groups-widgets>
+					<div class="gwidget_holder container" style="width:100%; height:100%; position:relative;" ng-controller="groupsController">
+							<groups-widgets class="gwidget gw-id{{group.id}}" ng-class="!group.maximized ? 'col-md-6' : 'col-md-12'" ng-repeat="group in groups" style="margin-top:65px;"></groups-widgets>
 					</div>
 				</div>
 			</div>
-		</div>
 		</div>
 	</body>
 	</html>
