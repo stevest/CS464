@@ -96,7 +96,7 @@
 							//element.parent().find(".gw-id"+scope.group.id).css({"position":"absolute","z-index":4});
 					    	//element.parent().find(".gw-id"+scope.group.id).width("100%");
 					    	//element.parent().find(".gw-id"+scope.group.id).height("100%");
-								$("html, body").animate({ scrollTop: 0 }, "slow");
+								$("html, body").animate({ scrollTop: 0 }, 400);
 								for ( var k = 1 ; k <= scope.$parent.groups.length ; k++ ){
 									if (scope.group.id != k){
 										console.log(element.parent().find(".gw-id"+k));
