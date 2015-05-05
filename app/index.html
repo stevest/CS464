@@ -1,26 +1,23 @@
-	<!doctype html>
-
-	<html lang="en" ng-app="pm">
+<!doctype html>
+<html lang="en" ng-app="pm">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0">
-	  	<title>Project Student Manager</title>
-	  	<meta name="description" content="student project manager">
-	  	<meta name="author" content="team12">
-	  	<link href='http://fonts.googleapis.com/css?family=Fira+Sans:400,500|Ubuntu+Condensed|Open+Sans|Roboto|Roboto+Condensed|Open+Sans+Condensed:300&subset=latin,greek' rel='stylesheet' type='text/css'>
-	  	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-	  	<link rel="stylesheet" href="assets/css/style.css">
-	  	<script type="text/javascript" src="assets/js/jquery-1.11.2.min.js"></script>
-	  	<script type="text/javascript" src="assets/js/angular.js"></script>
-			<script type="text/javascript" src="assets/js/angular-route.js"></script>
-	  	<script type="text/javascript" src="assets/js/app.js"></script>
-	  	<script type="text/javascript" src="assets/js/ng-table.min.js"></script>
-	  	<link rel="stylesheet" href="assets/css/ng-table.min.css">
-
-
-	    <link href="assets/css/plugins.css" rel="stylesheet">
-
-	    <link href="assets/plugins/metrojs/metrojs.css" rel="stylesheet">
+		<title>Project Student Manager</title>
+		<meta name="description" content="student project manager">
+		<meta name="author" content="team12">
+		<link href='http://fonts.googleapis.com/css?family=Fira+Sans:400,500|Ubuntu+Condensed|Open+Sans|Roboto|Roboto+Condensed|Open+Sans+Condensed:300&subset=latin,greek'
+		rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/css/style.css">
+		<script type="text/javascript" src="assets/js/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript" src="assets/js/angular.js"></script>
+		<script type="text/javascript" src="assets/js/angular-route.js"></script>
+		<script type="text/javascript" src="assets/js/app.js"></script>
+		<script type="text/javascript" src="assets/js/ng-table.js"></script>
+		<link rel="stylesheet" href="assets/css/ng-table.min.css">
+		<link href="assets/css/plugins.min.css" rel="stylesheet">
+		<!-- <link href="assets/plugins/metrojs/metrojs.css" rel="stylesheet">
 	    <script src="assets/js/dashboard.js"></script>
 	    <script src="assets/js/application.js"></script>
 	    <script src="assets/plugins/jquery-1.11.js"></script>
@@ -40,180 +37,172 @@
 
 	    <script src="assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
 	    <script src="assets/plugins/modal/js/classie.js"></script>
-	    <script src="assets/plugins/modal/js/modalEffects.js"></script>
-
-
-
-
-	    <link href="assets/css/icons/icons.min.css" rel="stylesheet">
-	    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-	    <link href="assets/css/plugins.min.css" rel="stylesheet">
-	    <link href="assets/css/style.min.css" rel="stylesheet">
-	    <link href="#" rel="stylesheet" id="theme-color">
-
-	    <link href="assets/plugins/modal/css/component.css" rel="stylesheet">
-	    <script src="assets/plugins/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-
-	    <link rel="stylesheet" href="assets/plugins/datatables/dataTables.css">
-	    <link rel="stylesheet" href="assets/plugins/datatables/dataTables.tableTools.css">
-
+	    <script src="assets/plugins/modal/js/modalEffects.js"></script>-->
+		<link href="assets/css/icons/icons.min.css" rel="stylesheet">
+		<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+		<link href="assets/css/plugins.min.css" rel="stylesheet">
+		<link href="assets/css/style.min.css" rel="stylesheet">
+		<link href="#" rel="stylesheet" id="theme-color">
+		<link href="assets/plugins/modal/css/component.css" rel="stylesheet">
+		<link rel="stylesheet" href="assets/plugins/datatables/dataTables.css">
+		<link rel="stylesheet" href="assets/plugins/datatables/dataTables.tableTools.css">
+		<!-- <script src="assets/plugins/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 	    <script src="assets/plugins/bootstrap-switch/bootstrap-switch.js"></script>
 	    <script src="assets/plugins/bootstrap-progressbar/bootstrap-progressbar.js"></script>
 	    <script src="assets/plugins/datatables/dynamic/jquery.dataTables.min.js"></script>
 	    <script src="assets/plugins/datatables/dataTables.bootstrap.js"></script>
 	    <script src="assets/plugins/datatables/dataTables.tableTools.js"></script>
 	    <script src="assets/plugins/datatables/table.editable.js"></script>
-	    <script src="assets/js/table_dynamic.js"></script>
-
+	    <script src="assets/js/table_dynamic.js"></script>-->
 	</head>
-
 	<body style="background-color:#ffffff;">
-
-
-					<!--<img src="assets/images/bar.jpg"></img>-->
+		<!--<img src="assets/images/bar.jpg"></img>-->
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" mynavbar>
 			<div class="container-fluid">
-			  <div class="navbar-header">
-				<a class="navbar-brand" href="index.html"> ProjectManager</a>
-			  </div>
-			  <div class="navbar-center" style="top:2px;">
-				  <div class="m-b-20" style="width:300px;color: #262626;background:#2b303b;">
-					<input type="text" class="form-control" placeholder="Browse Bitches..." style="color: #262626;background:#2b303b;">
-				  </div>
-			  </div>
-			  <div class="navbar-collapse collapse">
-			<!-- BEGIN TOP NAVIGATION MENU -->
-			<div login>
-					<button type="button" class="btn btn-default" ng-hide="usrService.loggedIn">Login!</button>
+				<div class="navbar-header">
+					<a class="navbar-brand" href="index.html"> ProjectManager</a>
 				</div>
-				<ul class="nav navbar-nav pull-right header-menu" ng-show="usrService.loggedIn">
-					<!-- BEGIN NOTIFICATION DROPDOWN -->
-					<li class="dropdown" id="notifications-header">
-						
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+				<div class="navbar-center" style="top:2px;">
+					<div class="m-b-20" style="width:300px;color: #262626;background:#2b303b;">
+						<input type="text" class="form-control" placeholder="Browse Bitches..." style="color: #262626;background:#2b303b;">
+					</div>
+				</div>
+				<div class="navbar-collapse collapse">
+					<!-- BEGIN TOP NAVIGATION MENU -->
+					<div loginModal>
+						<button type="button" class="btn btn-default pull-right" ng-hide="usrService.loggedIn" ng-click="toggleLoginModal()">Login!</button>
+					</div>
+					<div loginModal title="Login form" visible="showModal">
+						<form role="form">
+							<div class="form-group">
+								<label for="email">Email address</label>
+								<input type="email" class="form-control" id="email" placeholder="Enter email" />
+							</div>
+							<div class="form-group">
+								<label for="password">Password{{showModal}}</label>
+								<input type="password" class="form-control" id="password" placeholder="Password" />
+							</div>
+							<button type="submit" class="btn btn-default">Submit</button>
+						</form>
+					</div>
+					<ul class="nav navbar-nav pull-right header-menu" ng-show="usrService.loggedIn">
+						<!-- BEGIN NOTIFICATION DROPDOWN -->
+						<li class="dropdown" id="notifications-header">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 							<i class="glyph-icon flaticon-notifications"></i>
 							<span class="badge badge-danger badge-header">6</span>
 						</a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header clearfix">
-								<p class="pull-left">Notifications</p>
-							</li>
-							<li>
-								<ul class="dropdown-menu-list withScroll" data-height="220">
-									<li>
-										<a href="#">
+							<ul class="dropdown-menu">
+								<li class="dropdown-header clearfix">
+									<p class="pull-left">Notifications</p>
+								</li>
+								<li>
+									<ul class="dropdown-menu-list withScroll" data-height="220">
+										<li>
+											<a href="#">
 											<i class="fa fa-star p-r-10 f-18 c-orange"></i>
 											Steve have rated your photo
 											<span class="dropdown-time">Just now</span>
 										</a>
-									</li>
-									<li>
-										<a href="#">
+										</li>
+										<li>
+											<a href="#">
 											<i class="fa fa-heart p-r-10 f-18 c-red"></i>
 											John added you to his favs
 											<span class="dropdown-time">15 mins</span>
 										</a>
-									</li>
-									<li>
-										<a href="#">
+										</li>
+										<li>
+											<a href="#">
 											<i class="fa fa-file-text p-r-10 f-18"></i>
 											New document available
 											<span class="dropdown-time">22 mins</span>
 										</a>
-									</li>
-									<li>
-										<a href="#">
+										</li>
+										<li>
+											<a href="#">
 											<i class="fa fa-picture-o p-r-10 f-18 c-blue"></i>
 											New picture added
 											<span class="dropdown-time">40 mins</span>
 										</a>
-									</li>
-									<li>
-										<a href="#">
+										</li>
+										<li>
+											<a href="#">
 											<i class="fa fa-bell p-r-10 f-18 c-orange"></i>
 											Meeting in 1 hour
 											<span class="dropdown-time">1 hour</span>
 										</a>
-									</li>
-									<li>
-										<a href="#">
+										</li>
+										<li>
+											<a href="#">
 											<i class="fa fa-bell p-r-10 f-18"></i>
 											Server 5 overloaded
 											<span class="dropdown-time">2 hours</span>
 										</a>
-									</li>
-									<li>
-										<a href="#">
+										</li>
+										<li>
+											<a href="#">
 											<i class="fa fa-comment p-r-10 f-18 c-gray"></i>
 											Bill comment your post
 											<span class="dropdown-time">3 hours</span>
 										</a>
-									</li>
-									<li>
-										<a href="#">
+										</li>
+										<li>
+											<a href="#">
 											<i class="fa fa-picture-o p-r-10 f-18 c-blue"></i>
 											New picture added
 											<span class="dropdown-time">2 days</span>
 										</a>
-									</li>
-								</ul>
-							</li>
-							<li class="dropdown-footer clearfix">
-								<a href="#" class="pull-left">See all notifications</a>
-								<a href="#" class="pull-right">
+										</li>
+									</ul>
+								</li>
+								<li class="dropdown-footer clearfix">
+									<a href="#" class="pull-left">See all notifications</a>
+									<a href="#" class="pull-right">
 									<i class="fa fa-cog"></i>
 								</a>
-							</li>
-						</ul>
-					</li>
-					<!-- END NOTIFICATION DROPDOWN -->
-
-					<!-- BEGIN USER DROPDOWN -->
-					<li class="dropdown" id="user-header">
-						<a href="#" class="dropdown-toggle c-white" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+								</li>
+							</ul>
+						</li>
+						<!-- END NOTIFICATION DROPDOWN -->
+						<!-- BEGIN USER DROPDOWN -->
+						<li class="dropdown" id="user-header">
+							<a href="#" class="dropdown-toggle c-white" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 							<img src="assets/img/avatars/avatar2.png" alt="user avatar" width="30" class="p-r-5">
-							<span class="username">Bob Nilson</span>
+							<span class="username">USERNAME HERE</span>
 							<i class="fa fa-angle-down p-r-10"></i>
 						</a>
-						<ul class="dropdown-menu">
-							<li>
-								<a href="profil.html">
+							<ul class="dropdown-menu">
+								<li>
+									<a href="profil.html">
 									<i class="glyph-icon flaticon-account"></i> My Profile
 								</a>
-							</li>
-
-							<li>
-								<a href="profil_edit.html">
-									<i class="glyph-icon flaticon-settings21"></i> Account Settings
-								</a>
-							</li>
-							<li >
-							  <a href="logout.html" title="Lock Screen"> <i class="fa fa-power-off"></i>LOGOUT</a>
-							</li>
-						</ul>
-					</li>
-					<!-- END USER DROPDOWN -->
-				</ul>
-				<!-- END TOP NAVIGATION MENU -->
+								</li>
+								<li>
+									<a href="#/Projects" title="Lock Screen" ng-click="usrService.logOut()"> <i class="fa fa-power-off"></i>LOGOUT</a>
+								</li>
+							</ul>
+						</li>
+						<!-- END USER DROPDOWN -->
+					</ul>
+					<!-- END TOP NAVIGATION MENU -->
 				</div>
 			</div>
 		</nav>
 		<!-- END TOP MENU -->
-
-
-		<div class="container" style="margin-top:-10px;max-width:1024px;">
-				<div class="row">
-				
-					<ul class="nav nav-tabs nav-justified" >
-						<li>
-							<a class="panel_text" href="#/Projects">Projects</a>
-						</li>
-						<li>
-							<a class="panel_text" href="#/Groups">Groups</a>
-						</li>
-					</ul>
-					<div ng-view></div>
+		<div class="container main">
+			<div class="row">
+				<ul class="nav nav-tabs nav-justified">
+					<li>
+						<a class="panel_text" href="#/Projects">Projects</a>
+					</li>
+					<li ng-show="usrService.loggedIn">
+						<a class="panel_text" href="#/Groups">Groups</a>
+					</li>
+				</ul>
+				<div ng-view></div>
 			</div>
 		</div>
 	</body>
-	</html>
+
+</html>

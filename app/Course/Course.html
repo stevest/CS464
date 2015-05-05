@@ -1,2 +1,19 @@
-<h2>The course page</h2>
-<p>{{user.course}}</p>
+<div>
+	<h2>
+		<strong>{{course.code}}</strong>{{course.title}}</h2>
+	<h3>
+		<strong>Project:</strong>{{course.project}}</h3>
+	<p>Διδάσκων: {{course.author}}</p>
+	<ul class="nav nav-tabs">
+		<li>
+			<a class="panel_text" href="#/Course">Info</a>
+		</li>
+		<li>
+			<a class="panel_text" href="#/Course">Groups</a>
+		</li>
+		<li>
+			<a class="panel_text" href="#/Course">Evaluation</a>
+		</li>
+	</ul>
+	
+</div>

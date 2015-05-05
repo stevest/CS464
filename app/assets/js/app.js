@@ -1,117 +1,98 @@
 (function(){
 
-	function cicrbar(){
-		this.init = function(id,mem,maxmem){
-			this.id = id;
-			this.mem = mem;
-			this.maxmem = maxmem;
-			el = document.getElementById(this.id);
-			//console.log("Element got is: "+el);
-			this.size = el.getAttribute('data-size') || 165;
-			this.lineWidth = el.getAttribute('data-line') || 15;
-            this.color = el.getAttribute('data-color') || "#30bae7";
-			this.canvas = document.createElement('canvas');
-			this.span = document.createElement('span');
-			this.span.textContent = this.mem + '/' + this.maxmem;
-			if (typeof(G_vmlCanvasManager) !== 'undefined') {
-				G_vmlCanvasManager.initElement(canvas);
-			}
-			this.ctx = this.canvas.getContext('2d');
-			this.canvas.width = this.canvas.height = this.size;
-			el.appendChild(this.span);
-			el.appendChild(this.canvas);
-			this.ctx.translate(this.size / 2, this.size / 2); // change center
-			this.ctx.rotate((-1 / 2 + 225 / 180) * Math.PI); // rotate -90 deg
-			this.radius = (this.size - this.lineWidth) / 2;
-		};
-		this.drawBar = function(color, lineWidth, percent) {
-			percent = Math.min(Math.max(0, percent), 1);
-			this.ctx.beginPath();
-			this.ctx.arc(0, 0, this.radius, 0, Math.PI * 2 * percent, false);
-			this.ctx.strokeStyle = color;
-			this.ctx.lineCap = 'round'; // butt, round or square
-			this.ctx.lineWidth = lineWidth;
-			this.ctx.stroke();
-		};
-		this.draw = function(){
-			this.drawBar('#333333', this.lineWidth, 1.0*0.75);
-			this.drawBar(this.color, this.lineWidth - this.lineWidth*25/100, (this.mem/this.maxmem)*0.75 );
-		};
-	};
-
-
-
-	//------------------------------------------------//
-	//------------------------------------------------//
-	//------------------------------------------------//
-
 	var app = angular.module('pm',[
 		'ngTable',
 		'ngRoute'
 		])
-		.factory('UserService',[function(){
+		.factory('UserService',['$http', function($http){
 		  var UserService = {
 			  loggedIn: false,
-			  username: 'notLoggedIn',
+			  username: null,
+			  name: null,
+			  surname: null,
+			  avatar: null,
 			  isLogged: function(){
-				  return this.loggedIn; 
+				  return UserService.loggedIn; 
 			  },
-			  loggin: function(name){
-				  this.loggedIn = true;
-				  this.username = name;
+			  logIn: function () {
+					  console.log("Login Succeded!");
+					  UserService.loggedIn = true;
+					  UserService.username = "Alexandra";
+					  UserService.name = "Αλεξάνδρα";
+					  UserService.surname = "Γεωργίου";
+					  UserService.avatar = "assets/img/avatars/avatar1_big.png";
 			  },
-			  loggout: function(){
-				  this.loggedIn = false;
-				  this.username = 'notLoggedIn';
+			  logOut: function(){
+				  UserService.loggedIn = false;
+				  UserService.username = null;
+				  UserService.name = null;
+				  UserService.surname = null;
+				  UserService.avatar = null;
 			  }
 		  };
 		  return UserService;
 	  }]);
-	  /*var lgnCtrl = app.controller('LoginController',['$scope','UserService','$timeout',function($scope,User){
-		  var userData;
-		  userData.username = 'alexandros';
-		  
-		  $timeout(function(){
-			  User.isLogged = true;
-			  User.username = userData.username;
-			  console.log('User logged in !');
-		  });
-	  }]);
-	  */
 
 		app.config(function($routeProvider){
 	    $routeProvider
 			// Route for the Home page
 			.when('/',{
-	      templateUrl: 'Projects/Projects.html'
+	      templateUrl: '/Projects/Projects.html'
 	    })
 			// Route for the Projects page
 			.when('/Projects',{
-	      templateUrl: 'Projects/Projects.html',
+	      templateUrl: '/Projects/Projects.html',
 				controller: 'ProjectsController'
 	    })
 			// Route for the Groups page
 			.when('/Groups',{
-	      templateUrl: 'Groups/Groups.html'
+	      templateUrl: '/Groups/Groups.html'
 	    })
 			// Route for the Course page
 			.when('/Course',{
-	      templateUrl: 'Course/Course.html',
+	      templateUrl: '/Course/Course.html',
 				controller: 'CourseController'
 	    })
 			//Default redirection:
-			.otherwise( { redirectTo: '/' } );
+			.otherwise( { redirectTo: '/Projects/Projects.html' } );
 	  });
-	  
-	  
 
-		app.controller('ProjectsController',function($scope){
+		app.controller('ProjectsController', ['$http', '$scope', '$filter', '$location', 'NgTableParams', 'UserService',
+		function ($http, $scope, $filter, $location, NgTableParams, UserService) {
 			console.log($scope);
-		});
+			$http({ method: 'GET', url: '/projects.json' }).success(function (data) {
+				$scope.data = data.projects;
+				$scope.$parent.data = data.projects;
+				console.log($scope.data[0].title);
+				$scope.executeFunction = function (u) {
+					console.log("Cliked on table element " + u.code);
+					$scope.$parent.courseClicked = u.code;
+					$location.path("/Course");
+				};
 
-		app.controller('CourseController',function($scope){
-			$scope.parent();
-		});
+				$scope.tableParams = new NgTableParams({
+					page: 1,            // show first page
+					count: 10,          // count per page
+					sorting: {
+						author: 'asc'     // initial sorting
+					}
+				},
+					{
+						total: $scope.data.length, // length of data
+						getData: function ($defer, params) {
+							// use build-in angular filter
+							var orderedData = params.sorting() ?
+								$filter('orderBy')($scope.data, params.orderBy()) :
+								$scope.data;
+
+							$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+						}
+					});
+			});
+		}]);
+		app.controller('CourseController',['$scope', '$filter', 'UserService', function($scope, $filter, UserService){
+			$scope.course = $filter('filter')($scope.$parent.data, {code: $scope.$parent.courseClicked})[0];
+		}]);
 		// Create login directive; Inject UserService!
 		app.directive('login', ['$timeout','UserService', function($timeout, UserService){
 			return{
@@ -122,13 +103,10 @@
 				  //controllerAs: 'loginCtrl',
 				link: function(scope, element, attrs){
 					$timeout(function(){
-						//console.log("Usernameinside link is " + UserService.username);
-						//console.log("User is NOT logged in!");
-						//console.log("Username is " + UserService.username);
 						element.find('.btn').on('click',function(){
 							$timeout(function(){
 							console.log("Login btn clicked!");
-							scope.usrService.loggin('Alexandros');
+							scope.usrService.logIn();
 						  console.log('User logged in ! '+ scope.usrService.loggedIn);
 						  console.log("Username is " + scope.usrService.username);
 						  });
@@ -148,6 +126,76 @@
 				}
 			};
 		}]);
+		app.directive('loginModal', function () {
+		    return {
+//		      template: '<div class="modal fade">' + 
+//		          '<div class="modal-dialog">' + 
+//		            '<div class="modal-content">' + 
+//		              '<div class="modal-header">' + 
+//		                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' + 
+//		                '<h4 class="modal-title">{{ title }}</h4>' + 
+//		              '</div>' + 
+//		              '<div class="modal-body" ng-transclude></div>' + 
+//		            '</div>' + 
+//		          '</div>' + 
+//		        '</div>',
+		      restrict: 'A',
+//		      transclude: true,
+//		      replace:true,
+//		      scope:true,
+			  controller: function ($scope) {
+			    $scope.showModal = false;
+			    $scope.toggleLoginModal = function(){
+					console.log("Toggle modal hit");
+			        $scope.showModal = !$scope.showModal;
+			    };
+			  },
+		      link: function postLink(scope, element, attrs) {
+		        scope.title = attrs.title;
+		
+		        scope.$watch(attrs.visible, function(value){
+		          if(value == true)
+		            $(element).modal('show');
+		          else
+		            $(element).modal('hide');
+		        });
+		
+		        $(element).on('shown.bs.modal', function(){
+		          scope.$apply(function(){
+		            scope.$parent[attrs.visible] = true;
+		          });
+		        });
+		
+		        $(element).on('hidden.bs.modal', function(){
+		          scope.$apply(function(){
+		            scope.$parent[attrs.visible] = false;
+		          });
+		        });
+		      }
+		    };
+		  });
+		/*app.directive('loader',['$http', '$timeout', function($http, $timeout){
+			return{
+				restrict: 'A',
+				controller: function($scope){
+						
+				},
+				link: function (scope, element, attrs){
+					scope.isLoading = function () {
+						return $http.pendingRequests.length > 0;
+	                };
+					
+	                scope.$watch(scope.isLoading, function (v){
+						console.log("V is "+v);
+	                    if(v){
+	                        element.show();
+	                    }else{
+	                        element.hide();
+	                    }
+	                });
+	            }
+			};
+		}]);*/
 
 	app.directive('groupsWidgets',function($timeout){
 		return{
@@ -156,6 +204,45 @@
 			controller:function($scope){
 				//Not the best practice:
 				$scope.group.maximized = false;
+				
+				$scope.Cicrbar = function(){
+					this.init = function(id,mem,maxmem){
+						this.id = id;
+						this.mem = mem;
+						this.maxmem = maxmem;
+						var el = document.getElementById(this.id);
+						//console.log("Element got is: "+el);
+						this.size = el.getAttribute('data-size') || 165;
+						this.lineWidth = el.getAttribute('data-line') || 15;
+			            this.color = el.getAttribute('data-color') || "#30bae7";
+						this.canvas = document.createElement('canvas');
+						this.span = document.createElement('span');
+						this.span.textContent = this.mem + '/' + this.maxmem;
+			//			if (typeof(G_vmlCanvasManager) !== 'undefined') {
+			//				G_vmlCanvasManager.initElement(this.canvas);
+			//			}
+						this.ctx = this.canvas.getContext('2d');
+						this.canvas.width = this.canvas.height = this.size;
+						el.appendChild(this.span);
+						el.appendChild(this.canvas);
+						this.ctx.translate(this.size / 2, this.size / 2); // change center
+						this.ctx.rotate((-1 / 2 + 225 / 180) * Math.PI); // rotate -90 deg
+						this.radius = (this.size - this.lineWidth) / 2;
+					};
+					this.drawBar = function(color, lineWidth, percent) {
+						percent = Math.min(Math.max(0, percent), 1);
+						this.ctx.beginPath();
+						this.ctx.arc(0, 0, this.radius, 0, Math.PI * 2 * percent, false);
+						this.ctx.strokeStyle = color;
+						this.ctx.lineCap = 'round'; // butt, round or square
+						this.ctx.lineWidth = lineWidth;
+						this.ctx.stroke();
+					};
+					this.draw = function(){
+						this.drawBar('#333333', this.lineWidth, 1.0*0.75);
+						this.drawBar(this.color, this.lineWidth - this.lineWidth*25/100, (this.mem/this.maxmem)*0.75 );
+					};
+				};
 				//console.log("Length of group members is " + $scope.group.members.length);
 				//console.log($scope);
 				/*$scope.$on('ngRepeatFinished',function(ngRepeatFinishedEvent){
@@ -177,10 +264,7 @@
 				//Render each element as soon as its ready:
 				$timeout(function(){
 					//scope.$emit('ngRepeatFinished');
-					//console.log("Timeout function executed");
-					//console.log(scope);
-					//console.log(element.html());
-					var bar = new cicrbar();
+					var bar = new scope.Cicrbar();
 					bar.init("graph"+scope.group.id,scope.group.members.length,scope.group.maxmembers);
 					bar.draw();
 					console.log("Done rendering bar!");
@@ -305,49 +389,8 @@ app.directive('groupMembers',function($timeout){
 	/*app.controller("groupsController",function($scope){
 		$scope.groups = allGroups;
 	});*/
-	app.controller('DemoCtrl', function ($scope, $filter, NgTableParams, $location, $http) {
-		this.errors = null;
-		/*var data = [{ pass: "Pass", code: "HY464", author: "Κωνσταντίνος Στεφανίδης", title: "Ανάπτυξη γραφικής διεπαφής για Web.", members: "2" },
-			{ pass: "Pass", code: "HY464", author: "Κωνσταντίνος Στεφανίδης", title: "Ανάπτυξη γραφικής διεπαφής για Web.", members: "2" },
-			{ pass: "Pass", code: "HY464", author: "Κωνσταντίνος Στεφανίδης", title: "Ανάπτυξη γραφικής διεπαφής για Web.", members: "2" },
-			{ pass: "Pass", code: "HY464", author: "Κωνσταντίνος Στεφανίδης", title: "Ανάπτυξη γραφικής διεπαφής για Web.", members: "2" },
-			{ pass: "Pass", code: "HY464", author: "Κωνσταντίνος Στεφανίδης", title: "Ανάπτυξη γραφικής διεπαφής για Web.", members: "2" },
-			{ pass: "Pass", code: "HY464", author: "Κωνσταντίνος Στεφανίδης", title: "Ανάπτυξη γραφικής διεπαφής για Web.", members: "2" },
-			{ pass: "Pass", code: "HY464", author: "Κωνσταντίνος Στεφανίδης", title: "Ανάπτυξη γραφικής διεπαφής για Web.", members: "2" },
-            { pass: "Fail", code: "HY454", author: "Αναστασακης Αλέξανδρος", title: "Ανάπτυξη γραφικής διεπαφής για Mobile.", members: "2" }];
-			*/
-		$http({method: 'GET', url: '/projects.json'}).success(function(data){
-			$scope.data = data.projects;
-			console.log($scope.data.length);
-			$scope.executeFunction = function (u) {
-				console.log("Cliked on table element " + u.code);
-				$location.path("/Course");
-			}
 
-			$scope.tableParams = new NgTableParams({
-				page: 1,            // show first page
-				count: 10,          // count per page
-				sorting: {
-					author: 'asc'     // initial sorting
-				}
-			},
-				{
-					total: $scope.data.length, // length of data
-					getData: function ($defer, params) {
-						// use build-in angular filter
-						var orderedData = params.sorting() ?
-							$filter('orderBy')($scope.data, params.orderBy()) :
-							$scope.data;
-
-						$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-					}
-				});
-		})
-		/*.cach(function(note){
-			this.errors = note.data.error;
-		})*/;
-		
-	})
+	
 /*
 	var allGroups = [
 		{
