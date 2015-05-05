@@ -45,12 +45,47 @@
 	//------------------------------------------------//
 	//------------------------------------------------//
 
-	var app = angular.module('pm',['ngTable']);
+	var app = angular.module('pm',[
+		'ngTable',
+		'ngRoute'
+		]);
+
+		app.config(function($routeProvider){
+	    $routeProvider
+			// Route for the Home page
+			.when('/',{
+	      templateUrl: 'Projects/Projects.html'
+	    })
+			// Route for the Projects page
+			.when('/Projects',{
+	      templateUrl: 'Projects/Projects.html',
+				controller: 'ProjectsController'
+	    })
+			// Route for the Groups page
+			.when('/Groups',{
+	      templateUrl: 'Groups/Groups.html'
+	    })
+			// Route for the Course page
+			.when('/Course',{
+	      templateUrl: 'Course/Course.html',
+				controller: 'CourseController'
+	    })
+			//Default redirection:
+			.otherwise( { redirectTo: '/' } );
+	  });
+
+		app.controller('ProjectsController',function($scope){
+			console.log($scope);
+		});
+
+		app.controller('CourseController',function($scope){
+			$scope.parent();
+		});
 
 	app.directive('groupsWidgets',function($timeout){
 		return{
 			restrict: 'E',
-			templateUrl: 'groups-widgets.html',
+			templateUrl: 'Groups/groups-widgets.html',
 			controller:function($scope){
 				//Not the best practice:
 				$scope.group.maximized = false;
@@ -81,6 +116,7 @@
 					var bar = new cicrbar();
 					bar.init("graph"+scope.group.id,scope.group.members.length,scope.group.maxmembers);
 					bar.draw();
+					console.log("Done rendering bar!");
 
 					element.mouseenter(function(){
 						element.find('.comment-footer').slideDown(100);
@@ -92,6 +128,8 @@
 						console.log(scope.group.name);
 						console.log(element.parent().find(".gw-id"+scope.group.id).height());
 						console.log(element.parent().parent().find('.gwidget_holder').height());
+						console.log(element.parent().find(".gw-id"+scope.group.id));
+						console.log(scope.$parent.groups.length);
 						if (!scope.group.maximized) {
 							//element.parent().find(".gw-id"+scope.group.id).css({"position":"absolute","z-index":4});
 					    	//element.parent().find(".gw-id"+scope.group.id).width("100%");
@@ -99,6 +137,7 @@
 								$("html, body").animate({ scrollTop: 0 }, 400);
 								for ( var k = 1 ; k <= scope.$parent.groups.length ; k++ ){
 									if (scope.group.id != k){
+										//console.log(element.parent().find(".gw-id"+k));
 										console.log(element.parent().find(".gw-id"+k));
 										element.parent().find(".gw-id"+k).css({"display":"none"});
 									}
@@ -139,7 +178,7 @@
 app.directive('groupMembers',function($timeout){
 		return{
 			restrict: 'E',
-			templateUrl: 'group-members.html',
+			templateUrl: 'Groups/group-members.html',
 			controller:function($scope){
 
 			},
@@ -149,32 +188,7 @@ app.directive('groupMembers',function($timeout){
 			}
 		};
 	});
-app.directive('groupInvited',function($timeout){
-		return{
-			restrict: 'E',
-			templateUrl: 'group-invited.html',
-			controller:function($scope){
-
-			},
-			/*controllerAs: 'gWidget'*/
-			link: function(scope, element, attrs){
-
-			}
-		};
-	});
-app.directive('groupPending',function($timeout){
-		return{
-			restrict: 'E',
-			templateUrl: 'group-pending.html',
-			controller:function($scope){
-
-			},
-			/*controllerAs: 'gWidget'*/
-			link: function(scope, element, attrs){
-
-			}
-		};
-	});
+	
 	/*app.directive('onFinishRender',function($timeout){
 		return{
 			restrict:'A',
@@ -203,8 +217,13 @@ app.directive('groupPending',function($timeout){
 			return this.panel == checkPanel;
 		};
 	});
-	app.controller("groupsController",function($scope){
-		$scope.groups = allGroups;
+	app.controller("groupsController",function($scope,$http){
+		// function will execute asynchronously.
+		$http({method: 'GET', url: '/groups.json'}).success(function(data){
+			$scope.groups = data.groups;
+		});
+		console.log('Data loaded successfuly.');
+		//$scope.groups = allGroups;
 	});
 	app.controller('GroupTypesController',function(){
 		//Initialize selected panel to be Owner:
@@ -216,32 +235,53 @@ app.directive('groupPending',function($timeout){
 			return this.gTab == checkTab;
 		};
 	});
-	app.controller("groupsController",function($scope){
+	/*app.controller("groupsController",function($scope){
 		$scope.groups = allGroups;
-	});
-	app.controller('DemoCtrl', function($scope, $filter, NgTableParams) {
-            var data = [{pass: "Pass", code: "HY464", author: "Κωνσταντίνος Στεφανίδης", title: "Ανάπτυξη γραφικής διεπαφής για Web.", members:"2"},
-                        {pass: "Fail", code: "HY454", author: "Αναστασακης Αλέξανδρος", title: "Ανάπτυξη γραφικής διεπαφής για Mobile.", members:"2"}];
+	});*/
+	app.controller('DemoCtrl', function ($scope, $filter, NgTableParams, $location, $http) {
+		this.errors = null;
+		/*var data = [{ pass: "Pass", code: "HY464", author: "Κωνσταντίνος Στεφανίδης", title: "Ανάπτυξη γραφικής διεπαφής για Web.", members: "2" },
+			{ pass: "Pass", code: "HY464", author: "Κωνσταντίνος Στεφανίδης", title: "Ανάπτυξη γραφικής διεπαφής για Web.", members: "2" },
+			{ pass: "Pass", code: "HY464", author: "Κωνσταντίνος Στεφανίδης", title: "Ανάπτυξη γραφικής διεπαφής για Web.", members: "2" },
+			{ pass: "Pass", code: "HY464", author: "Κωνσταντίνος Στεφανίδης", title: "Ανάπτυξη γραφικής διεπαφής για Web.", members: "2" },
+			{ pass: "Pass", code: "HY464", author: "Κωνσταντίνος Στεφανίδης", title: "Ανάπτυξη γραφικής διεπαφής για Web.", members: "2" },
+			{ pass: "Pass", code: "HY464", author: "Κωνσταντίνος Στεφανίδης", title: "Ανάπτυξη γραφικής διεπαφής για Web.", members: "2" },
+			{ pass: "Pass", code: "HY464", author: "Κωνσταντίνος Στεφανίδης", title: "Ανάπτυξη γραφικής διεπαφής για Web.", members: "2" },
+            { pass: "Fail", code: "HY454", author: "Αναστασακης Αλέξανδρος", title: "Ανάπτυξη γραφικής διεπαφής για Mobile.", members: "2" }];
+			*/
+		$http({method: 'GET', url: '/projects.json'}).success(function(data){
+			$scope.data = data.projects;
+			console.log($scope.data.length);
+			$scope.executeFunction = function (u) {
+				console.log("Cliked on table element " + u.code);
+				$location.path("/Course");
+			}
 
-            $scope.tableParams = new NgTableParams({
-                page: 1,            // show first page
-                count: 10,          // count per page
-                sorting: {
-                    author: 'asc'     // initial sorting
-                }
-            }, {
-                total: data.length, // length of data
-                getData: function($defer, params) {
-                    // use build-in angular filter
-                    var orderedData = params.sorting() ?
-                                        $filter('orderBy')(data, params.orderBy()) :
-                                        data;
+			$scope.tableParams = new NgTableParams({
+				page: 1,            // show first page
+				count: 10,          // count per page
+				sorting: {
+					author: 'asc'     // initial sorting
+				}
+			},
+				{
+					total: $scope.data.length, // length of data
+					getData: function ($defer, params) {
+						// use build-in angular filter
+						var orderedData = params.sorting() ?
+							$filter('orderBy')($scope.data, params.orderBy()) :
+							$scope.data;
 
-                    $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-                }
-            });
-        })
-
+						$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+					}
+				});
+		})
+		.cach(function(note){
+			this.errors = note.data.error;
+		});
+		
+	})
+/*
 	var allGroups = [
 		{
 			id:1,
@@ -464,5 +504,5 @@ app.directive('groupPending',function($timeout){
 			]
 		}
 	];
-
+*/
 })();

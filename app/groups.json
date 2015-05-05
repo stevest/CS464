@@ -1,0 +1,48 @@
+{
+	"groups": [
+		{
+			"id":1,
+			"course": "HY464",
+			"name": "Ομάδα-1",
+			"author": "Alexandros",
+			"title": "Mobile application development.",
+			"maxmembers": 4,
+			"members": [
+				{
+					"name": "Αλέξανδρος",
+					"surname": "Ιωαννίδης-Παπαγεωργίου",
+					"email": "alexandros@csd.uoc.gr",
+					"avatar": "assets/img/avatars/avatar1_big.png"
+				},
+				{
+					"name": "Γιώργος",
+					"surname": "Παπακωνσταντίνου",
+					"email": "george@csd.uoc.gr",
+					"avatar": "assets/img/avatars/avatar1_big.png"
+				},
+				{
+					"name": "Ελένη",
+					"surname": "Ιωάννου",
+					"email": "elena@csd.uoc.gr",
+					"avatar": "assets/img/avatars/avatar1_big.png"
+				}
+			],
+			"invited": [
+				{
+					"name": "Κώστας",
+					"surname": "Γλεζέλης",
+					"email": "kostis@csd.uoc.gr",
+					"avatar": "assets/img/avatars/avatar1_big.png"
+				}
+			],
+			"pending": [
+				{
+					"name": "Αθανάσιος",
+					"surname": "Μπίτσιος",
+					"email": "nassos@csd.uoc.gr",
+					"avatar": "assets/img/avatars/avatar1_big.png"
+				}
+			]
+		}
+	]
+}
