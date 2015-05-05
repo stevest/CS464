@@ -48,7 +48,36 @@
 	var app = angular.module('pm',[
 		'ngTable',
 		'ngRoute'
-		]);
+		])
+		.factory('UserService',[function(){
+		  var UserService = {
+			  loggedIn: false,
+			  username: 'notLoggedIn',
+			  isLogged: function(){
+				  return this.loggedIn; 
+			  },
+			  loggin: function(name){
+				  this.loggedIn = true;
+				  this.username = name;
+			  },
+			  loggout: function(){
+				  this.loggedIn = false;
+				  this.username = 'notLoggedIn';
+			  }
+		  };
+		  return UserService;
+	  }]);
+	  /*var lgnCtrl = app.controller('LoginController',['$scope','UserService','$timeout',function($scope,User){
+		  var userData;
+		  userData.username = 'alexandros';
+		  
+		  $timeout(function(){
+			  User.isLogged = true;
+			  User.username = userData.username;
+			  console.log('User logged in !');
+		  });
+	  }]);
+	  */
 
 		app.config(function($routeProvider){
 	    $routeProvider
@@ -73,6 +102,8 @@
 			//Default redirection:
 			.otherwise( { redirectTo: '/' } );
 	  });
+	  
+	  
 
 		app.controller('ProjectsController',function($scope){
 			console.log($scope);
@@ -81,6 +112,42 @@
 		app.controller('CourseController',function($scope){
 			$scope.parent();
 		});
+		// Create login directive; Inject UserService!
+		app.directive('login', ['$timeout','UserService', function($timeout, UserService){
+			return{
+				restrict: 'A',
+				controller: function($scope){
+					$scope.usrService = UserService;
+				  },
+				  //controllerAs: 'loginCtrl',
+				link: function(scope, element, attrs){
+					$timeout(function(){
+						//console.log("Usernameinside link is " + UserService.username);
+						//console.log("User is NOT logged in!");
+						//console.log("Username is " + UserService.username);
+						element.find('.btn').on('click',function(){
+							$timeout(function(){
+							console.log("Login btn clicked!");
+							scope.usrService.loggin('Alexandros');
+						  console.log('User logged in ! '+ scope.usrService.loggedIn);
+						  console.log("Username is " + scope.usrService.username);
+						  });
+						});	
+					});
+				}
+			};
+		}]);
+		app.directive('mynavbar', ['$timeout','UserService', function($timeout, UserService){
+			return{
+				restrict: 'A',
+				controller: function($scope){
+					$scope.usrService = UserService;
+				  },
+				  //controllerAs: 'navbarCtrl',
+				link: function(scope, element, attrs){
+				}
+			};
+		}]);
 
 	app.directive('groupsWidgets',function($timeout){
 		return{
@@ -276,9 +343,9 @@ app.directive('groupMembers',function($timeout){
 					}
 				});
 		})
-		.cach(function(note){
+		/*.cach(function(note){
 			this.errors = note.data.error;
-		});
+		})*/;
 		
 	})
 /*

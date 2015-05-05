@@ -71,7 +71,7 @@
 
 
 					<!--<img src="assets/images/bar.jpg"></img>-->
-		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" >
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" mynavbar>
 			<div class="container-fluid">
 			  <div class="navbar-header">
 				<a class="navbar-brand" href="index.html"> ProjectManager</a>
@@ -83,9 +83,13 @@
 			  </div>
 			  <div class="navbar-collapse collapse">
 			<!-- BEGIN TOP NAVIGATION MENU -->
-				<ul class="nav navbar-nav pull-right header-menu" >
+			<div login>
+					<button type="button" class="btn btn-default" ng-hide="usrService.loggedIn">Login!</button>
+				</div>
+				<ul class="nav navbar-nav pull-right header-menu" ng-show="usrService.loggedIn">
 					<!-- BEGIN NOTIFICATION DROPDOWN -->
 					<li class="dropdown" id="notifications-header">
+						
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 							<i class="glyph-icon flaticon-notifications"></i>
 							<span class="badge badge-danger badge-header">6</span>
@@ -199,6 +203,7 @@
 
 		<div class="container" style="margin-top:-10px;max-width:1024px;">
 				<div class="row">
+				
 					<ul class="nav nav-tabs nav-justified" >
 						<li>
 							<a class="panel_text" href="#/Projects">Projects</a>
