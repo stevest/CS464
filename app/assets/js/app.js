@@ -34,29 +34,29 @@
 		  return UserService;
 	  }]);
 
-		app.config(function($routeProvider){
-	    $routeProvider
-			// Route for the Home page
-			.when('/',{
-	      templateUrl: '/Projects/Projects.html'
-	    })
-			// Route for the Projects page
-			.when('/Projects',{
-	      templateUrl: '/Projects/Projects.html',
-				controller: 'ProjectsController'
-	    })
-			// Route for the Groups page
-			.when('/Groups',{
-	      templateUrl: '/Groups/Groups.html'
-	    })
-			// Route for the Course page
-			.when('/Course',{
-	      templateUrl: '/Course/Course.html',
-				controller: 'CourseController'
-	    })
-			//Default redirection:
-			.otherwise( { redirectTo: '/Projects/Projects.html' } );
-	  });
+	app.config(function ($routeProvider) {
+		$routeProvider
+		// Route for the Home page
+			.when('/', {
+			templateUrl: '/Projects/Projects.html'
+		})
+		// Route for the Projects page
+			.when('/Projects', {
+			templateUrl: '/Projects/Projects.html',
+			controller: 'ProjectsController'
+		})
+		// Route for the Groups page
+			.when('/Groups', {
+			templateUrl: '/Groups/Groups.html'
+		})
+		// Route for the Course page
+			.when('/Course', {
+			templateUrl: '/Course/Course.html',
+			controller: 'CourseController'
+		})
+		//Default redirection:
+			.otherwise({ redirectTo: '/Projects/Projects.html' });
+	});
 
 		app.controller('ProjectsController', ['$http', '$scope', '$filter', '$location', 'NgTableParams', 'UserService',
 		function ($http, $scope, $filter, $location, NgTableParams, UserService) {
@@ -369,16 +369,65 @@ app.directive('groupMembers',function($timeout){
 	//app.controller('postRender',function(){
 	//
 	//});
-	app.controller('PanelController',function(){
-		//Initialize selected panel to be Groups:
-		this.panel = 2;
-		this.selectPanel = function(setPanel){
-			this.panel = setPanel;
+	app.directive('panels', ['$location', 'UserService', '$timeout', function ($location, UserService, $timeout) {
+		return {
+			restrict: 'A',
+			controller: function ($scope) {
+				$scope.usrService = UserService;
+				$scope.panels = [
+					{ sn: 0, link: '#/Projects', label: 'Projects' }
+				];
+				//initialize active panel: Projects
+				$scope.selectedPanel = 0;
+				$scope.setSelectedPanel = function (panel) {
+					$scope.selectedPanel = panel.sn;
+					console.log('selected panel set to '+ panel.sn);
+				};
+				$scope.panelClass = function (panel) {
+					if ($scope.selectedPanel == panel.sn) {
+						return "active";
+					} else {
+						return "";
+					}
+					console.log("PanelClass executed");
+				};
+			},
+			link: function (scope, element, attrs) {
+//				$timeout(function(){
+//					console.log(element.html());
+////					for (var i = 0 ; i < scope.panels.length ; i++){
+////						console.log(scope.panelClass(scope.panels[i]));
+////						element.find('.'+scope.panels[i].label).addClass(scope.panelClass(scope.panels[i]));
+////					}
+////					console.log("Timeout Panel set to " + scope.selectedPanel.label);
+//				});	
+//				$timeout(function(){
+//						for (var i = 0 ; i < scope.panels.length ; i++){
+//							console.log(i);
+//							console.log(scope.panels[i]);
+//							console.log(scope.panelClass(i));
+//							console.log(element.html());
+//							element.find('.'+scope.panels[i].label).addClass(scope.panelClass(i));
+//							console.log(element.html());
+//						}
+//						console.log("Panel set to " + scope.panels[scope.selectedPanel].label);
+//				});
+				scope.$watch('usrService.loggedIn', function (loggedIn) {
+					if (scope.usrService.loggedIn) {
+						scope.panels = [
+							{ sn: 0, link: '#/Projects', label: 'Projects' },
+							{ sn: 1, link: '#/Grouops', label: 'Groups' }
+						];
+					} else {
+						scope.panels = [
+							{ sn: 0, link: '#/Projects', label: 'Projects' }
+						];
+					}
+					
+				});
+			}
 		};
-		this.isSelected = function(checkPanel){
-			return this.panel == checkPanel;
-		};
-	});
+	}]);
 	app.controller("groupsController",function($scope,$http){
 		// function will execute asynchronously.
 		$http({method: 'GET', url: '/groups.json'}).success(function(data){

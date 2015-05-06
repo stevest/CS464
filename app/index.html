@@ -181,14 +181,11 @@
 		<!-- END TOP MENU -->
 		<div class="container main">
 			<div class="row">
-				<ul class="nav nav-tabs nav-justified">
-					<li>
-						<a class="panel_text" href="#/Projects">Projects</a>
+				<ul class="nav nav-tabs nav-justified" panels>
+					<li ng-class="panelClass(panel)" ng-repeat="panel in panels">
+						<a class="panel_text" href="{{panel.link}}" ng-click="setSelectedPanel(panel)">{{panel.label}}</a>
 					</li>
-					<li ng-show="usrService.loggedIn">
-						<a class="panel_text" href="#/Groups">Groups</a>
-					</li>
-				</ul>
+				</ul>	
 				<div ng-view></div>
 			</div>
 		</div>
