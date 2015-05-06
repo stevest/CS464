@@ -2,7 +2,8 @@
 
 	var app = angular.module('pm',[
 		'ngTable',
-		'ngRoute'
+		'ngRoute',
+		'ui.bootstrap'
 		])
 		.factory('UserService',['$http', function($http){
 		  var UserService = {
@@ -59,11 +60,9 @@
 
 		app.controller('ProjectsController', ['$http', '$scope', '$filter', '$location', 'NgTableParams', 'UserService',
 		function ($http, $scope, $filter, $location, NgTableParams, UserService) {
-			console.log($scope);
 			$http({ method: 'GET', url: '/projects.json' }).success(function (data) {
 				$scope.data = data.projects;
 				$scope.$parent.data = data.projects;
-				console.log($scope.data[0].title);
 				$scope.executeFunction = function (u) {
 					console.log("Cliked on table element " + u.code);
 					$scope.$parent.courseClicked = u.code;
@@ -126,54 +125,66 @@
 				}
 			};
 		}]);
-		app.directive('loginModal', function () {
-		    return {
-//		      template: '<div class="modal fade">' + 
-//		          '<div class="modal-dialog">' + 
-//		            '<div class="modal-content">' + 
-//		              '<div class="modal-header">' + 
-//		                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' + 
-//		                '<h4 class="modal-title">{{ title }}</h4>' + 
-//		              '</div>' + 
-//		              '<div class="modal-body" ng-transclude></div>' + 
-//		            '</div>' + 
-//		          '</div>' + 
-//		        '</div>',
-		      restrict: 'A',
-//		      transclude: true,
-//		      replace:true,
-//		      scope:true,
-			  controller: function ($scope) {
-			    $scope.showModal = false;
-			    $scope.toggleLoginModal = function(){
-					console.log("Toggle modal hit");
-			        $scope.showModal = !$scope.showModal;
-			    };
-			  },
-		      link: function postLink(scope, element, attrs) {
-		        scope.title = attrs.title;
-		
-		        scope.$watch(attrs.visible, function(value){
-		          if(value == true)
-		            $(element).modal('show');
-		          else
-		            $(element).modal('hide');
-		        });
-		
-		        $(element).on('shown.bs.modal', function(){
-		          scope.$apply(function(){
-		            scope.$parent[attrs.visible] = true;
-		          });
-		        });
-		
-		        $(element).on('hidden.bs.modal', function(){
-		          scope.$apply(function(){
-		            scope.$parent[attrs.visible] = false;
-		          });
-		        });
-		      }
-		    };
-		  });
+		app.controller('ModalInstanceCtrl', ['$timeout', '$scope', '$modalInstance', '$modal', '$log', 'UserService',
+		function ($timeout, $scope, $modalInstance, $modal, $log, UserService) {
+			$scope.usrService = UserService;
+			$scope.ok = function () {
+				$timeout(function () {
+					console.log("Login btn clicked!");
+					$scope.usrService.logIn();
+					console.log('User logged in ! ' + $scope.usrService.loggedIn);
+					console.log("Username is " + $scope.usrService.username);
+				});
+				$modalInstance.dismiss('cancel');
+			};
+			$scope.cancel = function () {
+				$modalInstance.dismiss('cancel');
+			};
+		}]);
+		app.directive('loginModal', ['$timeout', 'UserService', '$modal', '$log', function ($timeout, UserService, $modal, $log) {
+			return {
+				restrict: 'A',
+				controller: function ($scope, $log) { 
+					console.log($scope);
+					$scope.usrService = UserService;
+					$scope.items = ['item1', 'item2', 'item3'];
+					$scope.animationsEnabled = true;
+					$scope.open = function (size) {
+						var modalInstance = $modal.open({
+							animation: $scope.animationsEnabled,
+							templateUrl: 'myModalContent.html',
+							controller: 'ModalInstanceCtrl',
+							size: size,
+							resolve: {
+								items: function () {
+									return $scope.items;
+								}
+							}
+						});
+						modalInstance.result.then(function (selectedItem) {
+							$scope.selected = selectedItem;
+						}, function () {
+								$log.info('Modal dismissed at: ' + new Date());
+							});
+					};
+					$scope.toggleAnimation = function () {
+						$scope.animationsEnabled = !$scope.animationsEnabled;
+					};
+				},
+				link: function (scope, element, attrs) {
+					$timeout(function(){
+						element.find('.btn.btn-login').on('click',function(){
+							$timeout(function(){
+							console.log("Login btn clicked!");
+							scope.usrService.logIn();
+						  console.log('User logged in ! '+ scope.usrService.loggedIn);
+						  console.log("Username is " + scope.usrService.username);
+						  });
+						});	
+					});					
+				}
+			};
+		}]);
 		/*app.directive('loader',['$http', '$timeout', function($http, $timeout){
 			return{
 				restrict: 'A',
@@ -390,229 +401,4 @@ app.directive('groupMembers',function($timeout){
 		$scope.groups = allGroups;
 	});*/
 
-	
-/*
-	var allGroups = [
-		{
-			id:1,
-			course: "HY464",
-			name: 'Ομάδα-1',
-			author: 'Alexandros',
-			title: 'Mobile application development.',
-			maxmembers: 4,
-			members: [
-				{
-					name: "Αλέξανδρος",
-					surname: "Ιωαννίδης-Παπαγεωργίου",
-					email: "alexandros@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				},
-				{
-					name: "Γιώργος",
-					surname: "Παπακωνσταντίνου",
-					email: "george@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				},
-				{
-					name: "Ελένη",
-					surname: "Ιωάννου",
-					email: "elena@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				}
-			],
-			invited: [
-				{
-					name: "Κώστας",
-					surname: "Γλεζέλης",
-					email: "kostis@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				}
-			],
-			pending: [
-				{
-					name: "Αθανάσιος",
-					surname: "Μπίτσιος",
-					email: "nassos@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				}
-			]
-		},
-		{
-			id:2,
-			course: "HY454",
-			name: 'Omada12',
-			author: 'Eleni',
-			title: 'Web application development.',
-			maxmembers: 4,
-			members: [
-				{
-					name: "Αλέξανδρος",
-					surname: "Ιωαννίδης-Παπαγεωργίου",
-					email: "alexandros@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				},
-				{
-					name: "Γιώργος",
-					surname: "Παπακωνσταντίνου",
-					email: "george@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				}
-			],
-			invited: [
-				{
-					name: "Κώστας",
-					surname: "Γλεζέλης",
-					email: "kostis@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				},
-				{
-					name: "Ελένη",
-					surname: "Ιωάννου",
-					email: "elena@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				}
-			],
-			pending: [
-				{
-					name: "Αθανάσιος",
-					surname: "Μπίτσιος",
-					email: "nassos@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				}
-			]
-		},
-		{
-			id:3,
-			course: "HY454",
-			name: 'Omada12',
-			author: 'Eleni',
-			title: 'Web application development.',
-			maxmembers: 4,
-			members: [
-				{
-					name: "Αλέξανδρος",
-					surname: "Ιωαννίδης-Παπαγεωργίου",
-					email: "alexandros@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				}
-			],
-			invited: [
-				{
-					name: "Κώστας",
-					surname: "Γλεζέλης",
-					email: "kostis@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				}
-			],
-			pending: [
-				{
-					name: "Αθανάσιος",
-					surname: "Μπίτσιος",
-					email: "nassos@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				},
-				{
-					name: "Γιώργος",
-					surname: "Παπακωνσταντίνου",
-					email: "george@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				},
-				{
-					name: "Ελένη",
-					surname: "Ιωάννου",
-					email: "elena@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				}
-			]
-		},
-		{
-			id:4,
-			course: "HY454",
-			name: 'Omada12',
-			author: 'Eleni',
-			title: 'Web application development.',
-			maxmembers: 4,
-			members: [
-				{
-					name: "Αλέξανδρος",
-					surname: "Ιωαννίδης-Παπαγεωργίου",
-					email: "alexandros@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				},
-				{
-					name: "Γιώργος",
-					surname: "Παπακωνσταντίνου",
-					email: "george@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				}
-			],
-			invited: [
-				{
-					name: "Κώστας",
-					surname: "Γλεζέλης",
-					email: "kostis@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				}
-			],
-			pending: [
-				{
-					name: "Αθανάσιος",
-					surname: "Μπίτσιος",
-					email: "nassos@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				},
-				{
-					name: "Ελένη",
-					surname: "Ιωάννου",
-					email: "elena@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				}
-			]
-		},
-		{
-			id:5,
-			course: "HY359",
-			name: 'Omada15',
-			author: 'Giorgos',
-			title: 'Design',
-			maxmembers: 4,
-			members: [
-				{
-					name: "Αλέξανδρος",
-					surname: "Ιωαννίδης-Παπαγεωργίου",
-					email: "alexandros@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				},
-				{
-					name: "Γιώργος",
-					surname: "Παπακωνσταντίνου",
-					email: "george@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				},
-				{
-					name: "Ελένη",
-					surname: "Ιωάννου",
-					email: "elena@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				}
-			],
-			invited: [
-				{
-					name: "Κώστας",
-					surname: "Γλεζέλης",
-					email: "kostis@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				}
-			],
-			pending: [
-				{
-					name: "Αθανάσιος",
-					surname: "Μπίτσιος",
-					email: "nassos@csd.uoc.gr",
-					avatar: "assets/img/avatars/avatar1_big.png"
-				}
-			]
-		}
-	];
-*/
 })();

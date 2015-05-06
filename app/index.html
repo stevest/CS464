@@ -13,6 +13,7 @@
 		<script type="text/javascript" src="assets/js/jquery-1.11.2.min.js"></script>
 		<script type="text/javascript" src="assets/js/angular.js"></script>
 		<script type="text/javascript" src="assets/js/angular-route.js"></script>
+		<script type="text/javascript" src="assets/js/ui-bootstrap-custom-0.13.0.js"></script>
 		<script type="text/javascript" src="assets/js/app.js"></script>
 		<script type="text/javascript" src="assets/js/ng-table.js"></script>
 		<link rel="stylesheet" href="assets/css/ng-table.min.css">
@@ -69,21 +70,9 @@
 				</div>
 				<div class="navbar-collapse collapse">
 					<!-- BEGIN TOP NAVIGATION MENU -->
-					<div loginModal>
-						<button type="button" class="btn btn-default pull-right" ng-hide="usrService.loggedIn" ng-click="toggleLoginModal()">Login!</button>
-					</div>
-					<div loginModal title="Login form" visible="showModal">
-						<form role="form">
-							<div class="form-group">
-								<label for="email">Email address</label>
-								<input type="email" class="form-control" id="email" placeholder="Enter email" />
-							</div>
-							<div class="form-group">
-								<label for="password">Password{{showModal}}</label>
-								<input type="password" class="form-control" id="password" placeholder="Password" />
-							</div>
-							<button type="submit" class="btn btn-default">Submit</button>
-						</form>
+					<div login-modal>
+<!--						<p style="color: #ffffff">show modal {{items.length}}</p>-->
+						<button type="button" class="btn btn-default pull-right" ng-hide="usrService.loggedIn" ng-click="open()">Login</button>
 					</div>
 					<ul class="nav navbar-nav pull-right header-menu" ng-show="usrService.loggedIn">
 						<!-- BEGIN NOTIFICATION DROPDOWN -->
@@ -203,6 +192,69 @@
 				<div ng-view></div>
 			</div>
 		</div>
+<!--		<div ng-controller="loginModal">
+			<script type="text/ng-template" id="myModalContent.html">
+				<div class="modal-header">
+				            <h3 class="modal-title">I'm a modal!</h3>
+				        </div>
+				        <div class="modal-body">
+				            <ul>
+				                <li ng-repeat="item in items">
+				                    <a ng-click="selected.item = item">{{ item }}</a>
+				                </li>
+				            </ul>
+				            Selected: <b>{{ selected.item }}</b>
+				        </div>
+				        <div class="modal-footer">
+				            <button class="btn btn-primary" ng-click="ok()">OK</button>
+				            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+				        </div>
+			</script>
+			<button class="btn btn-default" ng-click="open()">Open me!</button>
+			<button class="btn btn-default" ng-click="open('lg')">Large modal</button>
+			<button class="btn btn-default" ng-click="open('sm')">Small modal</button>
+			<button class="btn btn-default" ng-click="toggleAnimation()">Toggle Animation ({{ animationsEnabled }})</button>
+			<div ng-show="selected">Selection from a modal: {{ selected }}</div>
+		</div>-->
+		<!-- BEGIN LOGIN BOX -->
+	    <div login-modal>
+			<script type="text/ng-template" id="myModalContent.html">
+				<div class="container" id="login-block" >
+					<div class="row">
+			            <div class="col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
+			                <div class="login-box clearfix animated flipInY">
+			                    <div class="page-icon animated bounceInDown">
+			                        <img src="assets/img/account/user-icon.png" alt="Key icon">
+			                    </div>
+			                    <div class="login-logo">
+			                        <a href="#/Projects">
+			                            <img src="assets/img/account/login-logo.png" alt="Company Logo">
+			                        </a>
+			                    </div>
+			                    <hr>
+			                    <div class="login-form">
+			                        <div class="alert alert-danger hide">
+			                            <button type="button" class="close" data-dismiss="alert">×</button>
+			                            <h4>Error!</h4>
+			                            Your Error Message goes here
+			                        </div>
+			                        <form>
+			                            <input type="text" placeholder="Username" class="input-field form-control user" />
+			                            <input type="password" placeholder="Password" class="input-field form-control password" />
+			                            <button type="submit" class="btn btn-login" ng-click="ok()">Login</button>
+			                        </form>
+			                        <div class="login-links">
+			                            <a href="#/Projects">Forgot password?</a>
+			                            <br>
+			                            <p>Univercity of Crete 2015</p>
+			                        </div>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+				</div>
+			</script>
+	    </div>
 	</body>
 
 </html>
