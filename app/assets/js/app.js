@@ -393,25 +393,6 @@ app.directive('groupMembers',function($timeout){
 				};
 			},
 			link: function (scope, element, attrs) {
-//				$timeout(function(){
-//					console.log(element.html());
-////					for (var i = 0 ; i < scope.panels.length ; i++){
-////						console.log(scope.panelClass(scope.panels[i]));
-////						element.find('.'+scope.panels[i].label).addClass(scope.panelClass(scope.panels[i]));
-////					}
-////					console.log("Timeout Panel set to " + scope.selectedPanel.label);
-//				});	
-//				$timeout(function(){
-//						for (var i = 0 ; i < scope.panels.length ; i++){
-//							console.log(i);
-//							console.log(scope.panels[i]);
-//							console.log(scope.panelClass(i));
-//							console.log(element.html());
-//							element.find('.'+scope.panels[i].label).addClass(scope.panelClass(i));
-//							console.log(element.html());
-//						}
-//						console.log("Panel set to " + scope.panels[scope.selectedPanel].label);
-//				});
 				scope.$watch('usrService.loggedIn', function (loggedIn) {
 					if (scope.usrService.loggedIn) {
 						scope.panels = [
