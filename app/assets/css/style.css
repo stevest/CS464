@@ -28,6 +28,22 @@
   }
 }
 
+/* groups styles */
+div.no_groups {
+  display: block;
+}
+groups-widgets + div.no_groups{
+  display: none;
+}
+
+/* Groups styles */
+.groups_tab{
+  font-size: 18px;
+}
+/* Course styles */
+course_tab{
+  font-size: 18px;
+}
 
 /* ng-view animate */
 
@@ -48,7 +64,7 @@
 }
 tr {
   border-top: 1px solid #C1C3D1;
-  border-bottom-: 1px solid #C1C3D1;
+  border-bottom: 1px solid #C1C3D1;
   color:#666B85;
   font-size:16px;
   font-weight:normal;
@@ -170,7 +186,7 @@ tr:last-child td:last-child {
 	display: table-cell;*/
 }
 .group_author{
-	fonr-size:12px;
+	font-size:12px;
 	float:none;
 }
 .group_title{

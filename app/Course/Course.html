@@ -6,23 +6,31 @@
 	<p>Διδάσκων: {{course.author}}</p>
 	<ul class="nav nav-tabs" course-tabs>
 		<li ng-class="tabClass(1)">
-			<a class="panel_text" ng-click="setSelectedTab(1)">Info</a>
+			<a class="course_tab" ng-click="setSelectedTab(1)">Info</a>
 		</li>
 		<li ng-class="tabClass(2)">
-			<a class="panel_text" ng-click="setSelectedTab(2)">Groups</a>
+			<a class="course_tab" ng-click="setSelectedTab(2)"><span class="badge badge-primary badge-header">{{filterGroups(course.code).length}}</span> Groups</a>
 		</li>
 		<li ng-class="tabClass(3)">
-			<a class="panel_text" ng-click="setSelectedTab(3)">Evaluation</a>
+			<a class="course_tab" ng-click="setSelectedTab(3)"><span class="badge badge-primary badge-header">{{course.evaluations.length}}</span> Evaluation</a>
 		</li>
 	</ul>
-	<div class="course_tab" ng-show="isSelected(1)">
+	<div class="course_tab_content" ng-show="isSelected(1)">
 		<h2>Περιγραφή μαθήματος:</h2>
 		{{course.info}}
 	</div>
-		<div class="course_tab" ng-show="isSelected(2)">
-			filter groups goes here
+		<div class="course_tab_content" ng-show="isSelected(2)">
+			<div ng-hide="usrService.loggedIn">
+				Login to see the groups!
+			</div>
+			<groups-widgets class="gwidget gw-id{{group.id}}" ng-class="!group.maximized ? 'col-md-6' : 'col-md-12'" ng-repeat="group in filterGroups(course.code)" style="margin-top:65px;"></groups-widgets>
 		</div>
-			<div class="course_tab" ng-show="isSelected(3)">
-				Evaluation goes here
+			<div class="course_tab_content" ng-show="isSelected(3)">
+				<div ng-repeat="eval in course.evaluations">
+					<div>By user: {{eval.username}}</div>
+					<div>date: {{eval.date | date:'short'}}</div>
+					<rating ng-model="eval.rating" max="5" readonly="true"></rating>
+<!--    <span class="label" ng-class="{'label-warning': {{100 * (eval.rating / maxrate)}}<30, 'label-info': {{100 * (eval.rating / maxrate)}}>=30 && {{100 * (eval.rating / maxrate)}}<70, 'label-success': {{100 * (eval.rating / maxrate)}}>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>-->
+				</div>
 			</div>
 </div>

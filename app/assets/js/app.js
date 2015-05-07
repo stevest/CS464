@@ -1,44 +1,78 @@
 (function(){
 
-	var app = angular.module('pm',[
+	var app = angular.module('pm', [
 		'ngTable',
 		'ngRoute',
 		'ui.bootstrap'
-		])
-		.factory('UserService',['$http', function($http){
-		  var UserService = {
-			  loggedIn: false,
-			  username: null,
-			  name: null,
-			  surname: null,
-			  avatar: null,
-			  isLogged: function(){
-				  return UserService.loggedIn; 
-			  },
-			  logIn: function () {
-					  console.log("Login Succeded!");
-					  UserService.loggedIn = true;
-					  UserService.username = "Alexandra";
-					  UserService.name = "Αλεξάνδρα";
-					  UserService.surname = "Γεωργίου";
-					  UserService.avatar = "assets/img/avatars/avatar1_big.png";
-			  },
-			  logOut: function(){
-				  UserService.loggedIn = false;
-				  UserService.username = null;
-				  UserService.name = null;
-				  UserService.surname = null;
-				  UserService.avatar = null;
-			  }
-		  };
-		  return UserService;
-	  }]);
+	])
+		.factory('UserService', ['$http', '$filter', '$timeout', '$interval', function ($http, $filter, $timeout, $interval) {
+		var UserService = {
+			loggedIn: false,
+			username: null,
+			name: null,
+			surname: null,
+			avatar: null,
+			isLogged: function () {
+				return UserService.loggedIn;
+			},
+			logIn: function () {
+				console.log("Login Succeded!");
+				UserService.loggedIn = true;
+				UserService.username = "alexandra86";
+				UserService.name = "Αλεξάνδρα";
+				UserService.surname = "Γεωργίου";
+				UserService.avatar = "assets/img/avatars/avatar1_big.png";
+				//Show off our preloader:
+				UserService.groupsTimeout = $timeout(function(){
+					UserService.getGroups();
+				},1000);
+				//Update table each # seconds:
+				UserService.groupsInterval = $interval(function(){
+					UserService.getGroups();
+				},60000);
+			},
+			logOut: function () {
+				UserService.loggedIn = false;
+				UserService.username = null;
+				UserService.name = null;
+				UserService.surname = null;
+				UserService.avatar = null;
+				$timeout.cancel( UserService.groupsTimeout );
+				$interval.cancel( UserService.groupsInterval );
+			},
+			//Set groups accessible from everyone:
+			groupsInterval: null,
+			groupsTimeout: null,
+			groups: [],
+			owner: [],
+			invited: [],
+			pending: [],
+			loading: 1,
+			getGroups: function () {
+				$http({ method: 'GET', url: '/groups.json' }).success(function (data) {
+					UserService.groups = data.groups;
+					UserService.loading = 0;
+					console.log(UserService.groups.length + 'groups loaded successfuly.');
+					//Filter groups by owner, invited pending:
+					UserService.owner = $filter('filter')(UserService.groups, { creator: UserService.username });
+					console.log(UserService.owner);
+					UserService.invited = $filter('getByInvited')(UserService.groups, UserService.username);
+					console.log(UserService.invited);
+					UserService.pending = $filter('getByPending')(UserService.groups, UserService.username);
+					console.log(UserService.pending);
+				});
+
+			}
+
+		};
+		return UserService;
+	}]);
 
 	app.config(function ($routeProvider) {
 		$routeProvider
 		// Route for the Home page
-			.when('/', {
-			templateUrl: '/Projects/Projects.html',
+			.when('/#/', {
+			templateUrl: '/Projects',
 			access: {allowGuest: true}
 		})
 		// Route for the Projects page
@@ -69,19 +103,20 @@
 			.otherwise({ redirectTo: '/Projects/Projects.html' });
 	});
 
-		app.controller('ProjectsController', ['$http', '$scope', '$filter', '$location', 'NgTableParams', 'UserService', '$interval', '$timeout',
+	app.controller('ProjectsController', ['$http', '$scope', '$filter', '$location', 'NgTableParams', 'UserService', '$interval', '$timeout',
 		function ($http, $scope, $filter, $location, NgTableParams, UserService, $interval, $timeout) {
 			$scope.loading = 1;
-			$scope.getProjects = function(){
+			$scope.getProjects = function () {
 				$http({ method: 'GET', url: '/projects.json' }).success(function (data) {
 					$scope.data = data.projects;
+					//Projects accessible from anywere:
 					$scope.$parent.data = data.projects;
 					$scope.executeFunction = function (u) {
 						console.log("Cliked on table element " + u.code);
 						$scope.$parent.courseClicked = u.code;
 						$location.path("/Course");
 					};
-	
+
 					$scope.tableParams = new NgTableParams({
 						page: 1,            // show first page
 						count: 10,          // count per page
@@ -96,26 +131,40 @@
 								var orderedData = params.sorting() ?
 									$filter('orderBy')($scope.data, params.orderBy()) :
 									$scope.data;
-	
+
 								$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
 							}
 						});
-						$scope.loading = 0;
-						console.log("Projects DONE loading");
+					$scope.loading = 0;
+					console.log("Projects DONE loading");
 				});
 			};
 			//Show off our preloader:
-			$timeout(function(){
+			$timeout(function () {
 				$scope.getProjects();
-			},2000);
+				console.log("Getting projects...");
+			}, 1000);
 			//Update table each # seconds:
-			$interval(function(){
+			$interval(function () {
 				$scope.getProjects();
-			},60000);
+			}, 60000);
 		}]);
 		
-		app.controller('CourseController',['$scope', '$filter', 'UserService', function($scope, $filter, UserService){
-			$scope.course = $filter('filter')($scope.$parent.data, {code: $scope.$parent.courseClicked})[0];
+		app.controller('CourseController', ['$scope', '$filter', 'UserService', function ($scope, $filter, UserService) {
+			$scope.usrService = UserService;
+			$scope.course = $filter('filter')($scope.$parent.data, { code: $scope.$parent.courseClicked })[0];
+			$scope.filterGroups = function (courseCode) {
+				console.log(courseCode);
+				console.log($scope.usrService.groups);
+				console.log($filter('filter')($scope.usrService.groups, { course: courseCode }));
+				return $filter('filter')($scope.usrService.groups, { course: courseCode });
+			};
+			//Evaluation star rating:
+			$scope.maxrate = 5;
+//			$scope.hoveringOver = function (value) {
+//				$scope.overStar = value;
+//				$scope.percent = 100 * (value / $scope.max);
+//			};
 		}]);
 		// Create login directive; Inject UserService!
 		app.directive('login', ['$timeout','UserService', function($timeout, UserService){
@@ -206,7 +255,6 @@
 			return {
 				restrict: 'A',
 				controller: function ($scope, $log) { 
-					console.log($scope);
 					$scope.usrService = UserService;
 					$scope.items = ['item1', 'item2', 'item3'];
 					$scope.animationsEnabled = true;
@@ -348,16 +396,17 @@
 					});
 
 					element.find('.maximizeWidget').on('click',function(){
-						console.log(scope.group.name);
-						console.log(element.parent().find(".gw-id"+scope.group.id).height());
-						console.log(element.parent().parent().find('.gwidget_holder').height());
-						console.log(element.parent().find(".gw-id"+scope.group.id));
-						console.log(scope.$parent.groups.length);
+						//console.log(scope.group.name);
+						//console.log(element.parent().find(".gw-id"+scope.group.id).height());
+						//console.log(element.parent().parent().find('.gwidget_holder').height());
+						//console.log(element.parent().find(".gw-id"+scope.group.id));
+						//console.log(scope.$parent.groups.length);
 						if (!scope.group.maximized) {
 							//element.parent().find(".gw-id"+scope.group.id).css({"position":"absolute","z-index":4});
 					    	//element.parent().find(".gw-id"+scope.group.id).width("100%");
 					    	//element.parent().find(".gw-id"+scope.group.id).height("100%");
 								$("html, body").animate({ scrollTop: 0 }, 400);
+								// SSS set the visible groups only!!!
 								for ( var k = 1 ; k <= scope.$parent.groups.length ; k++ ){
 									if (scope.group.id != k){
 										//console.log(element.parent().find(".gw-id"+k));
@@ -502,24 +551,36 @@ app.directive('groupMembers',function($timeout){
 		};
 	}]);
 	
-	app.controller("GroupsController", ['$scope', '$http', '$timeout', '$interval', function($scope, $http, $timeout, $interval){
-		$scope.loading = 1;
-		$scope.getGroups = function(){
-			// function will execute asynchronously.
-			$http({method: 'GET', url: '/groups.json'}).success(function(data){
-				$scope.groups = data.groups;
-			});
-			$scope.loading = 0;
-			console.log('Data loaded successfuly.');
+	app.filter('getByInvited', function(){
+		return function(groups, username){
+			var invitedArray = [];
+			for(var i = 0 ; i < groups.length ; i++){
+				for (var k = 0 ; k < groups[i].invited.length ; k++){
+					if(groups[i].invited[k].username == username){
+						invitedArray.push(groups[i]) ;
+					}
+				}
+			}
+			return invitedArray;
 		};
-		//Show off our preloader:
-		$timeout(function(){
-			$scope.getGroups();
-		},2000);
-		//Update table each # seconds:
-		$interval(function(){
-			$scope.getGroups();
-		},60000);
+	});
+	app.filter('getByPending', function(){
+		return function(groups, username){
+			var pendingArray = [];
+			for(var i = 0 ; i < groups.length ; i++){
+				for (var k = 0 ; k < groups[i].pending.length ; k++){
+					if(groups[i].pending[k].username == username){
+						pendingArray.push(groups[i]) ;
+					}
+				}
+			}
+			return pendingArray;
+		};
+	});
+	app.controller("GroupsController", ['$scope', '$http', '$timeout', '$interval', '$filter', 'UserService',
+	function($scope, $http, $timeout, $interval, $filter, UserService){
+		$scope.usrService = UserService;
+		
 	}]);
 	
 	app.controller('GroupTypesController',function(){
