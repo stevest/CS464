@@ -72,35 +72,35 @@
 		$routeProvider
 		// Route for the Home page
 			.when('/#/', {
-			templateUrl: '/Projects',
+			templateUrl: 'Projects',
 			access: {allowGuest: true}
 		})
 		// Route for the Projects page
 			.when('/Projects', {
-			templateUrl: '/Projects/Projects.html',
+			templateUrl: 'Projects/Projects.html',
 			controller: 'ProjectsController',
 			access: {allowGuest: true}
 		})
 		// Route for the Groups page
 			.when('/Groups', {
-			templateUrl: '/Groups/Groups.html',
+			templateUrl: 'Groups/Groups.html',
 			controller: 'GroupsController',
 			access: {allowGuest: false}
 		})
 		// Route for the Course page
 			.when('/Course', {
-			templateUrl: '/Course/Course.html',
+			templateUrl: 'Course/Course.html',
 			controller: 'CourseController',
 			access: {allowGuest: true}
 		})
 		// Route for the Course page
 			.when('/Profile', {
-			templateUrl: '/Profile/Profile.html',
+			templateUrl: 'Profile/Profile.html',
 			controller: 'ProfileController',
 			access: {allowGuest: false}
 		})
 		//Default redirection:
-			.otherwise({ redirectTo: '/Projects/Projects.html' });
+			.otherwise({ redirectTo: 'Projects/Projects.html' });
 	});
 
 	app.controller('ProjectsController', ['$http', '$scope', '$filter', '$location', 'NgTableParams', 'UserService', '$interval', '$timeout',
