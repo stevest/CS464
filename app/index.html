@@ -72,7 +72,7 @@
 					<!-- BEGIN TOP NAVIGATION MENU -->
 					<div login-modal>
 <!--						<p style="color: #ffffff">show modal {{items.length}}</p>-->
-						<button type="button" class="btn btn-default pull-right" ng-hide="usrService.loggedIn" ng-click="open()">Login</button>
+						<button type="button" class="btn btn-dark pull-right" ng-hide="usrService.loggedIn" ng-click="open()">Login</button>
 					</div>
 					<ul class="nav navbar-nav pull-right header-menu" ng-show="usrService.loggedIn">
 						<!-- BEGIN NOTIFICATION DROPDOWN -->
@@ -216,7 +216,7 @@
 		<!-- BEGIN LOGIN BOX -->
 	    <div login-modal>
 			<script type="text/ng-template" id="myModalContent.html">
-				<div class="container" id="login-block" >
+				<div class="modal-container" id="login-block" >
 					<div class="row">
 			            <div class="col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
 			                <div class="login-box clearfix animated flipInY">
@@ -224,8 +224,8 @@
 			                        <img src="assets/img/account/user-icon.png" alt="Key icon">
 			                    </div>
 			                    <div class="login-logo">
-			                        <a href="#/Projects">
-			                            <img src="assets/img/account/login-logo.png" alt="Company Logo">
+			                        <a href="#/Projects" style="text-decoration:none; color:#ffffff" onMouseOver="this.style.color='#ffffff'" onMouseOut="this.style.color='#ffffff'">
+			                            <!--<img src="assets/img/account/login-logo.png" alt="Company Logo">-->ProjectManager
 			                        </a>
 			                    </div>
 			                    <hr>
