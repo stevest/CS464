@@ -150,8 +150,8 @@
 			//WHAAT? https://github.com/angular-ui/ui-router/issues/17
 				$scope.usrService = UserService;
 				$scope.$on('$routeChangeStart', function (event	, next, current) {
-					console.log("Routing in  progress! ($routeChangeStart)");
-					console.log(next);
+					//console.log("Routing in  progress! ($routeChangeStart)");
+					//console.log(next);
 					if ( next.access != undefined && !next.access.allowGuest && !$scope.usrService.loggedIn) { 
 		                //$location.path("/");
 						event.preventDefault();
@@ -160,7 +160,7 @@
 		        });
 				
 				$rootScope.$on("$locationChangeStart", function (event, next, current) {
-					console.log("Routing in  progress! ($locationChangeStart)");
+					//console.log("Routing in  progress! ($locationChangeStart)");
 					for (var i in window.routes) {
 						if (next.indexOf(i) != -1) {
 							if (!window.routes[i].access.allowGuest && !$scope.usrService.loggedIn) {
@@ -398,6 +398,7 @@
 			}
 		};
 	});
+	
 app.directive('groupMembers',function($timeout){
 		return{
 			restrict: 'E',
@@ -430,6 +431,7 @@ app.directive('groupMembers',function($timeout){
 	//app.controller('postRender',function(){
 	//
 	//});
+	
 	app.directive('panels', ['$location', 'UserService', '$timeout', function ($location, UserService, $timeout) {
 		return {
 			restrict: 'A',
@@ -442,7 +444,7 @@ app.directive('groupMembers',function($timeout){
 				$scope.selectedPanel = 0;
 				$scope.setSelectedPanel = function (panel) {
 					$scope.selectedPanel = panel.sn;
-					console.log('selected panel set to '+ panel.sn);
+					console.log('selected panel set to '+ panel.sn+'with href '+panel.link);
 				};
 				$scope.panelClass = function (panel) {
 					if ($scope.selectedPanel == panel.sn) {
@@ -458,7 +460,7 @@ app.directive('groupMembers',function($timeout){
 					if (scope.usrService.loggedIn) {
 						scope.panels = [
 							{ sn: 0, link: '#/Projects', label: 'Projects' },
-							{ sn: 1, link: '#/Grouops', label: 'Groups' }
+							{ sn: 1, link: '#/Groups', label: 'Groups' }
 						];
 					} else {
 						scope.panels = [
@@ -470,6 +472,7 @@ app.directive('groupMembers',function($timeout){
 			}
 		};
 	}]);
+	
 	app.directive('courseTabs', ['$location', '$timeout', function ($location, $timeout) {
 		return {
 			restrict: 'A',
@@ -498,6 +501,7 @@ app.directive('groupMembers',function($timeout){
 			}
 		};
 	}]);
+	
 	app.controller("GroupsController", ['$scope', '$http', '$timeout', '$interval', function($scope, $http, $timeout, $interval){
 		$scope.loading = 1;
 		$scope.getGroups = function(){
@@ -505,6 +509,7 @@ app.directive('groupMembers',function($timeout){
 			$http({method: 'GET', url: '/groups.json'}).success(function(data){
 				$scope.groups = data.groups;
 			});
+			$scope.loading = 0;
 			console.log('Data loaded successfuly.');
 		};
 		//Show off our preloader:
@@ -516,6 +521,7 @@ app.directive('groupMembers',function($timeout){
 			$scope.getGroups();
 		},60000);
 	}]);
+	
 	app.controller('GroupTypesController',function(){
 		//Initialize selected panel to be Owner:
 		this.gTab = 1;
