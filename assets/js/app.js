@@ -49,7 +49,7 @@
 			pending: [],
 			loading: 1,
 			getGroups: function () {
-				$http({ method: 'GET', url: '/groups.json' }).success(function (data) {
+				$http({ method: 'GET', url: 'groups.json' }).success(function (data) {
 					UserService.groups = data.groups;
 					UserService.loading = 0;
 					console.log(UserService.groups.length + 'groups loaded successfuly.');
@@ -107,7 +107,7 @@
 		function ($http, $scope, $filter, $location, NgTableParams, UserService, $interval, $timeout) {
 			$scope.loading = 1;
 			$scope.getProjects = function () {
-				$http({ method: 'GET', url: '/projects.json' }).success(function (data) {
+				$http({ method: 'GET', url: 'projects.json' }).success(function (data) {
 					$scope.data = data.projects;
 					//Projects accessible from anywere:
 					$scope.$parent.data = data.projects;
