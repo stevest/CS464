@@ -38,21 +38,31 @@
 		$routeProvider
 		// Route for the Home page
 			.when('/', {
-			templateUrl: '/Projects/Projects.html'
+			templateUrl: '/Projects/Projects.html',
+			access: {allowGuest: true}
 		})
 		// Route for the Projects page
 			.when('/Projects', {
 			templateUrl: '/Projects/Projects.html',
-			controller: 'ProjectsController'
+			controller: 'ProjectsController',
+			access: {allowGuest: true}
 		})
 		// Route for the Groups page
 			.when('/Groups', {
-			templateUrl: '/Groups/Groups.html'
+			templateUrl: '/Groups/Groups.html',
+			access: {allowGuest: false}
 		})
 		// Route for the Course page
 			.when('/Course', {
 			templateUrl: '/Course/Course.html',
-			controller: 'CourseController'
+			controller: 'CourseController',
+			access: {allowGuest: true}
+		})
+		// Route for the Course page
+			.when('/Profile', {
+			templateUrl: '/Profile/Profile.html',
+			controller: 'ProfileController',
+			access: {allowGuest: false}
 		})
 		//Default redirection:
 			.otherwise({ redirectTo: '/Projects/Projects.html' });
@@ -113,6 +123,37 @@
 					});
 				}
 			};
+		}]);
+		app.controller('ProfileController',[function($scope){
+			
+		}]);
+		app.controller('RouteController', ['$scope', '$route', '$routeParams', '$location', '$rootScope', 'UserService',
+		function ($scope, $route, $routeParams, $location, $rootScope, UserService) {
+			//But check: https://github.com/angular/angular.js/issues/2109
+			//WHAAT? https://github.com/angular-ui/ui-router/issues/17
+				$scope.usrService = UserService;
+				$scope.$on('$routeChangeStart', function (event	, next, current) {
+					console.log("Routing in  progress! ($routeChangeStart)");
+					console.log(next);
+					if ( next.access != undefined && !next.access.allowGuest && !$scope.usrService.loggedIn) { 
+		                //$location.path("/");
+						event.preventDefault();
+						alert('$routeChangeStart says: Login to access the page!');
+		            }
+		        });
+				
+				$rootScope.$on("$locationChangeStart", function (event, next, current) {
+					console.log("Routing in  progress! ($locationChangeStart)");
+					for (var i in window.routes) {
+						if (next.indexOf(i) != -1) {
+							if (!window.routes[i].access.allowGuest && !$scope.usrService.loggedIn) {
+								event.preventDefault();
+								alert('$locationChangeStart says: Login to access the page!');
+								//$location.path("/Login");
+		                    }
+		                }
+		            }
+		        });
 		}]);
 		app.directive('mynavbar', ['$timeout','UserService', function($timeout, UserService){
 			return{
