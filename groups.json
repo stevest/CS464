@@ -1,0 +1,102 @@
+{
+	"groups": [
+		{
+			"id":1,
+			"course": "HY464",
+			"name": "Ομάδα-1",
+			"creator": "alexandra86",
+			"title": "Mobile application development.",
+			"maxmembers": 4,
+			"members": [
+				{
+					"name": "Αλέξανδρος",
+					"surname": "Ιωαννίδης-Παπαγεωργίου",
+					"username": "blah",
+					"email": "alexandros@csd.uoc.gr",
+					"avatar": "assets/img/avatars/avatar1_big.png"
+				},
+				{
+					"name": "Γιώργος",
+					"surname": "Παπακωνσταντίνου",
+					"username": "blah",
+					"email": "george@csd.uoc.gr",
+					"avatar": "assets/img/avatars/avatar1_big.png"
+				},
+				{
+					"name": "Ελένη",
+					"surname": "Ιωάννου",
+					"username": "blah",
+					"email": "elena@csd.uoc.gr",
+					"avatar": "assets/img/avatars/avatar1_big.png"
+				}
+			],
+			"invited": [
+				{
+					"name": "Κώστας",
+					"surname": "Γλεζέλης",
+					"username": "blah",
+					"email": "kostis@csd.uoc.gr",
+					"avatar": "assets/img/avatars/avatar1_big.png"
+				}
+			],
+			"pending": [
+				{
+					"name": "Αθανάσιος",
+					"surname": "Μπίτσιος",
+					"username": "blah",
+					"email": "nassos@csd.uoc.gr",
+					"avatar": "assets/img/avatars/avatar1_big.png"
+				}
+			]
+		},
+		{
+			"id":2,
+			"course": "HY454",
+			"name": "Ομάδα-2",
+			"creator": "tasos91",
+			"title": "Web application development.",
+			"maxmembers": 5,
+			"members": [
+				{
+					"name": "Αλέξανδρος",
+					"surname": "Ιωαννίδης-Παπαγεωργίου",
+					"username": "blah",
+					"email": "alexandros@csd.uoc.gr",
+					"avatar": "assets/img/avatars/avatar1_big.png"
+				},
+				{
+					"name": "Γιώργος",
+					"surname": "Παπακωνσταντίνου",
+					"username": "blah",
+					"email": "george@csd.uoc.gr",
+					"avatar": "assets/img/avatars/avatar1_big.png"
+				},
+				{
+					"name": "Ελένη",
+					"surname": "Ιωάννου",
+					"username": "blah",
+					"email": "elena@csd.uoc.gr",
+					"avatar": "assets/img/avatars/avatar1_big.png"
+				}
+			],
+			"invited": [
+				{
+					"name": "Κώστας",
+					"surname": "Γλεζέλης",
+					"username": "alexandra86",
+					"email": "kostis@csd.uoc.gr",
+					"avatar": "assets/img/avatars/avatar1_big.png"
+				}
+			],
+			"pending": [
+				{
+					"name": "Αθανάσιος",
+					"surname": "Μπίτσιος",
+					"username": "blah",
+					"email": "nassos@csd.uoc.gr",
+					"avatar": "assets/img/avatars/avatar1_big.png"
+				}
+			]
+		}
+	]
+}

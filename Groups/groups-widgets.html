@@ -1,0 +1,341 @@
+<div class="col-md-12">
+	<div class="panel no-bd bd-3 panel-stat">
+		<div class="panel-body bg-grey p-15" style="background-color:#DFE5E9;">
+			<div class="row m-b-0">
+				<div class="col-xs-11">
+					<h2 class=" group_course stat-title">{{group.course}}</h2>
+					<h1 class="group_name">{{group.name}}</h1>
+					<!--<div class="live-tile" data-delay="4000" data-animation-easing="fade" data-height="47">
+	                                <div>
+	                                    <h1 class="m-0 w-500 bg-green">148</h1>
+	                                </div>
+	                                <div>
+	                                    <h1 class="m-0 w-500 bg-green">+28%</h1>col-sm-offset-1
+	                                </div>
+	                            </div>--></div>
+				<div class="col-xs-1 ">
+					<a href="#/Groups" class="maximizeWidget glyphicon glyphicon-resize-full" ng-class="!group.maximized ? 'glyphicon-resize-full' : 'glyphicon-resize-small'"></a>
+				</div>
+				<!-- <div class="col-xs-1 ">
+	                            <a href="#" ng-show="group.maximized" class="minimizeWidget glyphicon glyphicon-resize-small"></a>
+	                        </div> --></div>
+			<div class="row">
+				<div class="col-xs-7" style="float:left;">
+					<div class="row">
+						<div class="col-xs-12">
+							<small class="stat-title group_author">Created by:
+								<a href="profile.html">{{group.creator}}</a>
+							</small>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<small class="group_title">{{group.title}}</small>
+						</div>
+					</div>
+				</div>
+				<!-- <div>
+							    	<div class="col-md-12"> -->
+				<div class="btn-group-vertical" role="group" style="float:right;" ng-show="group.maximized">
+					<div class="btn-group" role="group">
+						<button type="button" class="btn btn-success">SUBMIT GROUP</button>
+					</div>
+					<div class="btn-group" role="group">
+						<button type="button" class="btn btn-danger">LEAVE GROUP</button>
+					</div>
+				</div>
+				<!-- </div>
+							    </div> -->
+				<div class="col-xs-5" style="float:right;">
+					<div class=" group_stats ">
+						<div class="col-md-12 col-sm-12" style="float:left;">
+							<img src="assets/images/UserGroup.png" style="width:90px;position:absolute;"></img>
+							<div class="group_progressbar" id="graph{{group.id}}" data-color="#30bae7" data-size="90"></div>
+						</div>
+						<div style="padding-top:120px; text-align: center;">Invited:{{group.invited.length}} Pending:{{group.pending.length}}</div>
+					</div>
+				</div>
+			</div>
+			<div class="row" ng-show="group.maximized">
+				<div class="col-md-12">
+					<h3>Members</h3>
+					<p>Owners of this group.</p>
+					<group-members ng-repeat="member in group.members"></group-members>
+				</div>
+				<div class="col-md-12">
+					<h3>Invited</h3>
+					<p>Members invited to join this group.</p>
+					<group-members ng-repeat="member in group.invited"></group-members>
+				</div>
+				<div class="col-md-12">
+					<h3>Pending</h3>
+					<p>Members requested to join this group.</p>
+					<group-members ng-repeat="member in group.pending"></group-members>
+				</div>
+				<div class="col-md-12">
+					<h3>Comments</h3>
+					<p>Discussion about the group.</p>
+					<!--<group-comments ng-repeat="comment in group.comments"></group-comments>-->
+					<!-- Dummy comment section -->
+					<div class="container">
+						<div class="tab-content">
+							<div class="tab-pane active" id="comments-logout">
+								<ul class="media-list">
+									<li class="media">
+										<a class="pull-left" href="#">
+														                          <img class="media-object img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg" alt="profile">
+														                        </a>
+										<div class="media-body">
+											<div class="well well-lg">
+												<h4 class="media-heading text-uppercase reviews">Marco</h4>
+												<ul class="media-date text-uppercase reviews list-inline">
+													<li class="dd">22</li>
+													<li class="mm">09</li>
+													<li class="aaaa">2014</li>
+												</ul>
+												<p class="media-comment">Great snippet! Thanks for sharing.</p>
+												<a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
+												<a class="btn btn-warning btn-circle text-uppercase" data-toggle="collapse" href="#replyOne"><span class="glyphicon glyphicon-comment"></span> 2 comments</a>
+											</div>
+										</div>
+										<div class="collapse" id="replyOne">
+											<ul class="media-list">
+												<li class="media media-replied">
+													<a class="pull-left" href="#">
+														                                      <img class="media-object img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/ManikRathee/128.jpg" alt="profile">
+														                                    </a>
+													<div class="media-body">
+														<div class="well well-lg">
+															<h4 class="media-heading text-uppercase reviews">
+																<span class="glyphicon glyphicon-share-alt"></span>The Hipster</h4>
+															<ul class="media-date text-uppercase reviews list-inline">
+																<li class="dd">22</li>
+																<li class="mm">09</li>
+																<li class="aaaa">2014</li>
+															</ul>
+															<p class="media-comment">Nice job Maria.</p>
+															<a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
+														</div>
+													</div>
+												</li>
+												<li class="media media-replied" id="replied">
+													<a class="pull-left" href="#">
+														                                      <img class="media-object img-circle" src="https://pbs.twimg.com/profile_images/442656111636668417/Q_9oP8iZ.jpeg" alt="profile">
+														                                    </a>
+													<div class="media-body">
+														<div class="well well-lg">
+															<h4 class="media-heading text-uppercase reviews">
+																<span class="glyphicon glyphicon-share-alt"></span>Mary</h4>
+															</h4>
+															<ul class="media-date text-uppercase reviews list-inline">
+																<li class="dd">22</li>
+																<li class="mm">09</li>
+																<li class="aaaa">2014</li>
+															</ul>
+															<p class="media-comment">Thank you Guys!</p>
+															<a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</li>
+									<li class="media">
+										<a class="pull-left" href="#">
+														                          <img class="media-object img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/kurafire/128.jpg" alt="profile">
+														                        </a>
+										<div class="media-body">
+											<div class="well well-lg">
+												<h4 class="media-heading text-uppercase reviews">Nico</h4>
+												<ul class="media-date text-uppercase reviews list-inline">
+													<li class="dd">22</li>
+													<li class="mm">09</li>
+													<li class="aaaa">2014</li>
+												</ul>
+												<p class="media-comment">I'm looking for that. Thanks!</p>
+												<div class="embed-responsive embed-responsive-16by9">
+													<iframe class="embed-responsive-item" src="//www.youtube.com/embed/80lNjkcp6gI" allowfullscreen></iframe>
+												</div>
+												<a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
+											</div>
+										</div>
+									</li>
+									<li class="media">
+										<a class="pull-left" href="#">
+														                          <img class="media-object img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/lady_katherine/128.jpg" alt="profile">
+														                        </a>
+										<div class="media-body">
+											<div class="well well-lg">
+												<h4 class="media-heading text-uppercase reviews">Kriztine</h4>
+												<ul class="media-date text-uppercase reviews list-inline">
+													<li class="dd">22</li>
+													<li class="mm">09</li>
+													<li class="aaaa">2014</li>
+												</ul>
+												<p class="media-comment">Yehhhh... Thanks for sharing.</p>
+												<a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
+												<a class="btn btn-warning btn-circle text-uppercase" data-toggle="collapse" href="#replyTwo"><span class="glyphicon glyphicon-comment"></span> 1 comment</a>
+											</div>
+										</div>
+										<div class="collapse" id="replyTwo">
+											<ul class="media-list">
+												<li class="media media-replied">
+													<a class="pull-left" href="#">
+														                                      <img class="media-object img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/jackiesaik/128.jpg" alt="profile">
+														                                    </a>
+													<div class="media-body">
+														<div class="well well-lg">
+															<h4 class="media-heading text-uppercase reviews">
+																<span class="glyphicon glyphicon-share-alt"></span>Lizz</h4>
+															<ul class="media-date text-uppercase reviews list-inline">
+																<li class="dd">22</li>
+																<li class="mm">09</li>
+																<li class="aaaa">2014</li>
+															</ul>
+															<p class="media-comment">Classy!</p>
+															<a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="tab-pane" id="add-comment">
+								<form action="#" method="post" class="form-horizontal" id="commentForm" role="form">
+									<div class="form-group">
+										<label for="email" class="col-sm-2 control-label">Comment</label>
+										<div class="col-sm-10">
+											<textarea class="form-control" name="addComment" id="addComment" rows="5"></textarea>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="uploadMedia" class="col-sm-2 control-label">Upload media</label>
+										<div class="col-sm-10">
+											<div class="input-group">
+												<div class="input-group-addon">http://</div>
+												<input type="text" class="form-control" name="uploadMedia" id="uploadMedia">
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-offset-2 col-sm-10">
+											<button class="btn btn-success btn-circle text-uppercase" type="submit" id="submitComment">
+												<span class="glyphicon glyphicon-send"></span>Summit comment</button>
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="tab-pane" id="account-settings">
+								<form action="#" method="post" class="form-horizontal" id="accountSetForm" role="form">
+									<div class="form-group">
+										<label for="avatar" class="col-sm-2 control-label">Avatar</label>
+										<div class="col-sm-10">
+											<div class="custom-input-file">
+												<label class="uploadPhoto">Edit
+													<input type="file" class="change-avatar" name="avatar" id="avatar">
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="name" class="col-sm-2 control-label">Name</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="name" id="name" placeholder="Vilma palma">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="nickName" class="col-sm-2 control-label">Nick name</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="nickName" id="nickName" placeholder="Vilma">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="email" class="col-sm-2 control-label">Email</label>
+										<div class="col-sm-10">
+											<input type="email" class="form-control" name="email" id="email" placeholder="vilma@mail.com">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="newPassword" class="col-sm-2 control-label">New password</label>
+										<div class="col-sm-10">
+											<input type="password" class="form-control" name="newPassword" id="newPassword">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="confirmPassword" class="col-sm-2 control-label">Confirm password</label>
+										<div class="col-sm-10">
+											<input type="password" class="form-control" name="confirmPassword" id="confirmPassword">
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-offset-2 col-sm-10">
+											<button class="btn btn-primary btn-circle text-uppercase" type="submit" id="submit">Save changes</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<!-- End dummy comments section -->
+				</div>
+			</div>
+			<div class="row" ng-show="!group.maximized">
+				<div class="col-md-12 comment-footer" style="display:none;">
+					<div class="btn-group btn-group-justified" role="group">
+						<div class="btn-group" role="group">
+							<button type="button" class="btn btn-success">SUBMIT GROUP</button>
+						</div>
+						<div class="btn-group" role="group">
+							<button type="button" class="btn btn-danger">LEAVE GROUP</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--<div class="row group_header" style="border-bottom: 2px solid #ccc">
+					<div>
+						<span class="group_course">{{group.course}}</span>
+						<span class="group_name">{{group.name}}</span>
+						<button type="button" class="btn btn-default" style="float:right;"><span class="glyphicon glyphicon-align-justify"></span></button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="container-fluid">
+			<div class="col-md-12">
+				<div class=" group_body">
+					<p class="group_author">Created by: {{group.author}}</p>
+					<p class="group_title">{{group.title}}</p>
+				</div>
+				<div class=" group_stats ">
+					<div class="col-md-12 col-sm-12" style="float:left;">
+						<img src="assets/images/UserGroup.png" style="width:90px;position:absolute;"></img>
+						<div class="group_progressbar" id="graph{{group.id}}"data-color="#30bae7" data-size="90"></div>
+
+					</div>
+					<div style="padding-top:120px; text-align: center;">
+						Invited:1
+						Pending:3
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div class="row" style="position:absolute;top:180px;">
+			<div class="col-md-12 comment-footer" style="display:none;">
+				<div class="btn-group btn-group-justified" role="group">
+					<div class="btn-group" role="group">
+						<button type="button" class="btn btn-success">SUBMIT GROUP</button>
+					</div>
+					<div class="btn-group" role="group">
+						<button type="button" class="btn btn-danger">LEAVE GROUP</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>-->

@@ -1,0 +1,46 @@
+{
+	"projects": [
+		{
+			"pass": "Pass",
+			"code": "HY464",
+			"author": "Κωνσταντίνος Στεφανίδης",
+			"project": "Ανάπτυξη γραφικής διεπαφής για Web.",
+			"title": "Αλληλεπίδραση ανθρώπου υπολογιστή",
+			"members": "2",
+			"info": "Ανάπτυξη γραφικής διεπαφής για ένα απο τα παρακάτω θέματα που εχουν ως στόχο την υποβοήθηση φοιτητών για τον σχηματισμό ομάδων.",
+			"evaluations": [
+				{
+					"username": "takis92",
+					"date": "1431014863549",
+					"rating": "4"
+				},
+				{
+					"username": "maraki22",
+					"date": "1288323623006",
+					"rating": "3"
+				}
+			]
+		},
+		{
+			"pass": "Fail",
+			"code": "HY472",
+			"author": "Αντώνης Αργυρός",
+			"project": "Background subtraction.",
+			"title": "Υπολογιστική όραση.",
+			"members": "3",
+			"info": "Background subtraction, also known as Foreground Detection, is a technique in the fields of image processing and computer vision wherein an image's foreground is extracted for further processing (object recognition etc.). Generally an image's regions of interest are objects (humans, cars, text etc.) in its foreground. After the stage of image preprocessing (which may include image denoising, post processing like morphology etc.) object localisation is required which may make use of this technique. Background subtraction is a widely used approach for detecting moving objects in videos from static cameras. The rationale in the approach is that of detecting the moving objects from the difference between the current frame and a reference frame, often called “background image”, or “background model”. Background subtraction is mostly done if the image in question is a part of a video stream. Background subtraction provides important cues for numerous applications in computer vision, for example surveillance tracking or human poses estimation. However, background subtraction is generally based on a static background hypothesis which is often not applicable in real environments. With indoor scenes, reflections or animated images on screens lead to background changes. In a same way, due to wind, rain or illumination changes brought by weather, static backgrounds methods have difficulties with outdoor scenes.",
+			"evaluations": [
+				{
+					"username": "takis92",
+					"date": "1288323623006",
+					"rating": "1"
+				},
+				{
+					"username": "maraki22",
+					"date": "1288323623006",
+					"rating": "2"
+				}
+			]
+		}
+	]
+}
