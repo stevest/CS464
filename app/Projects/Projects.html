@@ -4,8 +4,8 @@
 <!--        <div>
             <h2>Now loading...{{isLoading()}}</h2>
         </div>-->
-        <div>
-            <div>Check for visibility {{usrService.loggedIn}}</div>
+        <div ng-show="!loading">
+            <div>Check for user login {{usrService.loggedIn}}</div>
             <div>Username {{usrService.username}}</div>
             <div>Data Length {{data.length}}</div>
             <button ng-click="tableParams.sorting({})" class="btn btn-default pull-right">Clear sorting</button>
@@ -20,6 +20,9 @@
                     <td data-title="'Members'" sortable="'members'">{{user.members}}</td>
                 </tr>
             </table>
+        </div>
+        <div ng-show="loading">
+            Table is loading...
         </div>
     </div>
 </div>

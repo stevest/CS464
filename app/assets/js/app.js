@@ -50,6 +50,7 @@
 		// Route for the Groups page
 			.when('/Groups', {
 			templateUrl: '/Groups/Groups.html',
+			controller: 'GroupsController',
 			access: {allowGuest: false}
 		})
 		// Route for the Course page
@@ -68,37 +69,51 @@
 			.otherwise({ redirectTo: '/Projects/Projects.html' });
 	});
 
-		app.controller('ProjectsController', ['$http', '$scope', '$filter', '$location', 'NgTableParams', 'UserService',
-		function ($http, $scope, $filter, $location, NgTableParams, UserService) {
-			$http({ method: 'GET', url: '/projects.json' }).success(function (data) {
-				$scope.data = data.projects;
-				$scope.$parent.data = data.projects;
-				$scope.executeFunction = function (u) {
-					console.log("Cliked on table element " + u.code);
-					$scope.$parent.courseClicked = u.code;
-					$location.path("/Course");
-				};
-
-				$scope.tableParams = new NgTableParams({
-					page: 1,            // show first page
-					count: 10,          // count per page
-					sorting: {
-						author: 'asc'     // initial sorting
-					}
-				},
-					{
-						total: $scope.data.length, // length of data
-						getData: function ($defer, params) {
-							// use build-in angular filter
-							var orderedData = params.sorting() ?
-								$filter('orderBy')($scope.data, params.orderBy()) :
-								$scope.data;
-
-							$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+		app.controller('ProjectsController', ['$http', '$scope', '$filter', '$location', 'NgTableParams', 'UserService', '$interval', '$timeout',
+		function ($http, $scope, $filter, $location, NgTableParams, UserService, $interval, $timeout) {
+			$scope.loading = 1;
+			$scope.getProjects = function(){
+				$http({ method: 'GET', url: '/projects.json' }).success(function (data) {
+					$scope.data = data.projects;
+					$scope.$parent.data = data.projects;
+					$scope.executeFunction = function (u) {
+						console.log("Cliked on table element " + u.code);
+						$scope.$parent.courseClicked = u.code;
+						$location.path("/Course");
+					};
+	
+					$scope.tableParams = new NgTableParams({
+						page: 1,            // show first page
+						count: 10,          // count per page
+						sorting: {
+							author: 'asc'     // initial sorting
 						}
-					});
-			});
+					},
+						{
+							total: $scope.data.length, // length of data
+							getData: function ($defer, params) {
+								// use build-in angular filter
+								var orderedData = params.sorting() ?
+									$filter('orderBy')($scope.data, params.orderBy()) :
+									$scope.data;
+	
+								$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+							}
+						});
+						$scope.loading = 0;
+						console.log("Projects DONE loading");
+				});
+			};
+			//Show off our preloader:
+			$timeout(function(){
+				$scope.getProjects();
+			},2000);
+			//Update table each # seconds:
+			$interval(function(){
+				$scope.getProjects();
+			},60000);
 		}]);
+		
 		app.controller('CourseController',['$scope', '$filter', 'UserService', function($scope, $filter, UserService){
 			$scope.course = $filter('filter')($scope.$parent.data, {code: $scope.$parent.courseClicked})[0];
 		}]);
@@ -124,9 +139,11 @@
 				}
 			};
 		}]);
+		
 		app.controller('ProfileController',[function($scope){
 			
 		}]);
+		
 		app.controller('RouteController', ['$scope', '$route', '$routeParams', '$location', '$rootScope', 'UserService',
 		function ($scope, $route, $routeParams, $location, $rootScope, UserService) {
 			//But check: https://github.com/angular/angular.js/issues/2109
@@ -155,6 +172,7 @@
 		            }
 		        });
 		}]);
+		
 		app.directive('mynavbar', ['$timeout','UserService', function($timeout, UserService){
 			return{
 				restrict: 'A',
@@ -166,6 +184,7 @@
 				}
 			};
 		}]);
+		
 		app.controller('ModalInstanceCtrl', ['$timeout', '$scope', '$modalInstance', '$modal', '$log', 'UserService',
 		function ($timeout, $scope, $modalInstance, $modal, $log, UserService) {
 			$scope.usrService = UserService;
@@ -182,6 +201,7 @@
 				$modalInstance.dismiss('cancel');
 			};
 		}]);
+		
 		app.directive('loginModal', ['$timeout', 'UserService', '$modal', '$log', function ($timeout, UserService, $modal, $log) {
 			return {
 				restrict: 'A',
@@ -450,14 +470,52 @@ app.directive('groupMembers',function($timeout){
 			}
 		};
 	}]);
-	app.controller("groupsController",function($scope,$http){
-		// function will execute asynchronously.
-		$http({method: 'GET', url: '/groups.json'}).success(function(data){
-			$scope.groups = data.groups;
-		});
-		console.log('Data loaded successfuly.');
-		//$scope.groups = allGroups;
-	});
+	app.directive('courseTabs', ['$location', '$timeout', function ($location, $timeout) {
+		return {
+			restrict: 'A',
+			controller: function ($scope) {
+				//initialize active panel: Info
+				$scope.selectedTab = 1;
+				$scope.setSelectedTab = function (tab) {
+					$scope.selectedTab = tab;
+					console.log('selected course tab set to '+ tab);
+				};
+				$scope.tabClass = function (tab) {
+					if ($scope.selectedTab == tab) {
+						return "active";
+					} else {
+						return "";
+					}
+					console.log("tabClass executed");
+				};
+				$scope.isSelected = function(tab){
+					if ($scope.selectedTab == tab) {
+						return true;
+					} else {
+						return false;
+					}
+				};
+			}
+		};
+	}]);
+	app.controller("GroupsController", ['$scope', '$http', '$timeout', '$interval', function($scope, $http, $timeout, $interval){
+		$scope.loading = 1;
+		$scope.getGroups = function(){
+			// function will execute asynchronously.
+			$http({method: 'GET', url: '/groups.json'}).success(function(data){
+				$scope.groups = data.groups;
+			});
+			console.log('Data loaded successfuly.');
+		};
+		//Show off our preloader:
+		$timeout(function(){
+			$scope.getGroups();
+		},2000);
+		//Update table each # seconds:
+		$interval(function(){
+			$scope.getGroups();
+		},60000);
+	}]);
 	app.controller('GroupTypesController',function(){
 		//Initialize selected panel to be Owner:
 		this.gTab = 1;
@@ -468,8 +526,5 @@ app.directive('groupMembers',function($timeout){
 			return this.gTab == checkTab;
 		};
 	});
-	/*app.controller("groupsController",function($scope){
-		$scope.groups = allGroups;
-	});*/
 
 })();

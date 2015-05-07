@@ -4,16 +4,25 @@
 	<h3>
 		<strong>Project:</strong>{{course.project}}</h3>
 	<p>Διδάσκων: {{course.author}}</p>
-	<ul class="nav nav-tabs">
-		<li>
-			<a class="panel_text" href="#/Course">Info</a>
+	<ul class="nav nav-tabs" course-tabs>
+		<li ng-class="tabClass(1)">
+			<a class="panel_text" ng-click="setSelectedTab(1)">Info</a>
 		</li>
-		<li>
-			<a class="panel_text" href="#/Course">Groups</a>
+		<li ng-class="tabClass(2)">
+			<a class="panel_text" ng-click="setSelectedTab(2)">Groups</a>
 		</li>
-		<li>
-			<a class="panel_text" href="#/Course">Evaluation</a>
+		<li ng-class="tabClass(3)">
+			<a class="panel_text" ng-click="setSelectedTab(3)">Evaluation</a>
 		</li>
 	</ul>
-	
+	<div class="course_tab" ng-show="isSelected(1)">
+		<h2>Περιγραφή μαθήματος:</h2>
+		{{course.info}}
+	</div>
+		<div class="course_tab" ng-show="isSelected(2)">
+			filter groups goes here
+		</div>
+			<div class="course_tab" ng-show="isSelected(3)">
+				Evaluation goes here
+			</div>
 </div>

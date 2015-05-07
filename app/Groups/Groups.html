@@ -1,4 +1,5 @@
 
+<div>BLAH!</div>
 <div  ng-controller="GroupTypesController as gTabs" class="row">
   <ul class="nav nav-pills" >
     <li ng-click="gTabs.selectGTab(1)" ng-class="{ active:gTabs.isSelected(1) }">
@@ -15,7 +16,8 @@
     </li>
   </ul>
   <div class="projects_panel" ng-show="gTabs.isSelected(1)">
-    <div class="gwidget_holder container" style="width:100%; height:100%; position:relative;" ng-controller="groupsController">
+    <div class="gwidget_holder container" style="width:100%; height:100%; position:relative;">  <!--ng-controller="groupsController"-->
+      <div>groups are loading {{loading}}</div>
         <groups-widgets class="gwidget gw-id{{group.id}}" ng-class="!group.maximized ? 'col-md-6' : 'col-md-12'" ng-repeat="group in groups" style="margin-top:65px;"></groups-widgets>
     </div>
   </div>
