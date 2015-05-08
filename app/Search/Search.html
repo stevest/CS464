@@ -1,0 +1,12 @@
+<div>
+	<h3>Search results:</h3>
+	<div class="col-md-11">Searching for {{fromSearch.getSearchQuery()}}.</div>
+	<div class="col-md-1">Results matching: {{fromSearch.getSearchResults().length}}</div>
+	<ul>
+		<li ng-repeat="item in fromSearch.getSearchResults()" ng-switch="item.hasOwnProperty(title)">
+			has property {{item.hasOwnProperty(name)}}
+			<div ng-switch-when="false">This is a user!</div>
+			<div ng-switch-when="true">This is a class!</div>
+		</li>
+	</ul>
+</div>

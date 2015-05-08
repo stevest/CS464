@@ -1,32 +1,32 @@
 <div>
 	<h2>
-		<strong>{{course.code}}</strong>{{course.title}}</h2>
+		<strong>{{thisCourse().code}}</strong>{{thisCourse().title}}</h2>
 	<h3>
-		<strong>Project:</strong>{{course.project}}</h3>
-	<p>Διδάσκων: {{course.author}}</p>
+		<strong>Project:</strong>{{thisCourse().project}}</h3>
+	<p>Διδάσκων: {{thisCourse().author}}</p>
 	<ul class="nav nav-tabs" course-tabs>
 		<li ng-class="tabClass(1)">
 			<a class="course_tab" ng-click="setSelectedTab(1)">Info</a>
 		</li>
 		<li ng-class="tabClass(2)">
-			<a class="course_tab" ng-click="setSelectedTab(2)"><span class="badge badge-primary badge-header">{{filterGroups(course.code).length}}</span> Groups</a>
+			<a class="course_tab" ng-click="setSelectedTab(2)"><span class="badge badge-primary badge-header">{{filterGroups(thisCourse().code).length}}</span> Groups</a>
 		</li>
 		<li ng-class="tabClass(3)">
-			<a class="course_tab" ng-click="setSelectedTab(3)"><span class="badge badge-primary badge-header">{{course.evaluations.length}}</span> Evaluation</a>
+			<a class="course_tab" ng-click="setSelectedTab(3)"><span class="badge badge-primary badge-header">{{thisCourse().evaluations.length}}</span> Evaluation</a>
 		</li>
 	</ul>
 	<div class="course_tab_content" ng-show="isSelected(1)">
 		<h2>Περιγραφή μαθήματος:</h2>
-		{{course.info}}
+		{{thisCourse().info}}
 	</div>
 		<div class="course_tab_content" ng-show="isSelected(2)">
 			<div ng-hide="usrService.loggedIn">
 				Login to see the groups!
 			</div>
-			<groups-widgets class="gwidget gw-id{{group.id}}" ng-class="!group.maximized ? 'col-md-6' : 'col-md-12'" ng-repeat="group in filterGroups(course.code)" ng-show="usrService.loggedIn" style="margin-top:65px;"></groups-widgets>
+			<groups-widgets class="gwidget gw-id{{group.id}}" ng-class="!group.maximized ? 'col-md-6' : 'col-md-12'" ng-repeat="group in filterGroups(thisCourse().code)" ng-show="usrService.loggedIn" style="margin-top:65px;"></groups-widgets>
 		</div>
 			<div class="course_tab_content" ng-show="isSelected(3)">
-				<div ng-repeat="eval in course.evaluations">
+				<div ng-repeat="eval in thisCourse().evaluations">
 					<div>By user: {{eval.username}}</div>
 					<div>date: {{eval.date | date:'short'}}</div>
 					<rating ng-model="eval.rating" max="5" readonly="true"></rating>

@@ -128,21 +128,69 @@
 					"surname": "Ιωαννίδης-Παπαγεωργίου",
 					"username": "blah",
 					"email": "alexandros@csd.uoc.gr",
-					"avatar": "assets/img/avatars/avatar1_big.png"
+					"avatar": "assets/img/avatars/avatar1_big.png",
+					"projects": [
+						{
+							"code": "HY464",
+							"assignmentdate": "1288323623006",
+							"project": "Ανάπτυξη γραφικής διεπαφής για Web.",
+							"score": "8.5",
+							"scorevisible": "true"
+						},
+						{
+							"code": "HY474",
+							"assignmentdate": "1288323623006",
+							"project": "Ανάπτυξη γραφικής διεπαφής για Web.",
+							"score": "3.5",
+							"scorevisible": "false"
+						}
+					]
 				},
 				{
 					"name": "Γιώργος",
 					"surname": "Παπακωνσταντίνου",
 					"username": "blah",
 					"email": "george@csd.uoc.gr",
-					"avatar": "assets/img/avatars/avatar1_big.png"
+					"avatar": "assets/img/avatars/avatar1_big.png",
+					"projects": [
+						{
+							"code": "HY464",
+							"assignmentdate": "1288323623006",
+							"project": "Ανάπτυξη γραφικής διεπαφής για Web.",
+							"score": "8.5",
+							"scorevisible": "true"
+						},
+						{
+							"code": "HY474",
+							"assignmentdate": "1288323623006",
+							"project": "Ανάπτυξη γραφικής διεπαφής για Web.",
+							"score": "3.5",
+							"scorevisible": "false"
+						}
+					]
 				},
 				{
 					"name": "Ελένη",
 					"surname": "Ιωάννου",
 					"username": "blah",
 					"email": "elena@csd.uoc.gr",
-					"avatar": "assets/img/avatars/avatar1_big.png"
+					"avatar": "assets/img/avatars/avatar1_big.png",
+					"projects": [
+						{
+							"code": "HY464",
+							"assignmentdate": "1288323623006",
+							"project": "Ανάπτυξη γραφικής διεπαφής για Web.",
+							"score": "8.5",
+							"scorevisible": "true"
+						},
+						{
+							"code": "HY474",
+							"assignmentdate": "1288323623006",
+							"project": "Ανάπτυξη γραφικής διεπαφής για Web.",
+							"score": "3.5",
+							"scorevisible": "false"
+						}
+					]
 				}
 			]
 }

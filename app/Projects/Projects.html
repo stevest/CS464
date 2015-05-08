@@ -1,20 +1,20 @@
 <div class="projects_panel row">
     <div class="col-md-12">
-        <div ng-hide="loadingProjects">
+        <div ng-hide="prjService.loadingProjects">
             <button ng-click="tableParams.sorting({})" class="btn btn-default pull-right">Clear sorting</button>
             <p>
                 <strong>Sorting:</strong>{{tableParams.sorting()|json}}</p>
             <table ng-table="tableParams" class="table">
-                <tr class="course-{{user.code}}" ng-repeat="user in $data" ng-click="executeFunction(user)">
-                    <td data-title="'Pass'" sortable="'pass'" ng-show="usrService.loggedIn">{{user.pass}}</td>
-                    <td data-title="'Code'" sortable="'code'">{{user.code}}</td>
-                    <td data-title="'Author'" sortable="'author'">{{user.author}}</td>
-                    <td data-title="'Project'" sortable="'project'">{{user.project}}</td>
-                    <td data-title="'Members'" sortable="'members'">{{user.members}}</td>
+                <tr class="course-{{entry.code}}" ng-repeat="entry in prjService.projects" ng-click="prjService.projectClicked(entry)">
+                    <td data-title="'Pass'" sortable="'pass'" ng-show="usrService.loggedIn">{{entry.pass}}</td>
+                    <td data-title="'Code'" sortable="'code'">{{entry.code}}</td>
+                    <td data-title="'Author'" sortable="'author'">{{entry.author}}</td>
+                    <td data-title="'Project'" sortable="'project'">{{entry.project}}</td>
+                    <td data-title="'Members'" sortable="'members'">{{entry.members}}</td>
                 </tr>
             </table>
         </div>
-        <div ng-show="loadingProjects">
+        <div ng-show="prjService.loadingProjects">
             <div class="sk-spinner sk-spinner-rotating-plane"></div>
             <div class="sk-spinner-text">
                 <h3>Loading projects...</h3>
