@@ -47,11 +47,11 @@
 			owner: [],
 			invited: [],
 			pending: [],
-			loading: 1,
+			loadingGroups: 1,
 			getGroups: function () {
-				$http({ method: 'GET', url: '/groups.json' }).success(function (data) {
+				$http({ method: 'GET', url: 'groups.json' }).success(function (data) {
 					UserService.groups = data.groups;
-					UserService.loading = 0;
+					UserService.loadingGroups = 0;
 					console.log(UserService.groups.length + 'groups loaded successfuly.');
 					//Filter groups by owner, invited pending:
 					UserService.owner = $filter('filter')(UserService.groups, { creator: UserService.username });
@@ -111,9 +111,9 @@
 
 	app.controller('ProjectsController', ['$http', '$scope', '$filter', '$location', 'NgTableParams', 'UserService', '$interval', '$timeout',
 		function ($http, $scope, $filter, $location, NgTableParams, UserService, $interval, $timeout) {
-			$scope.loading = 1;
+			$scope.loadingProjects = 1;
 			$scope.getProjects = function () {
-				$http({ method: 'GET', url: '/projects.json' }).success(function (data) {
+				$http({ method: 'GET', url: 'projects.json' }).success(function (data) {
 					$scope.data = data.projects;
 					//Projects accessible from anywere:
 					$scope.$parent.data = data.projects;
@@ -141,8 +141,8 @@
 								$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
 							}
 						});
-					$scope.loading = 0;
-					console.log("Projects DONE loading");
+					$scope.loadingProjects = 0;
+					console.log("Projects DONE loadingProjects");
 				});
 			};
 			//Show off our preloader:
@@ -657,7 +657,21 @@ app.directive('groupMembers',function($timeout){
 	app.controller("GroupsController", ['$scope', '$http', '$timeout', '$interval', '$filter', 'UserService',
 	function($scope, $http, $timeout, $interval, $filter, UserService){
 		$scope.usrService = UserService;
-		
+		$scope.btnGroups = [
+			[
+				'SUBMIT GROUP',
+				'LEAVE GROUP'
+			],
+			[
+				'PENDING'
+			],
+			[
+				'ACCEPT',
+				'DECLINE'
+			],
+			
+			
+		];
 	}]);
 	
 	app.controller('GroupTypesController',function(){

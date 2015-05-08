@@ -23,7 +23,7 @@
 			<div ng-hide="usrService.loggedIn">
 				Login to see the groups!
 			</div>
-			<groups-widgets class="gwidget gw-id{{group.id}}" ng-class="!group.maximized ? 'col-md-6' : 'col-md-12'" ng-repeat="group in filterGroups(course.code)" style="margin-top:65px;"></groups-widgets>
+			<groups-widgets class="gwidget gw-id{{group.id}}" ng-class="!group.maximized ? 'col-md-6' : 'col-md-12'" ng-repeat="group in filterGroups(course.code)" ng-show="usrService.loggedIn" style="margin-top:65px;"></groups-widgets>
 		</div>
 			<div class="course_tab_content" ng-show="isSelected(3)">
 				<div ng-repeat="eval in course.evaluations">

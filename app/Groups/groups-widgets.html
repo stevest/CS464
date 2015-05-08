@@ -37,12 +37,15 @@
 				<!-- <div>
 							    	<div class="col-md-12"> -->
 				<div class="btn-group-vertical" role="group" style="float:right;" ng-show="group.maximized">
-					<div class="btn-group" role="group">
+					<div class="btn-group" role="group" ng-repeat="bgrp in btnGroups[gTab]">
+						<button type="button" class="btn btn-danger">{{bgrp}}</button>
+					</div>
+<!--					<div class="btn-group" role="group">
 						<button type="button" class="btn btn-success">SUBMIT GROUP</button>
 					</div>
 					<div class="btn-group" role="group">
 						<button type="button" class="btn btn-danger">LEAVE GROUP</button>
-					</div>
+					</div>-->
 				</div>
 				<!-- </div>
 							    </div> -->
