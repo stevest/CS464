@@ -60,10 +60,16 @@
 					console.log(UserService.invited);
 					UserService.pending = $filter('getByPending')(UserService.groups, UserService.username);
 					console.log(UserService.pending);
+					//import users:
+					UserService.users = data.users;
 				});
 
+			},
+			selectUser : function(username){
+				//Get GID of selected user:
+				UserService.userClicked = $filter('userByUsername')(UserService.users, username);
+				console.log("User clicked is "+ UserService.userClicked.name);
 			}
-
 		};
 		return UserService;
 	}]);
@@ -77,30 +83,30 @@
 		})
 		// Route for the Projects page
 			.when('/Projects', {
-			templateUrl: '/Projects/Projects.html',
+			templateUrl: 'Projects/Projects.html',
 			controller: 'ProjectsController',
 			access: {allowGuest: true}
 		})
 		// Route for the Groups page
 			.when('/Groups', {
-			templateUrl: '/Groups/Groups.html',
+			templateUrl: 'Groups/Groups.html',
 			controller: 'GroupsController',
 			access: {allowGuest: false}
 		})
 		// Route for the Course page
 			.when('/Course', {
-			templateUrl: '/Course/Course.html',
+			templateUrl: 'Course/Course.html',
 			controller: 'CourseController',
 			access: {allowGuest: true}
 		})
 		// Route for the Course page
 			.when('/Profile', {
-			templateUrl: '/Profile/Profile.html',
+			templateUrl: 'Profile/Profile.html',
 			controller: 'ProfileController',
 			access: {allowGuest: false}
 		})
 		//Default redirection:
-			.otherwise({ redirectTo: '/Projects/Projects.html' });
+			.otherwise({ redirectTo: 'Projects/Projects.html' });
 	});
 
 	app.controller('ProjectsController', ['$http', '$scope', '$filter', '$location', 'NgTableParams', 'UserService', '$interval', '$timeout',
@@ -166,6 +172,7 @@
 //				$scope.percent = 100 * (value / $scope.max);
 //			};
 		}]);
+		
 		// Create login directive; Inject UserService!
 		app.directive('login', ['$timeout','UserService', function($timeout, UserService){
 			return{
@@ -189,9 +196,47 @@
 			};
 		}]);
 		
-		app.controller('ProfileController',[function($scope){
-			
+		app.controller('ProfileController',['$scope','$filter', 'UserService', function($scope, $filter, UserService){
+			$scope.usrService = UserService;
+			//initialize active panel: About
+			$scope.selectedTab = 1;
+			$scope.setSelectedTab = function (tab) {
+				$scope.selectedTab = tab;
+				console.log('selected profile tab set to '+ tab);
+			};
+			$scope.tabClass = function (tab) {
+				if ($scope.selectedTab == tab) {
+					return "active";
+				} else {
+					return "";
+				}
+				console.log("tabClass executed");
+			};
+			$scope.isSelected = function(tab){
+				if ($scope.selectedTab == tab) {
+					return true;
+				} else {
+					return false;
+				}
+			};
+			$scope.userInGroups = function (username) {
+				return $filter('groupsOfUser')($scope.usrService.groups, username);
+			};
 		}]);
+		
+		app.filter('groupsOfUser', function(){
+			return function(groups, username){
+				var usergroupsArray = [];
+				for(var i = 0 ; i < groups.length ; i++){
+					for (var k = 0 ; k < groups[i].members.length ; k++){
+						if(groups[i].members[k].username == username){
+							usergroupsArray.push(groups[i]) ;
+						}
+					}
+				}
+				return usergroupsArray;
+			};
+		});
 		
 		app.controller('RouteController', ['$scope', '$route', '$routeParams', '$location', '$rootScope', 'UserService',
 		function ($scope, $route, $routeParams, $location, $rootScope, UserService) {
@@ -227,7 +272,26 @@
 				restrict: 'A',
 				controller: function($scope){
 					$scope.usrService = UserService;
-				  },
+//					$scope.items = [
+//					    'The first choice!',
+//					    'And another choice for you.',
+//					    'but wait! A third!'
+//					  ];
+					
+					  $scope.status = {
+					    isopen: false
+					  };
+					
+//					  $scope.toggled = function(open) {
+//					    $log.log('Dropdown is now: ', open);
+//					  };
+					
+					  $scope.toggleDropdown = function($event) {
+					    $event.preventDefault();
+					    $event.stopPropagation();
+					    $scope.status.isopen = !$scope.status.isopen;
+					  };
+				},
 				  //controllerAs: 'navbarCtrl',
 				link: function(scope, element, attrs){
 				}
@@ -317,11 +381,13 @@
 			};
 		}]);*/
 
-	app.directive('groupsWidgets',function($timeout){
+	app.directive('groupsWidgets',['$timeout', 'UserService', '$filter', function($timeout, UserService, $filter){
 		return{
 			restrict: 'E',
 			templateUrl: 'Groups/groups-widgets.html',
 			controller:function($scope){
+				$scope.usrService = UserService;
+				
 				//Not the best practice:
 				$scope.group.maximized = false;
 				
@@ -363,6 +429,7 @@
 						this.drawBar(this.color, this.lineWidth - this.lineWidth*25/100, (this.mem/this.maxmem)*0.75 );
 					};
 				};
+				
 				//console.log("Length of group members is " + $scope.group.members.length);
 				//console.log($scope);
 				/*$scope.$on('ngRepeatFinished',function(ngRepeatFinishedEvent){
@@ -446,7 +513,7 @@
 
 			}
 		};
-	});
+	}]);
 	
 app.directive('groupMembers',function($timeout){
 		return{
@@ -575,6 +642,16 @@ app.directive('groupMembers',function($timeout){
 				}
 			}
 			return pendingArray;
+		};
+	});
+	app.filter('userByUsername', function(){
+		return function(users, username){
+			for(var i = 0 ; i < users.length ; i++){
+				if(users[i].username == username){
+					return users[i];
+				}
+			}
+			return null;
 		};
 	});
 	app.controller("GroupsController", ['$scope', '$http', '$timeout', '$interval', '$filter', 'UserService',

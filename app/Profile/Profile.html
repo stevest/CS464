@@ -2,13 +2,13 @@
 				<div class="row">
 					<div class="col-md-2">
 						<a class="pull-left" href="#">
-							<img class="media-object img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg" alt="profile">
+							<img class="media-object img-circle" ng-src="{{usrService.userClicked.avatar}}" alt="profile">
 						</a>
 					</div>
 					<div class="col-md-2">
 						<div class="row">
-							<h2><strong>Bob</strong></h2>
-							<h3 style="margin-top:-10px;">Nilson</h3>
+							<h2><strong>{{usrService.userClicked.name}}</strong></h2>
+							<h3 style="margin-top:-10px;">{{usrService.userClicked.surname}}</h3>
 						</div>
 						<div class="row">
 							<button type="button" class="btn btn-dark">edit profil</button>
@@ -17,7 +17,7 @@
 					<div class="col-md-2">
 						<div class="row">
 							<h4 style="margin-top:22px;"><strong>Contact</strong></h4><br>
-							<i class="fa fa-envelope-o pulse"></i> bobnilson@gmail.com<br>
+							<i class="fa fa-envelope-o pulse"></i>{{usrService.userClicked.email}}<br>
 							<i class="fa fa-facebook pulse" style="margin-right:-4px;"></i> &nbsp; &nbsp;facebook.com/Bob.Nil
 						</div>
 					</div>
@@ -26,7 +26,7 @@
 				<div class="row" style="margin-top:10px;">
 					<div class="col-md-12">
 						<div class="tabcordion">
-                        <ul id="myTab" class="nav nav-tabs">
+<!--                        <ul id="myTab" class="nav nav-tabs">
                             <li class="active"><a href="#tab1_1" data-toggle="tab"><strong>About</strong></a></li>
                             <li class=""><a href="#tab1_2" data-toggle="tab"><strong>Groups</strong></a></li>
                             <li class="dropdown">
@@ -36,8 +36,45 @@
                                     <li><a href="#tab1_4" tabindex="-1" data-toggle="tab">Now</a></li>
                                 </ul>
                             </li>
-                        </ul>
-                        <div id="myTabContent" class="tab-content">
+                        </ul>-->
+                        <ul class="nav nav-tabs">
+                    		<li ng-class="tabClass(1)">
+                    			<a class="profile_tab" ng-click="setSelectedTab(1)">About</a>
+                    		</li>
+                    		<li ng-class="tabClass(2)">
+                    			<a class="profile_tab" ng-click="setSelectedTab(2)"><span class="badge badge-primary badge-header">{{filterGroups(course.code).length}}</span> Groups</a>
+                    		</li>
+                    		<li ng-class="tabClass(3)">
+                    			<a class="profile_tab" ng-click="setSelectedTab(3)"><span class="badge badge-primary badge-header">{{course.evaluations.length}}</span> Projects</a>
+                    		</li>
+                    	</ul>
+                        <div class="profile_tab_content" ng-show="isSelected(1)">
+                    		<h2>About User</h2>
+                    		
+                        </div>
+                        <div class="profile_tab_content" ng-show="isSelected(2)">
+                    		<h2>User groups:</h2>
+                			<groups-widgets class="gwidget gw-id{{group.id}}" ng-class="!group.maximized ? 'col-md-6' : 'col-md-12'" ng-repeat="group in userInGroups(usrService.userClicked.username)" style="margin-top:65px;"></groups-widgets>
+                        </div>
+                        <div class="profile_tab_content" ng-show="isSelected(3)">
+                    		<h2>User Projects</h2>
+                            <div class="user_projects_table" ng-repeat="project in usrService.userClicked.projects">
+                                <div class="col-md-9">
+                                    <div>{{project.code}} {{project.project}}</div>
+                                    <div>Ανάθεση: {{project.assignmentdate | date:'shortDate'}}</div>    
+                                </div>
+                                <div class="col-md-3">
+                                    Βαθμός: {{project.scorevisible}}<span style="font-size:18px;">{{project.score}}/</span><span style="font-size:14px;">10</span>
+                                    <div class="switch" ng-show="usrService.userClicked.username == usrService.username">
+                                    	<input id="cmn-toggle-{{project.code}}" class="cmn-toggle cmn-toggle-round" type="checkbox" ng-model="project.scorevisible">
+                                    	<label for="cmn-toggle-{{project.code}}"></label>
+                                    </div>
+                                </div>
+                            </div>
+                    		
+                        </div>
+                        
+<!--                        <div id="myTabContent" class="tab-content">
                             <div class="tab-pane fade active in" id="tab1_1">
                                 <div class="row column-seperation">
                                     <div class="col-md-6 line-separator">
@@ -67,7 +104,7 @@
                             <div class="tab-pane fade" id="tab1_4">
                                 <p></p>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
 					</div>
 				</div>
