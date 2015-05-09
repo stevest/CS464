@@ -451,7 +451,6 @@
 			templateUrl: 'Groups/groups-widgets.html',
 			controller:function($scope){
 				$scope.usrService = UserService;
-				
 				//Not the best practice:
 				$scope.group.maximized = false;
 				
@@ -538,10 +537,27 @@
 					    	//element.parent().find(".gw-id"+scope.group.id).height("100%");
 								$("html, body").animate({ scrollTop: 0 }, 400);
 								// SSS set the visible groups only!!!
-								for ( var k = 1 ; k <= scope.$parent.groups.length ; k++ ){
-									if (scope.group.id != k){
-										//console.log(element.parent().find(".gw-id"+k));
-										console.log(element.parent().find(".gw-id"+k));
+								//test a little:
+//								console.log("Lenght of owned groups is " + scope.usrService.owner.length);
+//								console.log("owned group id is " + scope.group.id);
+//								console.log(element.parent().find(".gw-id"+scope.group.id));
+								var openGroups = element.parent().find(".gwidget");
+								console.log(openGroups);
+								
+								for ( var k = 0 ; k < openGroups.length ; k++ ){
+									console.log("INSIDE LOOP");
+									var thisGroup = $(openGroups[k]).find('.gw-id*');
+									
+									if (scope.group.id != thisGroup.context.className[thisGroup.context.className.indexOf('gw-id')+5]){
+										
+										
+										
+										//console.log(thisGroup.context.className.indexOf('gw-id'));
+										//$(openGroups[k]).find('.gw-id*').context.className.indexOf('gw-id')
+										//console.log(thisGroup.context.className[thisGroup.context.className.indexOf('gw-id')+5]);
+										
+//										//console.log(element.parent().find(".gw-id"+k));
+//										console.log(element.parent().find(".gw-id"+k));
 										element.parent().find(".gw-id"+k).css({"display":"none"});
 									}
 								}
@@ -550,11 +566,11 @@
 					    	});
 					    } else {
 					    	//element.parent().find(".gw-id"+scope.group.id).css({"position":"relative","z-index":"auto"});
-								for ( var k = 1 ; k <= scope.$parent.groups.length ; k++ ){
-									if (scope.group.id != k){
-										element.parent().find(".gw-id"+k).css({"display":"inline"});
-									}
-								}
+//								for ( var k = 1 ; k <= scope.$parent.groups.length ; k++ ){
+//									if (scope.group.id != k){
+//										element.parent().find(".gw-id"+k).css({"display":"inline"});
+//									}
+//								}
 					    	scope.$apply(function(){
 					    		scope.group.maximized = false;
 					    	});
