@@ -131,6 +131,7 @@
 		// Route for the Home page
 			.when('/#/', {
 			templateUrl: '/Projects',
+			controller: 'ProjectsController',
 			access: {allowGuest: true}
 		})
 		// Route for the Projects page
@@ -289,12 +290,14 @@
 		        });
 		}]);
 		
-		app.directive('mynavbar', ['$timeout','UserService', 'ProjectsService', '$location', function($timeout, UserService, ProjectsService, $location){
+		app.directive('mynavbar', ['$timeout','UserService', 'ProjectsService', '$location', 'accessSearchResults',
+		function($timeout, UserService, ProjectsService, $location, accessSearchResults){
 			return{
 				restrict: 'A',
 				controller: function($scope){
 					$scope.usrService = UserService;
 					$scope.prjService = ProjectsService;
+					$scope.fromSearch = accessSearchResults;
 					$scope.searchableItems = [];
 					$scope.searchResults = [];
 					$scope.prevLocation = '';
@@ -329,15 +332,31 @@
 //					   //return $scope.prjService.projects;
 //				  };
 				  $scope.foo = function(selectedItem){
-					  console.log(selectedItem);
 					  console.log("FOO FUNCTION CALLED!");
+					  //if item is course go to course page, else
+					  //go to student profile:
+					  if (!selectedItem.originalObject.title){
+						  //is student:
+						  console.log("Result is a student!");
+						  $scope.usrService.selectUser(selectedItem.originalObject.username);
+						  $location.path("/Profile");
+					  } else {
+						  //is course:
+						  console.log("Result is a course!");
+						  $scope.prjService.projectClicked(selectedItem.originalObject);
+						  console.log(selectedItem);
+						  console.log($scope.prjService.projectSelected);
+					  }
+					  
 				  };
 				  $scope.searchInFocus = function(){
+					  //Reset previous results:
+					  $scope.fromSearch.searchResults = [];
 					  $scope.prevLocation = $location.path();
 					  $location.path('/Search');
 				  };
 				  $scope.searchOutFocus = function(){
-					  $location.path($scope.prevLocation);
+					  //$location.path($scope.prevLocation);
 				  };
 				  
 //				  $scope.upsateSearchableItems = function(newItems){
@@ -354,10 +373,11 @@
 				},
 				  //controllerAs: 'navbarCtrl',
 				link: function(scope, element, attrs){
-					scope.$watch('prjService.projects', function () {
+					scope.$watchGroup(['prjService.projects','usrService.users'], function () {
+						scope.searchableItems = scope.prjService.projects.concat(scope.usrService.users || []);
+						console.log(scope.searchableItems);
 						console.log("searchable items updated");
-						scope.searchableItems = scope.prjService.projects;
-				});
+					});
 				}
 			};
 		}]);

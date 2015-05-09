@@ -65,7 +65,7 @@
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" mynavbar>
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="index.html"> ProjectManager</a>
+					<a class="navbar-brand" href="/#/"> ProjectManager</a>
 				</div>
 <!--				<div class="navbar-center" style="top:2px;">
 					<div class="m-b-20" style="width:300px;color: #262626;background:#2b303b;">
@@ -74,8 +74,8 @@
 				</div>-->
 				<div  class="navbar-center" style="top:2px;" ng-show="true">
 					<angucomplete-alt id="search" placeholder="Search course/members" pause="100" selected-object="foo" local-data="searchableItems"
-					search-fields="username,code" title-field="username,code" minlength="3" input-class="form-control form-control-small" clear-selected="false" 
-					text-no-results="Nothing found :(" focus-in="searchInFocus()" focus-out="searchOutFocus()"></angucomplete-alt>
+					search-fields="username,name,surname,code,project,title,author,info" title-field="username,name,surname,code,project,title,author,info" minlength="1" input-class="form-control form-control-small" clear-selected="true" 
+					match-class="highlight" text-no-results="Nothing found :(" focus-in="searchInFocus()" focus-out="searchOutFocus()"></angucomplete-alt>
 				</div>
 				<div class="navbar-collapse collapse">
 					<!-- BEGIN TOP NAVIGATION MENU -->

@@ -2,13 +2,13 @@
 	<h3>Search results:</h3>
 	<div class="col-md-11">Searching for {{fromSearch.getSearchQuery()}}.</div>
 	<div class="col-md-1">Results matching: {{fromSearch.getSearchResults().length}}</div>
-	<ul>
-		<li ng-repeat="item in fromSearch.getSearchResults()" ng-switch="!item.title">
-			<div ng-switch-when="true">
-				<div>Όνομα: {{item.name}}</div>
-				<div>email: {{item.email}}</div>
+	<ul class="row">
+		<li ng-repeat="item in fromSearch.getSearchResults()">
+			<div class="well" ng-show="{{!item.originalObject.title}}">
+				<div>Όνομα: {{item.originalObject.name}} {{item.originalObject.surname}}</div>
+				<div>email: {{item.originalObject.email}}</div>
 			</div>
-			<div ng-switch-when="false">
+			<div class="well" ng-show="{{!item.originalObject.username}}">
 				<div>Διδάσκων: {{item.originalObject.author}}</div>
 				<div>Τίτλος: {{item.originalObject.title}}</div>
 				<div>Project: {{item.originalObject.project}}</div>

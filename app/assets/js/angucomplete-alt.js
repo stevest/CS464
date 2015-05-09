@@ -44,8 +44,8 @@
         }
       },
       getSearchResults: function(){
-        console.log('getting New search results are:');
-        console.log(accessSearchResults.searchResults);
+        //console.log('getting New search results are:');
+        //console.log(accessSearchResults.searchResults);
         return accessSearchResults.searchResults;
       },
       getSearchQuery: function(){
