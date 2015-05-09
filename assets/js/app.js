@@ -3,9 +3,60 @@
 	var app = angular.module('pm', [
 		'ngTable',
 		'ngRoute',
-		'ui.bootstrap'
+		'ui.bootstrap',
+		'angucomplete-alt'
 	])
-		.factory('UserService', ['$http', '$filter', '$timeout', '$interval', function ($http, $filter, $timeout, $interval) {
+		.factory('ProjectsService', ['$http', '$filter', '$timeout', '$interval', 'UserService', 'NgTableParams', '$location',
+		function ($http, $filter, $timeout, $interval, UserService, NgTableParams, $location) {
+			var ProjectsService = {
+				projectSelected: null,
+				projectsInterval: null,
+				projectsTimeout: null,
+				projects: [],
+				loadingProjects: 1,
+				getProjects: function () {
+					ProjectsService.loadingProjects = 1;
+					$http({ method: 'GET', url: 'projects.json' }).success(function (data) {
+						ProjectsService.projects = data.projects;
+						ProjectsService.tableParams = new NgTableParams({
+							page: 1,            // show first page
+							count: 10,          // count per page
+							sorting: {
+								author: 'asc'     // initial sorting
+							}
+						},
+							{
+								total: ProjectsService.projects.length, // length of data
+								getData: function ($defer, params) {
+									// use build-in angular filter
+									var orderedData = params.sorting() ?
+										$filter('orderBy')(ProjectsService.projects, params.orderBy()) :
+										ProjectsService.projects;
+									$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+								}
+							});
+						ProjectsService.loadingProjects = 0;
+						console.log("Projects DONE loadingProjects");
+					});
+				},
+				//Show off our preloader:
+				projectsTimeout: $timeout(function () {
+					ProjectsService.getProjects();
+				}, 1000),
+				//Update table each # seconds:
+				projectsInterval: $interval(function () {
+					ProjectsService.getProjects();
+				}, 60000),
+				projectClicked: function (u) {
+					console.log("Cliked on table element " + u.code);
+					ProjectsService.projectSelected = u;
+					$location.path("/Course");
+				}
+			};
+			return ProjectsService;
+		}])
+		.factory('UserService', ['$http', '$filter', '$timeout', '$interval',
+		function ($http, $filter, $timeout, $interval) {
 		var UserService = {
 			loggedIn: false,
 			username: null,
@@ -23,13 +74,13 @@
 				UserService.surname = "Γεωργίου";
 				UserService.avatar = "assets/img/avatars/avatar1_big.png";
 				//Show off our preloader:
-				UserService.groupsTimeout = $timeout(function(){
+				UserService.groupsTimeout = $timeout(function () {
 					UserService.getGroups();
-				},1000);
+				}, 1000);
 				//Update table each # seconds:
-				UserService.groupsInterval = $interval(function(){
+				UserService.groupsInterval = $interval(function () {
 					UserService.getGroups();
-				},60000);
+				}, 60000);
 			},
 			logOut: function () {
 				UserService.loggedIn = false;
@@ -37,8 +88,8 @@
 				UserService.name = null;
 				UserService.surname = null;
 				UserService.avatar = null;
-				$timeout.cancel( UserService.groupsTimeout );
-				$interval.cancel( UserService.groupsInterval );
+				$timeout.cancel(UserService.groupsTimeout);
+				$interval.cancel(UserService.groupsInterval);
 			},
 			//Set groups accessible from everyone:
 			groupsInterval: null,
@@ -47,11 +98,11 @@
 			owner: [],
 			invited: [],
 			pending: [],
-			loading: 1,
+			loadingGroups: 1,
 			getGroups: function () {
 				$http({ method: 'GET', url: 'groups.json' }).success(function (data) {
 					UserService.groups = data.groups;
-					UserService.loading = 0;
+					UserService.loadingGroups = 0;
 					console.log(UserService.groups.length + 'groups loaded successfuly.');
 					//Filter groups by owner, invited pending:
 					UserService.owner = $filter('filter')(UserService.groups, { creator: UserService.username });
@@ -62,13 +113,14 @@
 					console.log(UserService.pending);
 					//import users:
 					UserService.users = data.users;
+					//console.log("array of users");
+					//console.log(UserService.users);
 				});
-
 			},
-			selectUser : function(username){
+			selectUser: function (username) {
 				//Get GID of selected user:
 				UserService.userClicked = $filter('userByUsername')(UserService.users, username);
-				console.log("User clicked is "+ UserService.userClicked.name);
+				console.log("User clicked is " + UserService.userClicked.name);
 			}
 		};
 		return UserService;
@@ -105,65 +157,35 @@
 			controller: 'ProfileController',
 			access: {allowGuest: false}
 		})
+		// Route for the Search page
+			.when('/Search', {
+			templateUrl: 'Search/Search.html',
+			controller: 'SearchController',
+			access: {allowGuest: true}
+		})
 		//Default redirection:
 			.otherwise({ redirectTo: 'Projects/Projects.html' });
 	});
 
-	app.controller('ProjectsController', ['$http', '$scope', '$filter', '$location', 'NgTableParams', 'UserService', '$interval', '$timeout',
-		function ($http, $scope, $filter, $location, NgTableParams, UserService, $interval, $timeout) {
-			$scope.loading = 1;
-			$scope.getProjects = function () {
-				$http({ method: 'GET', url: 'projects.json' }).success(function (data) {
-					$scope.data = data.projects;
-					//Projects accessible from anywere:
-					$scope.$parent.data = data.projects;
-					$scope.executeFunction = function (u) {
-						console.log("Cliked on table element " + u.code);
-						$scope.$parent.courseClicked = u.code;
-						$location.path("/Course");
-					};
+	app.controller('ProjectsController', ['$http', '$scope', '$filter', '$location', 'NgTableParams', 'UserService', '$interval', '$timeout', 'ProjectsService',
+		function ($http, $scope, $filter, $location, NgTableParams, UserService, $interval, $timeout, ProjectsService) {
+			$scope.prjService = ProjectsService;
 
-					$scope.tableParams = new NgTableParams({
-						page: 1,            // show first page
-						count: 10,          // count per page
-						sorting: {
-							author: 'asc'     // initial sorting
-						}
-					},
-						{
-							total: $scope.data.length, // length of data
-							getData: function ($defer, params) {
-								// use build-in angular filter
-								var orderedData = params.sorting() ?
-									$filter('orderBy')($scope.data, params.orderBy()) :
-									$scope.data;
-
-								$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-							}
-						});
-					$scope.loading = 0;
-					console.log("Projects DONE loading");
-				});
-			};
-			//Show off our preloader:
-			$timeout(function () {
-				$scope.getProjects();
-				console.log("Getting projects...");
-			}, 1000);
-			//Update table each # seconds:
-			$interval(function () {
-				$scope.getProjects();
-			}, 60000);
 		}]);
 		
-		app.controller('CourseController', ['$scope', '$filter', 'UserService', function ($scope, $filter, UserService) {
+		app.controller('SearchController', ['$scope', 'accessSearchResults', function($scope, accessSearchResults){
+			$scope.fromSearch = accessSearchResults;
+		}]);
+		
+		app.controller('CourseController', ['$scope', '$filter', 'UserService', 'ProjectsService',
+		function ($scope, $filter, UserService, ProjectsService) {
 			$scope.usrService = UserService;
-			$scope.course = $filter('filter')($scope.$parent.data, { code: $scope.$parent.courseClicked })[0];
+			$scope.prjService = ProjectsService;
+			$scope.thisCourse = function(){
+				return $scope.prjService.projectSelected;
+			};
 			$scope.filterGroups = function (courseCode) {
-				console.log(courseCode);
-				console.log($scope.usrService.groups);
-				console.log($filter('filter')($scope.usrService.groups, { course: courseCode }));
-				return $filter('filter')($scope.usrService.groups, { course: courseCode });
+				return $filter('filter')($scope.usrService.groups, { course: courseCode });	
 			};
 			//Evaluation star rating:
 			$scope.maxrate = 5;
@@ -267,33 +289,75 @@
 		        });
 		}]);
 		
-		app.directive('mynavbar', ['$timeout','UserService', function($timeout, UserService){
+		app.directive('mynavbar', ['$timeout','UserService', 'ProjectsService', '$location', function($timeout, UserService, ProjectsService, $location){
 			return{
 				restrict: 'A',
 				controller: function($scope){
 					$scope.usrService = UserService;
+					$scope.prjService = ProjectsService;
+					$scope.searchableItems = [];
+					$scope.searchResults = [];
+					$scope.prevLocation = '';
 //					$scope.items = [
 //					    'The first choice!',
 //					    'And another choice for you.',
 //					    'but wait! A third!'
 //					  ];
-					
-					  $scope.status = {
-					    isopen: false
-					  };
-					
+				
+				  $scope.status = {
+				    isopen: false
+				  };
+				
 //					  $scope.toggled = function(open) {
 //					    $log.log('Dropdown is now: ', open);
 //					  };
-					
-					  $scope.toggleDropdown = function($event) {
-					    $event.preventDefault();
-					    $event.stopPropagation();
-					    $scope.status.isopen = !$scope.status.isopen;
-					  };
+				
+				  $scope.toggleDropdown = function($event) {
+				    $event.preventDefault();
+				    $event.stopPropagation();
+				    $scope.status.isopen = !$scope.status.isopen;
+				  };
+				  $scope.userServiceEvoked = function(){
+					   return $scope.usrService.loggedIn;
+				  };
+//				  $scope.userServiceGetUsers = function(){
+//					  //console.log("getting users.........");
+//					   return $scope.usrService.users;
+//				  };
+//				  $scope.userServiceGetProjects = function(){
+//					  //console.log("getting projects.........");
+//					   //return $scope.prjService.projects;
+//				  };
+				  $scope.foo = function(selectedItem){
+					  console.log(selectedItem);
+					  console.log("FOO FUNCTION CALLED!");
+				  };
+				  $scope.searchInFocus = function(){
+					  $scope.prevLocation = $location.path();
+					  $location.path('/Search');
+				  };
+				  $scope.searchOutFocus = function(){
+					  $location.path($scope.prevLocation);
+				  };
+				  
+//				  $scope.upsateSearchableItems = function(newItems){
+//					  $scope.searchableItems = newItems;
+//				  };
+				  
+					   
+//					  $timeout(function(){
+//							console.log($scope.userServiceGetUsers());
+//							console.log($scope.userServiceGetProjects());
+//							console.log($scope.userServiceGetUsers().concat($scope.userServiceGetProjects()));
+//					  },4000);
+					  
 				},
 				  //controllerAs: 'navbarCtrl',
 				link: function(scope, element, attrs){
+					scope.$watch('prjService.projects', function () {
+						console.log("searchable items updated");
+						scope.searchableItems = scope.prjService.projects;
+				});
 				}
 			};
 		}]);
@@ -387,7 +451,6 @@
 			templateUrl: 'Groups/groups-widgets.html',
 			controller:function($scope){
 				$scope.usrService = UserService;
-				
 				//Not the best practice:
 				$scope.group.maximized = false;
 				
@@ -474,10 +537,27 @@
 					    	//element.parent().find(".gw-id"+scope.group.id).height("100%");
 								$("html, body").animate({ scrollTop: 0 }, 400);
 								// SSS set the visible groups only!!!
-								for ( var k = 1 ; k <= scope.$parent.groups.length ; k++ ){
-									if (scope.group.id != k){
-										//console.log(element.parent().find(".gw-id"+k));
-										console.log(element.parent().find(".gw-id"+k));
+								//test a little:
+//								console.log("Lenght of owned groups is " + scope.usrService.owner.length);
+//								console.log("owned group id is " + scope.group.id);
+//								console.log(element.parent().find(".gw-id"+scope.group.id));
+								var openGroups = element.parent().find(".gwidget");
+								console.log(openGroups);
+								
+								for ( var k = 0 ; k < openGroups.length ; k++ ){
+									console.log("INSIDE LOOP");
+									var thisGroup = $(openGroups[k]).find('.gw-id*');
+									
+									if (scope.group.id != thisGroup.context.className[thisGroup.context.className.indexOf('gw-id')+5]){
+										
+										
+										
+										//console.log(thisGroup.context.className.indexOf('gw-id'));
+										//$(openGroups[k]).find('.gw-id*').context.className.indexOf('gw-id')
+										//console.log(thisGroup.context.className[thisGroup.context.className.indexOf('gw-id')+5]);
+										
+//										//console.log(element.parent().find(".gw-id"+k));
+//										console.log(element.parent().find(".gw-id"+k));
 										element.parent().find(".gw-id"+k).css({"display":"none"});
 									}
 								}
@@ -486,11 +566,11 @@
 					    	});
 					    } else {
 					    	//element.parent().find(".gw-id"+scope.group.id).css({"position":"relative","z-index":"auto"});
-								for ( var k = 1 ; k <= scope.$parent.groups.length ; k++ ){
-									if (scope.group.id != k){
-										element.parent().find(".gw-id"+k).css({"display":"inline"});
-									}
-								}
+//								for ( var k = 1 ; k <= scope.$parent.groups.length ; k++ ){
+//									if (scope.group.id != k){
+//										element.parent().find(".gw-id"+k).css({"display":"inline"});
+//									}
+//								}
 					    	scope.$apply(function(){
 					    		scope.group.maximized = false;
 					    	});
@@ -657,7 +737,19 @@ app.directive('groupMembers',function($timeout){
 	app.controller("GroupsController", ['$scope', '$http', '$timeout', '$interval', '$filter', 'UserService',
 	function($scope, $http, $timeout, $interval, $filter, UserService){
 		$scope.usrService = UserService;
-		
+		$scope.btnGroups = [
+			[
+				'SUBMIT GROUP',
+				'LEAVE GROUP'
+			],
+			[
+				'PENDING'
+			],
+			[
+				'ACCEPT',
+				'DECLINE'
+			],
+		];
 	}]);
 	
 	app.controller('GroupTypesController',function(){

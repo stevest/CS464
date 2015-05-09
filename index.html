@@ -14,8 +14,10 @@
 		<script type="text/javascript" src="assets/js/angular.js"></script>
 		<script type="text/javascript" src="assets/js/angular-route.js"></script>
 		<script type="text/javascript" src="assets/js/ui-bootstrap-custom-0.13.0.js"></script>
+		<script type="text/javascript" src="assets/js/angucomplete-alt.js"></script>
 		<script type="text/javascript" src="assets/js/app.js"></script>
 		<script type="text/javascript" src="assets/js/ng-table.js"></script>
+		<link rel="stylesheet" href="assets/css/angucomplete-alt.css">
 		<link rel="stylesheet" href="assets/css/ng-table.min.css">
 		<link rel="stylesheet" href="assets/css/switch-base.css">
 		<link rel="stylesheet" href="assets/css/switch-style.css">
@@ -65,10 +67,15 @@
 				<div class="navbar-header">
 					<a class="navbar-brand" href="index.html"> ProjectManager</a>
 				</div>
-				<div class="navbar-center" style="top:2px;">
+<!--				<div class="navbar-center" style="top:2px;">
 					<div class="m-b-20" style="width:300px;color: #262626;background:#2b303b;">
 						<input type="text" class="form-control" placeholder="Browse Bitches..." style="color: #262626;background:#2b303b;">
 					</div>
+				</div>-->
+				<div  class="navbar-center" style="top:2px;" ng-show="true">
+					<angucomplete-alt id="search" placeholder="Search course/members" pause="100" selected-object="foo" local-data="searchableItems"
+					search-fields="username,code" title-field="username,code" minlength="3" input-class="form-control form-control-small" clear-selected="false" 
+					text-no-results="Nothing found :(" focus-in="searchInFocus()" focus-out="searchOutFocus()"></angucomplete-alt>
 				</div>
 				<div class="navbar-collapse collapse">
 					<!-- BEGIN TOP NAVIGATION MENU -->

@@ -1,28 +1,24 @@
 <div class="projects_panel row">
     <div class="col-md-12">
-        <!-- <div ng-controller="tableCtrl">-->
-<!--        <div>
-            <h2>Now loading...{{isLoading()}}</h2>
-        </div>-->
-        <div ng-show="!loading">
-            <div>Check for user login {{usrService.loggedIn}}</div>
-            <div>Username {{usrService.username}}</div>
-            <div>Data Length {{data.length}}</div>
+        <div ng-hide="prjService.loadingProjects">
             <button ng-click="tableParams.sorting({})" class="btn btn-default pull-right">Clear sorting</button>
             <p>
                 <strong>Sorting:</strong>{{tableParams.sorting()|json}}</p>
             <table ng-table="tableParams" class="table">
-                <tr class="course-{{user.code}}" ng-repeat="user in $data" ng-click="executeFunction(user)">
-                    <td data-title="'Pass'" sortable="'pass'" ng-show="usrService.loggedIn">{{user.pass}}</td>
-                    <td data-title="'Code'" sortable="'code'">{{user.code}}</td>
-                    <td data-title="'Author'" sortable="'author'">{{user.author}}</td>
-                    <td data-title="'Project'" sortable="'project'">{{user.project}}</td>
-                    <td data-title="'Members'" sortable="'members'">{{user.members}}</td>
+                <tr class="course-{{entry.code}}" ng-repeat="entry in prjService.projects" ng-click="prjService.projectClicked(entry)">
+                    <td data-title="'Pass'" sortable="'pass'" ng-show="usrService.loggedIn">{{entry.pass}}</td>
+                    <td data-title="'Code'" sortable="'code'">{{entry.code}}</td>
+                    <td data-title="'Author'" sortable="'author'">{{entry.author}}</td>
+                    <td data-title="'Project'" sortable="'project'">{{entry.project}}</td>
+                    <td data-title="'Members'" sortable="'members'">{{entry.members}}</td>
                 </tr>
             </table>
         </div>
-        <div ng-show="loading">
-            Table is loading...
+        <div ng-show="prjService.loadingProjects">
+            <div class="sk-spinner sk-spinner-rotating-plane"></div>
+            <div class="sk-spinner-text">
+                <h3>Loading projects...</h3>
+            </div>
         </div>
     </div>
 </div>
