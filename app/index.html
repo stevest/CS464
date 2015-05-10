@@ -9,7 +9,7 @@
 		<link href='http://fonts.googleapis.com/css?family=Fira+Sans:400,500|Ubuntu+Condensed|Open+Sans|Roboto|Roboto+Condensed|Open+Sans+Condensed:300&subset=latin,greek'
 		rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-		<link rel="stylesheet" href="assets/css/style.css">
+		
 		<script type="text/javascript" src="assets/js/jquery-1.11.2.min.js"></script>
 		<script type="text/javascript" src="assets/js/angular.js"></script>
 		<script type="text/javascript" src="assets/js/angular-route.js"></script>
@@ -17,11 +17,14 @@
 		<script type="text/javascript" src="assets/js/angucomplete-alt.js"></script>
 		<script type="text/javascript" src="assets/js/app.js"></script>
 		<script type="text/javascript" src="assets/js/ng-table.js"></script>
+			<link rel="stylesheet" href="assets/css/style.css">
 		<link rel="stylesheet" href="assets/css/angucomplete-alt.css">
 		<link rel="stylesheet" href="assets/css/ng-table.min.css">
 		<link rel="stylesheet" href="assets/css/switch-base.css">
 		<link rel="stylesheet" href="assets/css/switch-style.css">
-		<link href="assets/css/plugins.min.css" rel="stylesheet">
+			
+<!--		<link href="assets/css/plugins.min.css" rel="stylesheet">-->
+			
 		<!-- <link href="assets/plugins/metrojs/metrojs.css" rel="stylesheet">
 	    <script src="assets/js/dashboard.js"></script>
 	    <script src="assets/js/application.js"></script>
@@ -63,24 +66,54 @@
 	<body style="background-color:#ffffff;" ng-controller="RouteController">
 		<!--<img src="assets/images/bar.jpg"></img>-->
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" mynavbar>
-			<div class="container-fluid">
+			<div class="container">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="/#/"> ProjectManager</a>
 				</div>
-<!--				<div class="navbar-center" style="top:2px;">
+				<!-- <div class="navbar-center" style="top:2px;">
 					<div class="m-b-20" style="width:300px;color: #262626;background:#2b303b;">
 						<input type="text" class="form-control" placeholder="Browse Bitches..." style="color: #262626;background:#2b303b;">
 					</div>
 				</div>-->
-				<div  class="navbar-center" style="top:2px;" ng-show="true">
-					<angucomplete-alt id="search" placeholder="Search course/members" pause="100" selected-object="foo" local-data="searchableItems"
-					search-fields="username,name,surname,code,project,title,author,info" title-field="username,name,surname,code,project,title,author,info" minlength="1" input-class="form-control form-control-small" clear-selected="true" 
-					match-class="highlight" text-no-results="Nothing found :(" focus-in="searchInFocus()" focus-out="searchOutFocus()"></angucomplete-alt>
-				</div>
+<!--				<div class="navbar-center" style="top:2px;">
+					<div style="text-align:center;width:50%;margin-left:25%;">
+						<div class="spanel-holder">
+							<angucomplete-alt id="search" placeholder="Search course/members" pause="100" selected-object="foo" local-data="searchableItems"
+							search-fields="username,name,surname,code,project,title,author,info" title-field="name,surname,code,project,title,author"
+							minlength="1" input-class="search-form-control search-form-control-small" clear-selected="true" match-class="highlight" text-no-results="Nothing found :("
+							focus-in="searchInFocus()"></angucomplete-alt>
+							<button type="button" class="btn btn-danger" aria-label="Left Align" ng-show="fromSearch.isActive()" ng-click="searchOutFocus()"
+							style="float:right;">
+								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+							</button>
+						</div>
+						<div id="search-panel" class="spanel" ng-show="fromSearch.isActive()">
+							<div class="spanel-header">
+								<h3 class="spanel-header">Search results:</h3>
+								<div class="spanel-header">Searching for {{fromSearch.getSearchQuery()}}.</div>
+								<div class="spanel-header">Results matching: {{fromSearch.getSearchResults().length}}</div>
+								<ul class="">
+									<li ng-repeat="item in fromSearch.getSearchResults()">
+										<div class="well" ng-show="{{!item.originalObject.title}}">
+											<div>Όνομα: {{item.originalObject.name}} {{item.originalObject.surname}}</div>
+											<div>email: {{item.originalObject.email}}</div>
+										</div>
+										<div class="well" ng-show="{{!item.originalObject.username}}">
+											<div>Διδάσκων: {{item.originalObject.author}}</div>
+											<div>Τίτλος: {{item.originalObject.title}}</div>
+											<div>Project: {{item.originalObject.project}}</div>
+											<div>Κωδικός: {{item.originalObject.code}}</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>-->
 				<div class="navbar-collapse collapse">
 					<!-- BEGIN TOP NAVIGATION MENU -->
 					<div login-modal>
-<!--						<p style="color: #ffffff">show modal {{items.length}}</p>-->
+						<!-- <p style="color: #ffffff">show modal {{items.length}}</p>-->
 						<button type="button" class="btn btn-dark pull-right" ng-hide="usrService.loggedIn" ng-click="open()">Login</button>
 					</div>
 					<ul class="nav navbar-nav pull-right header-menu" ng-show="usrService.loggedIn">
@@ -164,19 +197,22 @@
 						</li>
 						<!-- END NOTIFICATION DROPDOWN -->
 						<!-- Single button -->
-					    <li class="btn-group" dropdown is-open="status.isopen">
-					      <a href="#" class="dropdown-toggle c-white" dropdown-toggle data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+						<li class="btn-group" dropdown is-open="status.isopen">
+							<a href="#" class="dropdown-toggle c-white" dropdown-toggle data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 					        {{usrService.name}} {{usrService.surname}}
 								<i class="fa fa-angle-down p-r-10"></i>
 					      </a>
-					      <ul class="dropdown-menu" role="menu">
-					        <li><a href="#/Profile" ng-click="usrService.selectUser(usrService.username)">My Profile</a></li>
-					        <li><a href="#/Projects" ng-click="usrService.logOut()"><i class="fa fa-power-off"></i>LOGOUT</a></li>
-					      </ul>
-					    </li>
-						
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<a href="#/Profile" ng-click="usrService.selectUser(usrService.username)">My Profile</a>
+								</li>
+								<li>
+									<a href="#/Projects" ng-click="usrService.logOut()"><i class="fa fa-power-off"></i>LOGOUT</a>
+								</li>
+							</ul>
+						</li>
 						<!-- BEGIN USER DROPDOWN -->
-<!--						<li class="dropdown" id="user-header">
+						<!-- <li class="dropdown" id="user-header">
 							<a href="#" class="dropdown-toggle c-white" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 							<img src="assets/img/avatars/avatar2.png" alt="user avatar" width="30" class="p-r-5">
 							<span class="username">USERNAME HERE</span>
@@ -206,11 +242,11 @@
 					<li ng-class="panelClass(panel)" ng-repeat="panel in panels">
 						<a class="panel_text" href="{{panel.link}}" ng-click="setSelectedPanel(panel)">{{panel.label}}</a>
 					</li>
-				</ul>	
+				</ul>
 				<div ng-view></div>
 			</div>
 		</div>
-<!--		<div ng-controller="loginModal">
+		<!-- <div ng-controller="loginModal">
 			<script type="text/ng-template" id="myModalContent.html">
 				<div class="modal-header">
 				            <h3 class="modal-title">I'm a modal!</h3>
@@ -235,7 +271,7 @@
 			<div ng-show="selected">Selection from a modal: {{ selected }}</div>
 		</div>-->
 		<!-- BEGIN LOGIN BOX -->
-	    <div login-modal>
+		<div login-modal>
 			<script type="text/ng-template" id="myModalContent.html">
 				<div class=" login fade-in" id="login-block" >
 					<div class="row">
@@ -272,7 +308,7 @@
 			        </div>
 				</div>
 			</script>
-	    </div>
+		</div>
 	</body>
 
 </html>

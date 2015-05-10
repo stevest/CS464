@@ -158,16 +158,35 @@
 			controller: 'ProfileController',
 			access: {allowGuest: false}
 		})
-		// Route for the Search page
-			.when('/Search', {
-			templateUrl: 'Search/Search.html',
-			controller: 'SearchController',
+		// Route for the new group page
+			.when('/CreateGroup', {
+			templateUrl: 'Groups/CreateGroup.html',
+			controller: 'CreateGroupController',
 			access: {allowGuest: true}
 		})
+//		// Route for the Search page
+//			.when('/Search', {
+//			templateUrl: 'Search/Search.html',
+//			controller: 'SearchController',
+//			access: {allowGuest: true}
+//		})
 		//Default redirection:
 			.otherwise({ redirectTo: 'Projects/Projects.html' });
 	});
-
+app.controller('CreateGroupController',['$scope', '$location', 'UserService', 'ProjectsService',
+function($scope, $location, UserService, ProjectsService){
+	$scope.usrService = UserService;
+	$scope.prjService = ProjectsService;
+	$scope.newGroup = {};
+	$scope.newGroup,id = $scope.usrService.groups.length+1;
+	$scope.newGroup.course = '';
+	$scope.newGroup.name = "Ομάδα-" + $scope.usrService.groups.length+1;
+	$scope.newGroup.creator = $scope.usrService.username;
+	$scope.newGroup.title = '';
+	$scope.newGroup.maxmembers = 1;
+	$scope.newGroup.members = [];
+	
+}]);
 	app.controller('ProjectsController', ['$http', '$scope', '$filter', '$location', 'NgTableParams', 'UserService', '$interval', '$timeout', 'ProjectsService',
 		function ($http, $scope, $filter, $location, NgTableParams, UserService, $interval, $timeout, ProjectsService) {
 			$scope.prjService = ProjectsService;
@@ -347,15 +366,27 @@
 						  console.log(selectedItem);
 						  console.log($scope.prjService.projectSelected);
 					  }
-					  
+					  $scope.searchOutFocus();
 				  };
 				  $scope.searchInFocus = function(){
+					  $scope.fromSearch.active = true;
 					  //Reset previous results:
 					  $scope.fromSearch.searchResults = [];
-					  $scope.prevLocation = $location.path();
-					  $location.path('/Search');
+					  //$scope.prevLocation = $location.path();
+					  //$location.path('/Search');
+					  //expand search panel:
+					  var focusInputElem = document.getElementById('search_value');
+				      focusInputElem.classList.remove('search-form-control-small');
+					  var focusSearchPanel = document.getElementById('search-panel');
+				      focusSearchPanel.classList.add('spanel-full');
 				  };
 				  $scope.searchOutFocus = function(){
+					  $scope.fromSearch.active = false;
+					  var focusInputElem = document.getElementById('search_value');
+				      focusInputElem.classList.add('search-form-control-small');
+					  var focusSearchPanel = document.getElementById('search-panel');
+				      focusSearchPanel.classList.remove('spanel-full');
+
 					  //$location.path($scope.prevLocation);
 				  };
 				  
@@ -373,6 +404,7 @@
 				},
 				  //controllerAs: 'navbarCtrl',
 				link: function(scope, element, attrs){
+					//Keep an eye for changes in items:
 					scope.$watchGroup(['prjService.projects','usrService.users'], function () {
 						scope.searchableItems = scope.prjService.projects.concat(scope.usrService.users || []);
 						console.log(scope.searchableItems);
@@ -754,9 +786,14 @@ app.directive('groupMembers',function($timeout){
 			return null;
 		};
 	});
-	app.controller("GroupsController", ['$scope', '$http', '$timeout', '$interval', '$filter', 'UserService',
-	function($scope, $http, $timeout, $interval, $filter, UserService){
+	app.controller("GroupsController", ['$scope', '$http', '$timeout', '$interval', '$filter', '$location', 'UserService',
+	function($scope, $http, $timeout, $interval, $filter, $location, UserService){
 		$scope.usrService = UserService;
+		
+		$scope.createGroup = function() {
+			$location.path('/CreateGroup');
+		};
+		
 		$scope.btnGroups = [
 			[
 				'SUBMIT GROUP',

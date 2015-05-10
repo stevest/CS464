@@ -27,6 +27,7 @@
     var accessSearchResults = {
       searchResults : [],
       searchQuery : '',
+      active: false,
       updateSearchResults: function(newResults){
         console.log('New search results are:');
         console.log(newResults);
@@ -50,7 +51,10 @@
       },
       getSearchQuery: function(){
         return accessSearchResults.searchQuery;
-      },      
+      },
+      isActive: function(){
+        return accessSearchResults.active;
+      }   
     };
     return accessSearchResults;
   }])
