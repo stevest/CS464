@@ -61,11 +61,6 @@
 	    <script src="assets/plugins/datatables/dataTables.tableTools.js"></script>
 	    <script src="assets/plugins/datatables/table.editable.js"></script>
 	    <script src="assets/js/table_dynamic.js"></script>
-		<script src='assets/plugins/fullcalendar/moment.min.js'></script>
-    	<script src='assets/plugins/fullcalendar/fullcalendar.js'></script>
-    	<script src="assets/js/calendar.js"></script>
-    	<link href="assets/plugins/fullcalendar/fullcalendar.css" rel="stylesheet">
-
 
 	</head>
 
@@ -214,12 +209,12 @@
                         <ul id="myTab" class="nav nav-tabs">
                             <li class="active"><a href="#tab1_1" data-toggle="tab"><strong>About</strong></a></li>
                             <li class=""><a href="#tab1_2" data-toggle="tab"><strong>Projects</strong></a></li>
-                            <li class=""><a href="#tab1_3" data-toggle="tab"><strong>Notifications</strong></a></li>
-                            <li class=""><a href="#tab1_4" data-toggle="tab"><strong>Calendar</strong></a></li>
+                            <li class=""><a href="#tab1_3" data-toggle="tab"><strong>Calendar</strong></a></li>
+                            <li class=""><a href="#tab1_4" data-toggle="tab"><strong>Upload Picture</strong></a></li>
                             
                         </ul>
                         <div id="myTabContent" class="tab-content">
-                            <div class="tab-pane  " id="tab1_1">
+                            <div class="tab-pane active in" id="tab1_1">
                                 <div class="row column-seperation">
                                     <div class="col-md-4 line-separator">
                                     	<div class="row">
@@ -286,8 +281,23 @@
                                     </div>
                                     
                                 </div>
+                                <div class="row" style="margin-top:20px;">
+                                	<div class="col-md-7 col-md-offset-5">
+                                		<button type="button" class="btn btn-info" style="width:100px;">Save</button>
+                                		<button type="button" class="btn btn-default" style="margin-left:20px;width:100px;">Cancel</button>
+                                	</div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="tab1_2">
+                                
+                            </div>
+                            <div class="tab-pane fade" id="tab1_3">
+                                
+                            </div>
+                            <div class="tab-pane fade" id="tab1_4">
                                 <div class="row">
-						            <div class="col-md-8">
+						            <div class="col-md-12">
 						              <div class="panel panel-default">
 						              <div class="panel-heading">
 						                <h3 class="panel-title"><strong>File</strong> Upload</h3>
@@ -305,188 +315,9 @@
 						                </div>
 						              </div>
 						            </div>
-						         </div>
-                                <div class="row" style="margin-top:20px;">
-                                	<div class="col-md-7 col-md-offset-5">
-                                		<button type="button" class="btn btn-info" style="width:100px;">Save</button>
-                                		<button type="button" class="btn btn-default" style="margin-left:20px;width:100px;">Cancel</button>
-                                	</div>
-                                </div>
+						          </div>
                             </div>
-
-                            <div class="tab-pane fade" id="tab1_2">
-                                
-                            </div>
-                            <div class="tab-pane fade" id="tab1_3">
-                                <form action="#"  class="form-horizontal" role="form" id="settings">
-                                	<table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th class="col-md-3"></th>
-                                                    <th class="col-md-3">
-                                                    <strong>INSTANTLY</strong><br/>
-                                                    <span>receive an email directly after update</span>
-                                                    </th>
-                                                    <th class="col-md-3"><strong>DAYLY</strong><br/>
-                                                    <span>receive one email by day with all updates</span>
-                                                    </th>
-                                                    <th class="col-md-3"><strong>NO EMAIL</strong><br/>
-                                                    <span>See updates only when I sign in.</span>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td colspan="4"><strong>Projects</strong></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>New Projects</td>
-                                                    <td>
-                                                        <input type="radio" name="contacts" value="1" checked/>
-                                                    </td>
-                                                    <td>
-                                                        <input type="radio" name="contacts" value="2"/>
-                                                    </td>
-                                                    <td>
-                                                        <input type="radio" name="contacts" value="3"/>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>New team </td>
-                                                    <td>
-                                                        <input type="radio" name="people" value="1"/>
-                                                    </td>
-                                                    <td>
-                                                        <input type="radio" name="people" value="2" checked/>
-                                                    </td>
-                                                    <td>
-                                                        <input type="radio" name="people" value="3"/>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>News</td>
-                                                    <td>
-                                                        <input type="radio" name="news" value="1" checked/>
-                                                    </td>
-                                                    <td>
-                                                        <input type="radio" name="news" value="2"/>
-                                                    </td>
-                                                    <td>
-                                                        <input type="radio" name="news" value="3"/>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Recommandations of Project</td>
-                                                    <td>
-                                                        <input type="radio" name="recommandations" value="1"/>
-                                                    </td>
-                                                    <td>
-                                                        <input type="radio" name="recommandations" value="2"/>
-                                                    </td>
-                                                    <td>
-                                                        <input type="radio" name="recommandations" value="3" checked/>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Important Alerts (<a href="#" class="c-blue">SMS</a>)</td>
-                                                    <td>
-                                                        <input type="radio" name="alerts" value="1" checked/>
-                                                    </td>
-                                                    <td>
-                                                        <input type="radio" name="alerts" value="2"/>
-                                                    </td>
-                                                    <td>
-                                                        <input type="radio" name="alerts" value="3"/>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Messages sent by email</td>
-                                                    <td colspan="3">
-                                                        <label>
-                                                            <input type="checkbox" checked>Send me a confirmation.
-                                                        </label>   
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="4"><strong>Users</strong></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>New pending users</td>
-                                                    <td colspan="3">
-                                                        <label>
-                                                            <input type="checkbox" checked>Send me notification.
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Invited users not verified</td>
-                                                    <td colspan="3">
-                                                        <label>
-                                                            <input type="checkbox" checked>Send me notification.
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                                
-                                                <tr>
-                                                    <td colspan="4"><strong>Comments</strong></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>New Comment from users</td>
-                                                    <td>
-                                                        <input type="radio" name="answers" value="1" checked/>
-                                                    </td>
-                                                    <td>
-                                                        <input type="radio" name="answers" value="2"/>
-                                                    </td>
-                                                    <td>
-                                                        <input type="radio" name="answers" value="3"/>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>reply one of my comment</td>
-                                                    <td colspan="3">
-                                                        <label>
-                                                            <input type="checkbox" checked>Send me notification when someone answer one of my comment.
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-	                                            <div class="align-center m-t-20">
-	                                                <button class="btn btn-primary m-r-20">Validate</button>
-	                                                <button type="reset" class="btn btn-default">Cancel</button>
-	                                            </div>
-                                        	</div>
-                                    	</div>
-                                </form>
-                            </div>
-
-                            <!-- BEGIN MODAL FOR CALENDAR-->
-					            <div class="modal fade" id="event-modal">
-					                <div class="modal-dialog">
-					                    <div class="modal-content">
-					                        <div class="modal-header">
-					                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					                            <h4 class="modal-title"><strong>Manage</strong> my events</h4>
-					                        </div>
-					                        <div class="modal-body">
-					                            <p></p>
-					                        </div>
-					                        <div class="modal-footer">
-					                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					                            <button type="button" class="btn btn-success save-event">Create event</button>
-					                            <button type="button" class="btn btn-danger delete-event" data-dismiss="modal">Delete</button>
-					                        </div>
-					                    </div>
-					                </div>
-					            </div>
-            				<!-- END MODAL FOR CALENDAR-->
-
-                            <div class="tab-pane fade active in" id="tab1_4">
-                                
-                            </div><!-- end of tab 4 -->
+                            
                         </div>
                     </div>
 					</div>
