@@ -100,6 +100,7 @@
 			pending: [],
 			loadingGroups: 1,
 			getGroups: function () {
+				UserService.loadingGroups = 1;
 				$http({ method: 'GET', url: 'groups.json' }).success(function (data) {
 					UserService.groups = data.groups;
 					UserService.loadingGroups = 0;
@@ -131,6 +132,7 @@
 		// Route for the Home page
 			.when('/#/', {
 			templateUrl: '/Projects',
+			controller: 'ProjectsController',
 			access: {allowGuest: true}
 		})
 		// Route for the Projects page
@@ -157,16 +159,35 @@
 			controller: 'ProfileController',
 			access: {allowGuest: false}
 		})
-		// Route for the Search page
-			.when('/Search', {
-			templateUrl: 'Search/Search.html',
-			controller: 'SearchController',
+		// Route for the new group page
+			.when('/CreateGroup', {
+			templateUrl: 'Groups/CreateGroup.html',
+			controller: 'CreateGroupController',
 			access: {allowGuest: true}
 		})
+//		// Route for the Search page
+//			.when('/Search', {
+//			templateUrl: 'Search/Search.html',
+//			controller: 'SearchController',
+//			access: {allowGuest: true}
+//		})
 		//Default redirection:
-			.otherwise({ redirectTo: 'Projects/Projects.html' });
+			.otherwise({ redirectTo: 'Projects' });
 	});
-
+app.controller('CreateGroupController',['$scope', '$location', 'UserService', 'ProjectsService',
+function($scope, $location, UserService, ProjectsService){
+	$scope.usrService = UserService;
+	$scope.prjService = ProjectsService;
+	$scope.newGroup = {};
+	$scope.newGroup,id = $scope.usrService.groups.length+1;
+	$scope.newGroup.course = '';
+	$scope.newGroup.name = "Ομάδα-" + $scope.usrService.groups.length+1;
+	$scope.newGroup.creator = $scope.usrService.username;
+	$scope.newGroup.title = '';
+	$scope.newGroup.maxmembers = 1;
+	$scope.newGroup.members = [];
+	
+}]);
 	app.controller('ProjectsController', ['$http', '$scope', '$filter', '$location', 'NgTableParams', 'UserService', '$interval', '$timeout', 'ProjectsService',
 		function ($http, $scope, $filter, $location, NgTableParams, UserService, $interval, $timeout, ProjectsService) {
 			$scope.prjService = ProjectsService;
@@ -289,12 +310,14 @@
 		        });
 		}]);
 		
-		app.directive('mynavbar', ['$timeout','UserService', 'ProjectsService', '$location', function($timeout, UserService, ProjectsService, $location){
+		app.directive('mynavbar', ['$timeout','UserService', 'ProjectsService', '$location', 'accessSearchResults',
+		function($timeout, UserService, ProjectsService, $location, accessSearchResults){
 			return{
 				restrict: 'A',
 				controller: function($scope){
 					$scope.usrService = UserService;
 					$scope.prjService = ProjectsService;
+					$scope.fromSearch = accessSearchResults;
 					$scope.searchableItems = [];
 					$scope.searchResults = [];
 					$scope.prevLocation = '';
@@ -329,15 +352,43 @@
 //					   //return $scope.prjService.projects;
 //				  };
 				  $scope.foo = function(selectedItem){
-					  console.log(selectedItem);
 					  console.log("FOO FUNCTION CALLED!");
+					  //if item is course go to course page, else
+					  //go to student profile:
+					  if (!selectedItem.originalObject.title){
+						  //is student:
+						  console.log("Result is a student!");
+						  $scope.usrService.selectUser(selectedItem.originalObject.username);
+						  $location.path("/Profile");
+					  } else {
+						  //is course:
+						  console.log("Result is a course!");
+						  $scope.prjService.projectClicked(selectedItem.originalObject);
+						  console.log(selectedItem);
+						  console.log($scope.prjService.projectSelected);
+					  }
+					  $scope.searchOutFocus();
 				  };
 				  $scope.searchInFocus = function(){
-					  $scope.prevLocation = $location.path();
-					  $location.path('/Search');
+					  $scope.fromSearch.active = true;
+					  //Reset previous results:
+					  $scope.fromSearch.searchResults = [];
+					  //$scope.prevLocation = $location.path();
+					  //$location.path('/Search');
+					  //expand search panel:
+					  var focusInputElem = document.getElementById('search_value');
+				      focusInputElem.classList.remove('search-form-control-small');
+					  var focusSearchPanel = document.getElementById('search-panel');
+				      focusSearchPanel.classList.add('spanel-full');
 				  };
 				  $scope.searchOutFocus = function(){
-					  $location.path($scope.prevLocation);
+					  $scope.fromSearch.active = false;
+					  var focusInputElem = document.getElementById('search_value');
+				      focusInputElem.classList.add('search-form-control-small');
+					  var focusSearchPanel = document.getElementById('search-panel');
+				      focusSearchPanel.classList.remove('spanel-full');
+						$scope.$broadcast('angucomplete-alt:clearInput');
+					  //$location.path($scope.prevLocation);
 				  };
 				  
 //				  $scope.upsateSearchableItems = function(newItems){
@@ -350,14 +401,26 @@
 //							console.log($scope.userServiceGetProjects());
 //							console.log($scope.userServiceGetUsers().concat($scope.userServiceGetProjects()));
 //					  },4000);
+
+				//Initialize selected panel to be Courses:
+						$scope.sTab = 1;
+						$scope.selectSTab = function(setTab){
+							$scope.sTab = setTab;
+							console.log("sTab selected is "+$scope.sTab);
+						};
+						$scope.isSelected = function(checkTab){
+							return $scope.sTab == checkTab;
+						};
 					  
 				},
 				  //controllerAs: 'navbarCtrl',
 				link: function(scope, element, attrs){
-					scope.$watch('prjService.projects', function () {
+					//Keep an eye for changes in items:
+					scope.$watchGroup(['prjService.projects','usrService.users'], function () {
+						scope.searchableItems = scope.prjService.projects.concat(scope.usrService.users || []);
+						console.log(scope.searchableItems);
 						console.log("searchable items updated");
-						scope.searchableItems = scope.prjService.projects;
-				});
+					});
 				}
 			};
 		}]);
@@ -734,9 +797,14 @@ app.directive('groupMembers',function($timeout){
 			return null;
 		};
 	});
-	app.controller("GroupsController", ['$scope', '$http', '$timeout', '$interval', '$filter', 'UserService',
-	function($scope, $http, $timeout, $interval, $filter, UserService){
+	app.controller("GroupsController", ['$scope', '$http', '$timeout', '$interval', '$filter', '$location', 'UserService',
+	function($scope, $http, $timeout, $interval, $filter, $location, UserService){
 		$scope.usrService = UserService;
+		
+		$scope.createGroup = function() {
+			$location.path('/CreateGroup');
+		};
+		
 		$scope.btnGroups = [
 			[
 				'SUBMIT GROUP',
@@ -752,7 +820,7 @@ app.directive('groupMembers',function($timeout){
 		];
 	}]);
 	
-	app.controller('GroupTypesController',function(){
+	app.controller('TabTypesController',function(){
 		//Initialize selected panel to be Owner:
 		this.gTab = 1;
 		this.selectGTab = function(setTab){

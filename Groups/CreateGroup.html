@@ -1,0 +1,74 @@
+<div class="col-md-12">
+	<div class="panel no-bd bd-3 panel-stat">
+		<div class="panel-body bg-grey p-15" style="background-color:#DFE5E9;">
+			<div class="row m-b-0">
+				<div class="col-xs-11">
+					<h2 class=" group_course stat-title">{{newGroup.course}}</h2>
+					<h1 class="group_name">{{newGroup.name}}</h1>
+
+			<div class="row">
+				<div class="col-xs-7" style="float:left;">
+					<div class="row">
+						<div class="col-xs-12">
+							<small class="stat-title group_author">Created by:
+								<a href="#/Profile" ng-click="usrService.selectUser(group.creator)">{{newGroup.creator}}</a>
+							</small>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<small class="group_title">{{newGroup.title}}</small>
+						</div>
+					</div>
+				</div>
+
+				<div class="btn-group-vertical" role="group" style="float:right;" ng-show="group.maximized">
+					<div class="btn-group" role="group" ng-repeat="bgrp in btnGroups[gTab]">
+						<button type="button" class="btn btn-danger">{{bgrp}}</button>
+					</div>
+
+				</div>
+				<!-- </div>
+							    </div> -->
+				<div class="col-xs-5" style="float:right;">
+					
+				</div>
+			</div>
+			<div class="row" ng-show="group.maximized">
+				<div class="col-md-12">
+					<h3>Members</h3>
+					<p>Owners of this group.</p>
+					<group-members ng-repeat="member in group.members"></group-members>
+				</div>
+				<div class="col-md-12">
+					<h3>Invited</h3>
+					<p>Members invited to join this group.</p>
+					<group-members ng-repeat="member in group.invited"></group-members>
+				</div>
+				<div class="col-md-12">
+					<h3>Pending</h3>
+					<p>Members requested to join this group.</p>
+					<group-members ng-repeat="member in group.pending"></group-members>
+				</div>
+				<div class="col-md-12">
+					<h3>Comments</h3>
+					<p>Discussion about the group.</p>
+					<!--<group-comments ng-repeat="comment in group.comments"></group-comments>-->
+					
+				</div>
+			</div>
+			<div class="row" ng-show="!group.maximized">
+				<div class="col-md-12 comment-footer" style="display:none;">
+					<div class="btn-group btn-group-justified" role="group">
+						<div class="btn-group" role="group">
+							<button type="button" class="btn btn-success">SUBMIT GROUP</button>
+						</div>
+						<div class="btn-group" role="group">
+							<button type="button" class="btn btn-danger">LEAVE GROUP</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

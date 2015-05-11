@@ -9,196 +9,142 @@
 		<link href='http://fonts.googleapis.com/css?family=Fira+Sans:400,500|Ubuntu+Condensed|Open+Sans|Roboto|Roboto+Condensed|Open+Sans+Condensed:300&subset=latin,greek'
 		rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-		<link rel="stylesheet" href="assets/css/style.css">
 		<script type="text/javascript" src="assets/js/jquery-1.11.2.min.js"></script>
 		<script type="text/javascript" src="assets/js/angular.js"></script>
 		<script type="text/javascript" src="assets/js/angular-route.js"></script>
-		<script type="text/javascript" src="assets/js/ui-bootstrap-custom-0.13.0.js"></script>
 		<script type="text/javascript" src="assets/js/angucomplete-alt.js"></script>
+		<script type="text/javascript" src="assets/js/ui-bootstrap-custom-0.13.0.js"></script>
 		<script type="text/javascript" src="assets/js/app.js"></script>
 		<script type="text/javascript" src="assets/js/ng-table.js"></script>
+		<link rel="stylesheet" href="assets/css/style.css">
 		<link rel="stylesheet" href="assets/css/angucomplete-alt.css">
 		<link rel="stylesheet" href="assets/css/ng-table.min.css">
 		<link rel="stylesheet" href="assets/css/switch-base.css">
 		<link rel="stylesheet" href="assets/css/switch-style.css">
-		<link href="assets/css/plugins.min.css" rel="stylesheet">
-		<!-- <link href="assets/plugins/metrojs/metrojs.css" rel="stylesheet">
-	    <script src="assets/js/dashboard.js"></script>
-	    <script src="assets/js/application.js"></script>
-	    <script src="assets/plugins/jquery-1.11.js"></script>
-	    <script src="assets/plugins/jquery-migrate-1.2.1.js"></script>
-	    <script src="assets/plugins/jquery-ui/jquery-ui-1.10.4.min.js"></script>
-	    <script src="assets/plugins/jquery-mobile/jquery.mobile-1.4.2.js"></script>
-	    <script src="assets/plugins/bootstrap-dropdown/bootstrap-hover-dropdown.min.js"></script>
-	    <script src="assets/plugins/bootstrap-select/bootstrap-select.js"></script>
-	    <script src="assets/plugins/mcustom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-	    <script src="assets/plugins/mmenu/js/jquery.mmenu.min.all.js"></script>
-	    <script src="assets/plugins/nprogress/nprogress.js"></script>
-	    <script src="assets/plugins/charts-sparkline/sparkline.min.js"></script>
-	    <script src="assets/plugins/breakpoints/breakpoints.js"></script>
-	    <script src="assets/plugins/numerator/jquery-numerator.js"></script>
-	    <script src="assets/plugins/jquery.cookie.min.js" type="text/javascript"></script>
-
-
-	    <script src="assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
-	    <script src="assets/plugins/modal/js/classie.js"></script>
-	    <script src="assets/plugins/modal/js/modalEffects.js"></script>-->
 		<link href="assets/css/icons/icons.min.css" rel="stylesheet">
-		<link href="assets/css/bootstrap.min.css" rel="stylesheet">
-		<link href="assets/css/plugins.min.css" rel="stylesheet">
-		<link href="assets/css/style.min.css" rel="stylesheet">
-		<link href="#" rel="stylesheet" id="theme-color">
-		<link href="assets/plugins/modal/css/component.css" rel="stylesheet">
-		<link rel="stylesheet" href="assets/plugins/datatables/dataTables.css">
-		<link rel="stylesheet" href="assets/plugins/datatables/dataTables.tableTools.css">
-		<!-- <script src="assets/plugins/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-	    <script src="assets/plugins/bootstrap-switch/bootstrap-switch.js"></script>
-	    <script src="assets/plugins/bootstrap-progressbar/bootstrap-progressbar.js"></script>
-	    <script src="assets/plugins/datatables/dynamic/jquery.dataTables.min.js"></script>
-	    <script src="assets/plugins/datatables/dataTables.bootstrap.js"></script>
-	    <script src="assets/plugins/datatables/dataTables.tableTools.js"></script>
-	    <script src="assets/plugins/datatables/table.editable.js"></script>
-	    <script src="assets/js/table_dynamic.js"></script>-->
 	</head>
 	<body style="background-color:#ffffff;" ng-controller="RouteController">
-		<!--<img src="assets/images/bar.jpg"></img>-->
-		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" mynavbar>
-			<div class="container-fluid">
+		<nav class="navbar navbar-inverse" role="navigation" mynavbar>
+			<div class="container">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="index.html"> ProjectManager</a>
+					<a class="navbar-brand" href="/#/"> ProjectManager UoC</a>
 				</div>
-<!--				<div class="navbar-center" style="top:2px;">
-					<div class="m-b-20" style="width:300px;color: #262626;background:#2b303b;">
-						<input type="text" class="form-control" placeholder="Browse Bitches..." style="color: #262626;background:#2b303b;">
-					</div>
-				</div>-->
-				<div  class="navbar-center" style="top:2px;" ng-show="true">
+				<div class="spanel-search-holder text-center">
 					<angucomplete-alt id="search" placeholder="Search course/members" pause="100" selected-object="foo" local-data="searchableItems"
-					search-fields="username,code" title-field="username,code" minlength="3" input-class="form-control form-control-small" clear-selected="false" 
-					text-no-results="Nothing found :(" focus-in="searchInFocus()" focus-out="searchOutFocus()"></angucomplete-alt>
+					search-fields="username,name,surname,code,project,title,author,info" title-field="name,surname,code,project,title,author"
+					minlength="1" input-class="search-form-control search-form-control-small" clear-selected="true" match-class="highlight" text-no-results="Nothing found :("
+					focus-in="searchInFocus()"></angucomplete-alt>
+					<button type="button" class="btn btn-danger" aria-label="Left Align" ng-show="fromSearch.isActive()"
+					ng-click="searchOutFocus()">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</button>
 				</div>
-				<div class="navbar-collapse collapse">
-					<!-- BEGIN TOP NAVIGATION MENU -->
-					<div login-modal>
-<!--						<p style="color: #ffffff">show modal {{items.length}}</p>-->
+				<ul class="nav navbar-nav navbar-right">
+					<ul login-modal>
 						<button type="button" class="btn btn-dark pull-right" ng-hide="usrService.loggedIn" ng-click="open()">Login</button>
-					</div>
-					<ul class="nav navbar-nav pull-right header-menu" ng-show="usrService.loggedIn">
-						<!-- BEGIN NOTIFICATION DROPDOWN -->
-						<li class="dropdown" id="notifications-header">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-							<i class="glyph-icon flaticon-notifications"></i>
-							<span class="badge badge-danger badge-header">6</span>
-						</a>
-							<ul class="dropdown-menu">
-								<li class="dropdown-header clearfix">
-									<p class="pull-left">Notifications</p>
-								</li>
-								<li>
-									<ul class="dropdown-menu-list withScroll" data-height="220">
-										<li>
-											<a href="#">
-											<i class="fa fa-star p-r-10 f-18 c-orange"></i>
-											Steve have rated your photo
-											<span class="dropdown-time">Just now</span>
-										</a>
-										</li>
-										<li>
-											<a href="#">
-											<i class="fa fa-heart p-r-10 f-18 c-red"></i>
-											John added you to his favs
-											<span class="dropdown-time">15 mins</span>
-										</a>
-										</li>
-										<li>
-											<a href="#">
-											<i class="fa fa-file-text p-r-10 f-18"></i>
-											New document available
-											<span class="dropdown-time">22 mins</span>
-										</a>
-										</li>
-										<li>
-											<a href="#">
-											<i class="fa fa-picture-o p-r-10 f-18 c-blue"></i>
-											New picture added
-											<span class="dropdown-time">40 mins</span>
-										</a>
-										</li>
-										<li>
-											<a href="#">
-											<i class="fa fa-bell p-r-10 f-18 c-orange"></i>
-											Meeting in 1 hour
-											<span class="dropdown-time">1 hour</span>
-										</a>
-										</li>
-										<li>
-											<a href="#">
-											<i class="fa fa-bell p-r-10 f-18"></i>
-											Server 5 overloaded
-											<span class="dropdown-time">2 hours</span>
-										</a>
-										</li>
-										<li>
-											<a href="#">
-											<i class="fa fa-comment p-r-10 f-18 c-gray"></i>
-											Bill comment your post
-											<span class="dropdown-time">3 hours</span>
-										</a>
-										</li>
-										<li>
-											<a href="#">
-											<i class="fa fa-picture-o p-r-10 f-18 c-blue"></i>
-											New picture added
-											<span class="dropdown-time">2 days</span>
-										</a>
-										</li>
-									</ul>
-								</li>
-								<li class="dropdown-footer clearfix">
-									<a href="#" class="pull-left">See all notifications</a>
-									<a href="#" class="pull-right">
-									<i class="fa fa-cog"></i>
-								</a>
-								</li>
-							</ul>
-						</li>
-						<!-- END NOTIFICATION DROPDOWN -->
-						<!-- Single button -->
-					    <li class="btn-group" dropdown is-open="status.isopen">
-					      <a href="#" class="dropdown-toggle c-white" dropdown-toggle data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+					</ul>
+					<ul ng-show="usrService.loggedIn">
+						<li class="btn-group" dropdown is-open="status.isopen">
+							<a href="#" class="dropdown-toggle c-white" dropdown-toggle data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 					        {{usrService.name}} {{usrService.surname}}
 								<i class="fa fa-angle-down p-r-10"></i>
 					      </a>
-					      <ul class="dropdown-menu" role="menu">
-					        <li><a href="#/Profile" ng-click="usrService.selectUser(usrService.username)">My Profile</a></li>
-					        <li><a href="#/Projects" ng-click="usrService.logOut()"><i class="fa fa-power-off"></i>LOGOUT</a></li>
-					      </ul>
-					    </li>
-						
-						<!-- BEGIN USER DROPDOWN -->
-<!--						<li class="dropdown" id="user-header">
-							<a href="#" class="dropdown-toggle c-white" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-							<img src="assets/img/avatars/avatar2.png" alt="user avatar" width="30" class="p-r-5">
-							<span class="username">USERNAME HERE</span>
-							<i class="fa fa-angle-down p-r-10"></i>
-						</a>
-							<ul class="dropdown-menu">
+							<ul class="dropdown-menu" role="menu">
 								<li>
-									<a href="profil.html">
-									<i class="glyph-icon flaticon-account"></i> My Profile
-								</a>
+									<a href="#/Profile" ng-click="usrService.selectUser(usrService.username)">My Profile</a>
 								</li>
 								<li>
-									<a href="#/Projects" title="Lock Screen" ng-click="usrService.logOut()"> <i class="fa fa-power-off"></i>LOGOUT</a>
+									<a href="#/Projects" ng-click="usrService.logOut()"><i class="fa fa-power-off"></i>LOGOUT</a>
 								</li>
 							</ul>
-						</li>-->
-						<!-- END USER DROPDOWN -->
+						</li>
 					</ul>
-					<!-- END TOP NAVIGATION MENU -->
-				</div>
+				</ul>
 			</div>
 		</nav>
+		<!-- <nav class="navbar navbar-inverse" role="navigation" mynavbar>
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="/#/"> ProjectManager UoC</a>
+				</div>
+				<ul class="nav navbar-nav navbar-left">
+					<div style="text-align:center;width:100%;">
+						<div class="spanel-search-holder">
+							<angucomplete-alt id="search" placeholder="Search course/members" pause="100" selected-object="foo" local-data="searchableItems"
+							search-fields="username,name,surname,code,project,title,author,info" title-field="name,surname,code,project,title,author"
+							minlength="1" input-class="search-form-control search-form-control-small" clear-selected="true" match-class="highlight" text-no-results="Nothing found :("
+							focus-in="searchInFocus()"></angucomplete-alt>
+							<button type="button" class="btn btn-danger" aria-label="Left Align" ng-show="fromSearch.isActive()"
+							ng-click="searchOutFocus()" style="float:right;">
+								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+							</button>
+						</div>
+					</div>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<ul login-modal>
+						<button type="button" class="btn btn-dark pull-right" ng-hide="usrService.loggedIn" ng-click="open()">Login</button>
+					</ul>
+					<ul ng-show="usrService.loggedIn">
+						<li class="btn-group" dropdown is-open="status.isopen">
+							<a href="#" class="dropdown-toggle c-white" dropdown-toggle data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+					        {{usrService.name}} {{usrService.surname}}
+								<i class="fa fa-angle-down p-r-10"></i>
+					      </a>
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<a href="#/Profile" ng-click="usrService.selectUser(usrService.username)">My Profile</a>
+								</li>
+								<li>
+									<a href="#/Projects" ng-click="usrService.logOut()"><i class="fa fa-power-off"></i>LOGOUT</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</ul>
+			</div>
+		</nav>-->
+		<div id="search-panel" class="container spanel" ng-show="fromSearch.isActive()" ng-controller="TabTypesController as sTabs">
+			<div class="spanel-header col-md-12">
+				<h3>Search results:</h3>
+				<p class="col-md-6 text-left">Searching for "{{fromSearch.getSearchQuery()}}".</p>
+				<p class="col-md-6 text-right">Results matching: {{fromSearch.getSearchResults().length}}</p>
+			</div>
+			<div>
+				<ul>
+					<ul class="nav nav-tabs nav-justified" style="margin-left:0px;margin-right:0px;">
+						<li ng-click="sTabs.selectGTab(1)" ng-class="{ active:sTabs.isSelected(1) }">
+							<a class="panel_text" href="">Courses</a>
+						</li>
+						<li ng-click="sTabs.selectGTab(2)" ng-class="{ active:sTabs.isSelected(2) }">
+							<a class="panel_text" href="">Users</a>
+						</li>
+					</ul>
+					<div class="spanel-body">
+						<div ng-show="sTabs.isSelected(1)">
+							<a href="#/Course" ng-repeat="item in fromSearch.isCourse(fromSearch.getSearchResults())" ng-click="prjService.projectClicked(item.originalObject);searchOutFocus()">
+								<div class="well sresults">
+									<div>Διδάσκων: {{item.originalObject.author}}</div>
+									<div>Τίτλος: {{item.originalObject.title}}</div>
+									<div>Project: {{item.originalObject.project}}</div>
+									<div>Κωδικός: {{item.originalObject.code}}</div>
+								</div>
+							</a>
+							<div class="no_results">No matching courses found :(</div>
+						</div>
+						<div ng-show="sTabs.isSelected(2)">
+							<a href="#/Profile" ng-repeat="item in fromSearch.isUser(fromSearch.getSearchResults())" ng-click="usrService.selectUser(item.originalObject.username);searchOutFocus()">
+								<div class="well sresults">
+									<div>Όνομα: {{item.originalObject.name}} {{item.originalObject.surname}}</div>
+									<div>email: {{item.originalObject.email}}</div>
+								</div>
+							</a>
+							<div class="no_results">No matching users found :(</div>
+						</div>
+					</div>
+				</ul>
+			</div>
+		</div>
 		<!-- END TOP MENU -->
 		<div class="container main">
 			<div class="row">
@@ -206,36 +152,12 @@
 					<li ng-class="panelClass(panel)" ng-repeat="panel in panels">
 						<a class="panel_text" href="{{panel.link}}" ng-click="setSelectedPanel(panel)">{{panel.label}}</a>
 					</li>
-				</ul>	
+				</ul>
 				<div ng-view></div>
 			</div>
 		</div>
-<!--		<div ng-controller="loginModal">
-			<script type="text/ng-template" id="myModalContent.html">
-				<div class="modal-header">
-				            <h3 class="modal-title">I'm a modal!</h3>
-				        </div>
-				        <div class="modal-body">
-				            <ul>
-				                <li ng-repeat="item in items">
-				                    <a ng-click="selected.item = item">{{ item }}</a>
-				                </li>
-				            </ul>
-				            Selected: <b>{{ selected.item }}</b>
-				        </div>
-				        <div class="modal-footer">
-				            <button class="btn btn-primary" ng-click="ok()">OK</button>
-				            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-				        </div>
-			</script>
-			<button class="btn btn-default" ng-click="open()">Open me!</button>
-			<button class="btn btn-default" ng-click="open('lg')">Large modal</button>
-			<button class="btn btn-default" ng-click="open('sm')">Small modal</button>
-			<button class="btn btn-default" ng-click="toggleAnimation()">Toggle Animation ({{ animationsEnabled }})</button>
-			<div ng-show="selected">Selection from a modal: {{ selected }}</div>
-		</div>-->
 		<!-- BEGIN LOGIN BOX -->
-	    <div login-modal>
+		<div login-modal>
 			<script type="text/ng-template" id="myModalContent.html">
 				<div class=" login fade-in" id="login-block" >
 					<div class="row">
@@ -246,7 +168,7 @@
 			                    </div>
 			                    <div class="login-logo">
 			                        <a href="#/Projects" style="text-decoration:none; color:#ffffff" onMouseOver="this.style.color='#ffffff'" onMouseOut="this.style.color='#ffffff'">
-			                            <!--<img src="assets/img/account/login-logo.png" alt="Company Logo">-->ProjectManager
+			                            ProjectManager<br>University of Crete
 			                        </a>
 			                    </div>
 			                    <hr>
@@ -272,7 +194,7 @@
 			        </div>
 				</div>
 			</script>
-	    </div>
+		</div>
 	</body>
 
 </html>

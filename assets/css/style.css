@@ -118,6 +118,76 @@ tr:last-child td:last-child {
 	float: left;
 }
 
+/*Navbar styles*/
+/*.navbar{min-height:40px;margin-bottom:20px;border:0;margin-bottom:0;z-index:90;height:40px;}
+.navbar-center{color:#bebebe;display:inline-block;font-size:20px;position:absolute;text-align:center;width:100%;margin-left:25%;left:0;top:6px}
+.navbar-nav>li>a{padding:10px}
+.navbar a.sidebar-toggle{padding:10px 20px 10px 5px}
+.navbar-inverse .navbar-brand{color:#fff;padding:8px 15px 12px 22px}
+.navbar-inverse .navbar-brand strong{color:#00a2d9}
+.header-menu.navbar-nav>li>a{padding:8px 4px 8px 14px;height:40px}
+.navbar-center{display:none}
+.navbar-header{float:left}
+.navbar-right{float:right}
+.navbar-sort-container{height:200px}*/
+
+
+/* Search panel styles */
+.spanel-search-holder{
+
+/*    position: absolute;
+    width: 50%;
+    left: 0;
+    text-align: center;
+    margin: auto;*/
+width: 60%;
+display: inline;
+}
+
+.spanel-holder{
+/*  position: absolute;
+  left: 0px;
+  top: 0px;*/
+/*  width: 50%;*/
+/*  display: inline;
+  z-index: 9999;*/
+/*  position: relative;*/
+}
+.spanel{
+  transition: height 0.2s;
+  background-color: #222222;
+  height: 0px;
+  width: 100%;
+/*  margin-top: 38px;*/
+  position: absolute;
+  z-index: 10;
+  right: 0%;
+  left: 0%;
+  top: 42px;
+  
+}
+.spanel-full{
+  height: 100%;
+}
+.spanel-header h3{
+  color: #ffffff; 
+  font-family: 'Fira', sans-serif;
+}
+.spanel-header p{
+  color: #ffffff; 
+  font-family: 'Fira', sans-serif;
+}
+.spanel-body{
+/*  background-color: #ffffff;*/
+  height: 100%;
+}
+div.no_results {
+  display: block;
+}
+a + div.no_results{
+  display: none;
+}
+
 /* group widget styles */
 .gwidget{
 	transition: height 0.2s;
@@ -126,6 +196,12 @@ tr:last-child td:last-child {
 .gwidget_max{
 	height:100%;
 	width:100%;
+}
+a.maximizeWidget{
+  font-size: 1.2em;
+}
+a.maximizeWidget:hover{
+  text-decoration: none;
 }
 .group_widget{
 	margin-left:0px;
