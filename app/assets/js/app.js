@@ -100,6 +100,7 @@
 			pending: [],
 			loadingGroups: 1,
 			getGroups: function () {
+				UserService.loadingGroups = 1;
 				$http({ method: 'GET', url: 'groups.json' }).success(function (data) {
 					UserService.groups = data.groups;
 					UserService.loadingGroups = 0;
@@ -171,7 +172,7 @@
 //			access: {allowGuest: true}
 //		})
 		//Default redirection:
-			.otherwise({ redirectTo: 'Projects/Projects.html' });
+			.otherwise({ redirectTo: 'Projects' });
 	});
 app.controller('CreateGroupController',['$scope', '$location', 'UserService', 'ProjectsService',
 function($scope, $location, UserService, ProjectsService){

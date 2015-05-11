@@ -1,4 +1,5 @@
-<!doctype html lang="en" ng-app="pm">
+<!doctype html>
+<html lang="en" ng-app="pm">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0">
@@ -41,7 +42,6 @@
 								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 							</button>
 						</div>
-							
 					</div>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
@@ -49,7 +49,7 @@
 						<!-- <p style="color: #ffffff">show modal {{items.length}}</p>-->
 						<button type="button" class="btn btn-dark pull-right" ng-hide="usrService.loggedIn" ng-click="open()">Login</button>
 					</ul>
-					<!-- <ul ng-show="usrService.loggedIn">
+					<ul ng-show="usrService.loggedIn">
 						<li class="btn-group" dropdown is-open="status.isopen">
 							<a href="#" class="dropdown-toggle c-white" dropdown-toggle data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 					        {{usrService.name}} {{usrService.surname}}
@@ -64,59 +64,48 @@
 								</li>
 							</ul>
 						</li>
-					</ul>--></ul>
+					</ul>
+				</ul>
 			</div>
 		</nav>
 		<div id="search-panel" class="container spanel" ng-show="fromSearch.isActive()" ng-controller="TabTypesController as sTabs">
 			<div class="spanel-header col-md-12">
 				<h3>Search results:</h3>
-				<p class="col-md-6 text-left">Searching for {{fromSearch.getSearchQuery()}}.</p>
+				<p class="col-md-6 text-left">Searching for "{{fromSearch.getSearchQuery()}}".</p>
 				<p class="col-md-6 text-right">Results matching: {{fromSearch.getSearchResults().length}}</p>
 			</div>
 			<div>
 				<ul>
-<!--					<div class="container main">-->
-<!--						<div class="row">-->
-							<ul class="nav nav-tabs nav-justified" style="margin-left:0px;margin-right:0px;">
-								<li ng-click="sTabs.selectGTab(1)" ng-class="{ active:sTabs.isSelected(1) }">
-									<a class="panel_text" href="">Courses</a>
-								</li>
-								<li ng-click="sTabs.selectGTab(2)" ng-class="{ active:sTabs.isSelected(2) }">
-									<a class="panel_text" href="">Users</a>
-								</li>
-							</ul>
-							<div class="spanel-body">
-								<a href="#/Course" ng-repeat="item in fromSearch.isCourse(fromSearch.getSearchResults())" ng-click="prjService.projectClicked(item.originalObject);searchOutFocus()" ng-show="sTabs.isSelected(1)">
-									<div class="well sresults">
-										<div>Διδάσκων: {{item.originalObject.author}}</div>
-										<div>Τίτλος: {{item.originalObject.title}}</div>
-										<div>Project: {{item.originalObject.project}}</div>
-										<div>Κωδικός: {{item.originalObject.code}}</div>
-									</div>
-								</a>
-								<div class="no_results">No matching courses found :(</div>
-								<a href="#/Course" ng-repeat="item in fromSearch.isUser(fromSearch.getSearchResults())" ng-click="prjService.projectClicked(item.originalObject);searchOutFocus()" ng-show="sTabs.isSelected(2)">
-									<div class="well sresults">
-										<div>Όνομα: {{item.originalObject.name}} {{item.originalObject.surname}}</div>
-										<div>email: {{item.originalObject.email}}</div>
-									</div>
-								</a>
-								<div class="no_results">No matching users found :(</div>
-							</div>
-<!--						</div>-->
-<!--					</div>-->
-<!--					<li ng-repeat="item in fromSearch.getSearchResults()">
-						<div class="well" ng-show="{{!item.originalObject.title}}">
-							<div>Όνομα: {{item.originalObject.name}} {{item.originalObject.surname}}</div>
-							<div>email: {{item.originalObject.email}}</div>
+					<ul class="nav nav-tabs nav-justified" style="margin-left:0px;margin-right:0px;">
+						<li ng-click="sTabs.selectGTab(1)" ng-class="{ active:sTabs.isSelected(1) }">
+							<a class="panel_text" href="">Courses</a>
+						</li>
+						<li ng-click="sTabs.selectGTab(2)" ng-class="{ active:sTabs.isSelected(2) }">
+							<a class="panel_text" href="">Users</a>
+						</li>
+					</ul>
+					<div class="spanel-body">
+						<div ng-show="sTabs.isSelected(1)">
+							<a href="#/Course" ng-repeat="item in fromSearch.isCourse(fromSearch.getSearchResults())" ng-click="prjService.projectClicked(item.originalObject);searchOutFocus()">
+								<div class="well sresults">
+									<div>Διδάσκων: {{item.originalObject.author}}</div>
+									<div>Τίτλος: {{item.originalObject.title}}</div>
+									<div>Project: {{item.originalObject.project}}</div>
+									<div>Κωδικός: {{item.originalObject.code}}</div>
+								</div>
+							</a>
+							<div class="no_results">No matching courses found :(</div>
 						</div>
-						<div class="well" ng-show="{{!item.originalObject.username}}">
-							<div>Διδάσκων: {{item.originalObject.author}}</div>
-							<div>Τίτλος: {{item.originalObject.title}}</div>
-							<div>Project: {{item.originalObject.project}}</div>
-							<div>Κωδικός: {{item.originalObject.code}}</div>
+						<div ng-show="sTabs.isSelected(2)">
+							<a href="#/Profile" ng-repeat="item in fromSearch.isUser(fromSearch.getSearchResults())" ng-click="usrService.selectUser(item.originalObject.username);searchOutFocus()">
+								<div class="well sresults">
+									<div>Όνομα: {{item.originalObject.name}} {{item.originalObject.surname}}</div>
+									<div>email: {{item.originalObject.email}}</div>
+								</div>
+							</a>
+							<div class="no_results">No matching users found :(</div>
 						</div>
-					</li>-->
+					</div>
 				</ul>
 			</div>
 		</div>
