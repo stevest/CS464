@@ -133,27 +133,57 @@ tr:last-child td:last-child {
 
 
 /* Search panel styles */
+.spanel-search-holder{
+/*  position: absolute;
+  left: 0px;
+  top: 0px;*/
+/*  width: 50%;*/
+/*  display: inline;
+  z-index: 9999;*/
+}
+
 .spanel-holder{
 /*  position: absolute;
   left: 0px;
   top: 0px;*/
 /*  width: 50%;*/
-  display: inline;
-  z-index: 9999;
+/*  display: inline;
+  z-index: 9999;*/
+/*  position: relative;*/
 }
 .spanel{
   transition: height 0.2s;
   background-color: #222222;
   height: 0px;
-  width: 50%;
-  margin-top: 38px;
+  width: 100%;
+/*  margin-top: 38px;*/
+  position: absolute;
+  z-index: 10;
+  right: 0%;
+  left: 0%;
+  top: 42px;
+  
 }
 .spanel-full{
-  height: 756px;
+  height: 100%;
 }
-.spanel-header{
-  color: #ffffff;
-  display: inline;
+.spanel-header h3{
+  color: #ffffff; 
+  font-family: 'Fira', sans-serif;
+}
+.spanel-header p{
+  color: #ffffff; 
+  font-family: 'Fira', sans-serif;
+}
+.spanel-body{
+/*  background-color: #ffffff;*/
+  height: 100%;
+}
+div.no_results {
+  display: block;
+}
+a + div.no_results{
+  display: none;
 }
 
 /* group widget styles */

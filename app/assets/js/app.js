@@ -386,7 +386,7 @@ function($scope, $location, UserService, ProjectsService){
 				      focusInputElem.classList.add('search-form-control-small');
 					  var focusSearchPanel = document.getElementById('search-panel');
 				      focusSearchPanel.classList.remove('spanel-full');
-
+						$scope.$broadcast('angucomplete-alt:clearInput');
 					  //$location.path($scope.prevLocation);
 				  };
 				  
@@ -400,6 +400,16 @@ function($scope, $location, UserService, ProjectsService){
 //							console.log($scope.userServiceGetProjects());
 //							console.log($scope.userServiceGetUsers().concat($scope.userServiceGetProjects()));
 //					  },4000);
+
+				//Initialize selected panel to be Courses:
+						$scope.sTab = 1;
+						$scope.selectSTab = function(setTab){
+							$scope.sTab = setTab;
+							console.log("sTab selected is "+$scope.sTab);
+						};
+						$scope.isSelected = function(checkTab){
+							return $scope.sTab == checkTab;
+						};
 					  
 				},
 				  //controllerAs: 'navbarCtrl',
@@ -809,7 +819,7 @@ app.directive('groupMembers',function($timeout){
 		];
 	}]);
 	
-	app.controller('GroupTypesController',function(){
+	app.controller('TabTypesController',function(){
 		//Initialize selected panel to be Owner:
 		this.gTab = 1;
 		this.selectGTab = function(setTab){

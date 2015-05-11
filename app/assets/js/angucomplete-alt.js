@@ -49,12 +49,32 @@
         //console.log(accessSearchResults.searchResults);
         return accessSearchResults.searchResults;
       },
+      isUser: function(results){
+        var users = [];
+        for (var i = 0 ; i < results.length ; i++){
+          if(results[i].originalObject.username){
+            users.push(results[i]);
+          }
+        }
+        console.log("Results filtered by user");
+        return users;
+      },
+      isCourse: function(results){
+        var courses = [];
+        for (var i = 0 ; i < results.length ; i++){
+          if(results[i].originalObject.title){
+            courses.push(results[i]);
+          }
+        }
+        console.log("Results filtered by course");
+        return courses;
+      },
       getSearchQuery: function(){
         return accessSearchResults.searchQuery;
       },
       isActive: function(){
         return accessSearchResults.active;
-      }   
+      }  
     };
     return accessSearchResults;
   }])
