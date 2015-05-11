@@ -24,29 +24,23 @@
 		<link href="assets/css/icons/icons.min.css" rel="stylesheet">
 	</head>
 	<body style="background-color:#ffffff;" ng-controller="RouteController">
-		<!--<img src="assets/images/bar.jpg"></img>-->
 		<nav class="navbar navbar-inverse" role="navigation" mynavbar>
 			<div class="container">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="/#/"> ProjectManager UoC</a>
 				</div>
-				<ul class="nav navbar-nav navbar-left">
-					<div style="text-align:center;width:100%;">
-						<div class="spanel-search-holder">
-							<angucomplete-alt id="search" placeholder="Search course/members" pause="100" selected-object="foo" local-data="searchableItems"
-							search-fields="username,name,surname,code,project,title,author,info" title-field="name,surname,code,project,title,author"
-							minlength="1" input-class="search-form-control search-form-control-small" clear-selected="true" match-class="highlight" text-no-results="Nothing found :("
-							focus-in="searchInFocus()"></angucomplete-alt>
-							<button type="button" class="btn btn-danger" aria-label="Left Align" ng-show="fromSearch.isActive()"
-							ng-click="searchOutFocus()" style="float:right;">
-								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-							</button>
-						</div>
-					</div>
-				</ul>
+				<div class="spanel-search-holder text-center">
+					<angucomplete-alt id="search" placeholder="Search course/members" pause="100" selected-object="foo" local-data="searchableItems"
+					search-fields="username,name,surname,code,project,title,author,info" title-field="name,surname,code,project,title,author"
+					minlength="1" input-class="search-form-control search-form-control-small" clear-selected="true" match-class="highlight" text-no-results="Nothing found :("
+					focus-in="searchInFocus()"></angucomplete-alt>
+					<button type="button" class="btn btn-danger" aria-label="Left Align" ng-show="fromSearch.isActive()"
+					ng-click="searchOutFocus()">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</button>
+				</div>
 				<ul class="nav navbar-nav navbar-right">
 					<ul login-modal>
-						<!-- <p style="color: #ffffff">show modal {{items.length}}</p>-->
 						<button type="button" class="btn btn-dark pull-right" ng-hide="usrService.loggedIn" ng-click="open()">Login</button>
 					</ul>
 					<ul ng-show="usrService.loggedIn">
@@ -68,6 +62,48 @@
 				</ul>
 			</div>
 		</nav>
+		<!-- <nav class="navbar navbar-inverse" role="navigation" mynavbar>
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="/#/"> ProjectManager UoC</a>
+				</div>
+				<ul class="nav navbar-nav navbar-left">
+					<div style="text-align:center;width:100%;">
+						<div class="spanel-search-holder">
+							<angucomplete-alt id="search" placeholder="Search course/members" pause="100" selected-object="foo" local-data="searchableItems"
+							search-fields="username,name,surname,code,project,title,author,info" title-field="name,surname,code,project,title,author"
+							minlength="1" input-class="search-form-control search-form-control-small" clear-selected="true" match-class="highlight" text-no-results="Nothing found :("
+							focus-in="searchInFocus()"></angucomplete-alt>
+							<button type="button" class="btn btn-danger" aria-label="Left Align" ng-show="fromSearch.isActive()"
+							ng-click="searchOutFocus()" style="float:right;">
+								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+							</button>
+						</div>
+					</div>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<ul login-modal>
+						<button type="button" class="btn btn-dark pull-right" ng-hide="usrService.loggedIn" ng-click="open()">Login</button>
+					</ul>
+					<ul ng-show="usrService.loggedIn">
+						<li class="btn-group" dropdown is-open="status.isopen">
+							<a href="#" class="dropdown-toggle c-white" dropdown-toggle data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+					        {{usrService.name}} {{usrService.surname}}
+								<i class="fa fa-angle-down p-r-10"></i>
+					      </a>
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<a href="#/Profile" ng-click="usrService.selectUser(usrService.username)">My Profile</a>
+								</li>
+								<li>
+									<a href="#/Projects" ng-click="usrService.logOut()"><i class="fa fa-power-off"></i>LOGOUT</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</ul>
+			</div>
+		</nav>-->
 		<div id="search-panel" class="container spanel" ng-show="fromSearch.isActive()" ng-controller="TabTypesController as sTabs">
 			<div class="spanel-header col-md-12">
 				<h3>Search results:</h3>

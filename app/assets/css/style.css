@@ -134,12 +134,14 @@ tr:last-child td:last-child {
 
 /* Search panel styles */
 .spanel-search-holder{
-/*  position: absolute;
-  left: 0px;
-  top: 0px;*/
-/*  width: 50%;*/
-/*  display: inline;
-  z-index: 9999;*/
+
+/*    position: absolute;
+    width: 50%;
+    left: 0;
+    text-align: center;
+    margin: auto;*/
+width: 60%;
+display: inline;
 }
 
 .spanel-holder{
@@ -194,6 +196,12 @@ a + div.no_results{
 .gwidget_max{
 	height:100%;
 	width:100%;
+}
+a.maximizeWidget{
+  font-size: 1.2em;
+}
+a.maximizeWidget:hover{
+  text-decoration: none;
 }
 .group_widget{
 	margin-left:0px;
