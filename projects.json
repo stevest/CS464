@@ -18,6 +18,16 @@
 					"username": "maraki22",
 					"date": "1288323623006",
 					"rating": "3"
+				},
+				{
+					"username": "maraki87",
+					"date": "1285423623006",
+					"rating": "4"
+				},
+				{
+					"username": "maraki87",
+					"date": "1289423623006",
+					"rating": "2"
 				}
 			]
 		},
@@ -29,6 +39,69 @@
 			"title": "Υπολογιστική όραση.",
 			"members": "3",
 			"info": "Background subtraction, also known as Foreground Detection, is a technique in the fields of image processing and computer vision wherein an image's foreground is extracted for further processing (object recognition etc.). Generally an image's regions of interest are objects (humans, cars, text etc.) in its foreground. After the stage of image preprocessing (which may include image denoising, post processing like morphology etc.) object localisation is required which may make use of this technique. Background subtraction is a widely used approach for detecting moving objects in videos from static cameras. The rationale in the approach is that of detecting the moving objects from the difference between the current frame and a reference frame, often called “background image”, or “background model”. Background subtraction is mostly done if the image in question is a part of a video stream. Background subtraction provides important cues for numerous applications in computer vision, for example surveillance tracking or human poses estimation. However, background subtraction is generally based on a static background hypothesis which is often not applicable in real environments. With indoor scenes, reflections or animated images on screens lead to background changes. In a same way, due to wind, rain or illumination changes brought by weather, static backgrounds methods have difficulties with outdoor scenes.",
+			"evaluations": [
+				{
+					"username": "takis92",
+					"date": "1288323623006",
+					"rating": "1"
+				},
+				{
+					"username": "maraki22",
+					"date": "1288323623006",
+					"rating": "2"
+				}
+			]
+		},
+		{
+			"pass": "Pass",
+			"code": "HY255",
+			"author": "Angelos Bilas",
+			"project": "C and Assembly Code Tutorial: Computing Sums.",
+			"title": "Programming Lab",
+			"members": "1",
+			"info": "Σκοπός: Ο στόχος της άσκησης αυτής είναι να βοηθήσει στην εισαγωγή (1) σε assembly των επεξεργαστών της αρχιτεκτονικής x86, (2) στην αναπαράσταση της γλώσσας assembly σε κώδικα μηχανής στη μνήμη του συστήματος, και (3) στην χρήση του gdb. Background: Η άσκηση αυτή θα γίνει σε Linux/x86 συστήματα του τμήματος (portokali, milo, rodakino, etc.). Για θέματα της αρχιτεκτονικής του x86 και της γλώσσας assembly που χρησιμοποιεί μπορείτε να συμβουλευτείτε την online έκδοση του βιβλίου: Programming from the Ground Up, Jonathan Bartlett 2004. (Τοπικό αντίγραφο του βιβλίου για ευκολία). Ιδιαίτερα χρήσιμα θα βρείτε τα Chapter 3 και Appendix B. Ακόμη για αντιστοίχηση εντολών σε opcode μπορείτε να συμβουλευτείτε αυτόν τον πίνακα (προσοχή τα ονόματα κάποιον εντολών διαφέρουν λίγο, π.χ. RET/RETN)",
+			"evaluations": [
+				{
+					"username": "elenaki89",
+					"date": "1289323623006",
+					"rating": "3"
+				},
+				{
+					"username": "maraki87",
+					"date": "1288423623006",
+					"rating": "3"
+				}
+			]
+		},
+		{
+			"pass": "Pass",
+			"code": "HY252",
+			"author": "Γιάννης Τζίτζικας",
+			"project": "MilleBornes game.",
+			"title": "Αντικειμενοστραφής Προγραμματισμός.",
+			"members": "2",
+			"info": "Περιγραφι Παιχνιδιοφ: Ζνασ οδθγόσ πάντα πρζπει να ςυμμορφϊνεται ςτουσ κανόνεσ οδικισ κυκλοφορίασ. Συγκεκριμζνα,μπορεί να οδθγιςει μόνο όταν το φανάρι ανάψει πράςινο και πρζπει να ςταματιςει όταν το φανάρι γίνει κόκκινο. Ακόμα, είναι απαραίτθτο να ςυμμορφϊνεται ςτισ πινακίδεσ ορίων ταχφτθτασ,να επιςκευάηει το όχθμα του ςε περίπτωςθ ατυχιματοσ και ςε περίπτωςθ ‘ςκαςμζνουϋ ελαςτικοφ να το αντικακιςτά με ανταλλακτικό ελαςτικό. Τζλοσ , αν υπάρχει ζνδειξθ πωσ τελειϊνει θ βενηίνθ, ο οδθγόσ πρζπει να ξαναγεμίςει το όχθμα του με βενηίνθ. Σε αυτό το επιτραπζηιο παιχνίδι, οι παίχτεσ βρίςκονται ςε ζνα αγϊνα δρόμου και πρζπει να ακολουκιςουν τουσ ίδιουσ κανόνεσ. Στόχοσ κάκε παίκτθ είναι να διανφςει πρϊτοσ 1000 μίλια και να ςυγκεντρϊςει πόντουσ. Το παιχνίδι παίηεται με 2 ζωσ 6 παίκτεσ. Για λόγουσ απλότθτασ θ υλοποίθςθ τθσ παροφςασ προγραμματιςτικισ εργαςίασ κα γίνει κεωρϊντασ μόνο δφο παίκτεσ.",
+			"evaluations": [
+				{
+					"username": "takis92",
+					"date": "1288323623006",
+					"rating": "1"
+				},
+				{
+					"username": "maraki22",
+					"date": "1288323623006",
+					"rating": "2"
+				}
+			]
+		},
+		{
+			"pass": "Pass",
+			"code": "HY150",
+			"author": "Μαρία Μαμαλάκη",
+			"project": "ASCII file parser.",
+			"title": "Προγραμματισμός.",
+			"members": "1",
+			"info": "Create an ASCII file parser.",
 			"evaluations": [
 				{
 					"username": "takis92",
